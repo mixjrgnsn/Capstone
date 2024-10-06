@@ -1,0 +1,144 @@
+body {
+    margin: 0;
+    background: linear-gradient(to bottom, #164A41, #4D774E);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;         
+    font-family: Verdana, sans-serif;
+}
+
+.heading {
+    text-align: center;
+    font-size: 35px;
+    color: rgb(255, 255, 255);
+    margin: 0;
+    margin-top: 10px;
+}
+
+.body-container {
+    margin: 20px auto;
+    width: 84%;
+    height: 550px;
+    padding: 20px;
+    border-radius: 13px;
+    background-color: #7DA87E;
+}
+
+.first{
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+}
+
+.second {
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+}
+
+.box-text1 {
+    outline: none;
+    border: 1px solid rgb(255, 255, 255);
+    font-size: 20px;
+    width: 170px;
+    height: 35px;
+    background-color: #164A41;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.box-text2 {
+    padding: 10px;
+    outline: none;
+    border: 2px solid rgb(255, 255, 255);
+    font-size: 20px;
+    width: 98%;
+    height: 360px;
+    background-color: #164A41;
+    border-radius: 10px;
+    color: rgb(219, 244, 218);
+}
+
+.text1, .text2 {
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+}
+
+.time-one {
+    background-color: #164A41;
+    border: 1px solid rgb(255, 255, 255);
+    width: 170px;
+    height: 35px;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.btn-container {
+    position: relative;
+    text-align: center;
+}
+
+.btn-click {
+    width: 120px;
+    height: 40px;
+    border-radius: 20px;
+    border: 0;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #164A41;
+    color: rgb(219, 244, 218);
+}
+
+.btn-click:hover {
+    background-color: rgb(167, 170, 166);
+    color: rgb(31, 32, 31);
+}
+
+@media (max-width: 768px) {
+
+    .heading {
+        font-size: 100%; 
+    }
+
+    .body-container {
+        width: 85%; 
+        height: auto; 
+    }
+
+    .first, .second {
+        font-size: 1.2em; 
+        font-size: 100%;
+    }
+
+    .box-text1 {
+        width: 30%;
+        font-size: 100%; 
+    }
+
+    .text1, .text2 {
+        font-size: 100%; 
+    }
+
+    .time-one {
+        width: 50%;
+        font-size: 100%; 
+        width: 30%; 
+    }
+
+    .box-text2 {
+        width: 95%; 
+        font-size: 80%; 
+    }
+
+    .btn-container {
+        margin: 0;
+    }
+
+    .btn-click {
+        width: 100%; 
+        max-width: 30%; 
+        height: 30px;
+        font-size: 100%; 
+    }
+}

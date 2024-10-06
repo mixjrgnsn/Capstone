@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    background: linear-gradient(to bottom, #164A41, #4D774E);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; 
+    font-family: verdana, sans-serif;
+}
+
+.first{
+    margin: 50px;
+    text-align: center;
+    font-size: 25px;
+    font-family: verdana;
+    color: rgb(255, 255, 255);
+}
+
+.body-container{
+    padding: 20px 30px;
+    margin: auto;
+    height: 300px;
+    width: 45%;
+    font-family: verdana;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    background-color: #7DA87E;
+    border-radius: 13px;
+}
+
+.second{
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+
+    .first{
+        font-size: 100%; 
+    }
+
+    .body-container{
+        width: 70%;
+        height: 200px;
+        font-size: 100%; 
+    }
+
+    .second{
+        font-size: 100%;
+    }
+
+}

@@ -1,0 +1,39 @@
+body{
+    margin: 0;
+    background: linear-gradient(to bottom, #164A41, #4D774E);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; 
+}
+
+.body-container{
+    background-color: #7DA87E;
+    padding: 40px 0;
+    height: 500px;
+    width: 40%;
+    margin: 20px auto;
+    margin-top: 90px;
+    border-radius: 12px;
+}
+
+.display-name{
+    color: rgb(255, 255, 255);
+    font-family: verdana;
+    margin-left: 50px;
+    padding-top: 20px;
+    font-size: 23px;
+}
+
+@media (max-width: 768px) {
+
+    .body-container{
+        width: 85%;
+        height: auto;
+    }
+
+    .display-name{
+        font-size: 100%;
+        margin-top: 0; 
+    }
+
+}

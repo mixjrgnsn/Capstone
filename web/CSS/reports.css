@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+    background: linear-gradient(to bottom, #164A41, #4D774E);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;         
+    font-family: Verdana, sans-serif;
+}
+
+.heading {
+    text-align: center;
+    font-size: 35px;
+    color: rgb(255, 255, 255);
+    margin: 0;
+    margin-top: 10px;
+}
+
+.body-container {
+    margin: 20px auto;
+    width: 84%;
+    height: 550px;
+    padding: 20px;
+    border-radius: 13px;
+    background-color: #7DA87E;
+}
+
+.first,
+.second {
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+}
+
+.box-text1 {
+    outline: none;
+    border: 1px solid rgb(255, 255, 255);
+    font-size: 20px;
+    width: 170px;
+    height: 35px;
+    background-color: #164A41;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+}
+
+.box-text2 {
+    padding: 10px;
+    outline: none;
+    border: 2px solid rgb(255, 255, 255);
+    font-size: 20px;
+    width: 98%;
+    height: 400px;
+    background-color: #164A41;
+    border-radius: 10px;
+    color: rgb(219, 244, 218);
+}
+
+.btn-container {
+    position: relative;
+    text-align: center;
+    margin-left: 1000px; /* Adjust as needed */
+}
+
+.btn-click {
+    width: 120px;
+    height: 40px;
+    border-radius: 20px;
+    border: 0;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #164A41;
+    color: rgb(219, 244, 218);
+}
+
+.btn-click:hover {
+    background-color: rgb(167, 170, 166);
+    color: rgb(31, 32, 31);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+
+    .heading{
+        font-size: 100%; /* Maintain font size */
+    }
+
+    .body-container {
+        width: 85%; 
+        height: auto; 
+        margin-bottom: 10px;
+    }
+
+    .first, .second {
+        font-size: 1.2em; 
+        font-size: 100%; 
+    }
+
+    .box-text1 {
+        font-size: 100%; 
+        width: 35%; 
+    }
+
+    .box-text2 {
+        font-size: 100%; 
+        width: 96%;
+    }
+
+    .btn-container {
+        margin-left: 0;
+        font-size: 100%;
+    }
+
+    .btn-click {
+        width: 100%;
+        max-width: 25%; 
+        height: 30px;
+        font-size: 100%; 
+    }
+}

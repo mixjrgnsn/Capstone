@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+    background: linear-gradient(to bottom, #164A41, #4D774E);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;     
+    font-family: Verdana, sans-serif;
+}
+
+.heading {
+    text-align: center;
+    font-size: 35px;
+    color: rgb(255, 255, 255);
+    margin: 0;
+    margin-top: 10px;
+}
+
+.body-container {
+    margin: 20px auto;
+    width: 84%;
+    height: 550px;
+    padding: 20px;
+    border-radius: 13px;
+    background-color: #7DA87E;
+}
+
+.second {
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    margin: 0;
+}
+
+.third {
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+}
+
+.box-text2 {
+    outline: none;
+    font-size: 20px;
+    width: 15%; 
+    height: 35px;
+    background-color: #164A41;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.box-text3 {
+    padding: 5px;
+    outline: none;
+    border: 2px solid rgb(255, 255, 255);
+    font-size: 20px;
+    width: 98%; 
+    height: 400px;
+    background-color: #164A41;
+    border-radius: 10px;
+    color: rgb(219, 244, 218);
+}
+
+.btn-container {
+    position: relative;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.btn-click {
+    width: 120px;
+    height: 40px;
+    border-radius: 20px;
+    border: 0;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #164A41;
+    color: rgb(219, 244, 218);
+}
+
+.btn-click:hover {
+    background-color: rgb(167, 170, 166);
+    color: rgb(31, 32, 31);
+}
+
+@media (max-width: 768px) {
+    .heading{
+        font-size: 100%; 
+    }
+
+    .body-container {
+        width: 85%; 
+        height: auto;
+    }
+
+    .second {
+        font-size: 1.2em; 
+        text-align: left; 
+    }
+
+    .third {
+        font-size: 1.2em; 
+        text-align: left; 
+    }
+
+    .box-text2 {
+        width: 30%;
+        font-size: 100%; 
+    }
+
+    .box-text3 {
+        width: 97%; 
+        font-size: 100%; 
+    }
+
+    .btn-container {
+        margin: 20px 0;
+        margin-left: 120px;
+    }
+
+    .btn-click {
+        width: 100%; 
+        max-width: 40%; 
+        height: 30px; 
+        font-size: 100%; 
+    }
+}

@@ -1,0 +1,145 @@
+body{
+    margin: 0;
+    overflow: hidden;
+}
+
+
+.header{
+    padding: 15px 0 10px 0;
+    background-color: #7DA87E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90px;
+    width: 100%; 
+}
+
+.logo-header{
+    display: flex;
+    height: 90px;
+}
+
+.middle{
+    height: calc(100vh - 90px);
+    background: linear-gradient(to bottom, #164A41, #4D774E);
+}
+
+.button-box{
+    width: 400px;
+    margin: 0 auto;
+    top: 40px;
+    position: relative;
+    border: 2px white solid;
+    border-radius: 30px;
+    background: #7DA87E;
+}
+
+.toggle-btn{
+    padding: 10px 40px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    /*border-radius: 30px;
+    border: 1;*/
+    color: #ffffff;
+    outline: none;
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+.btn{
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 200px;
+    height: 100%;
+    background: #164A41;
+    border-radius: 30px;
+    transition: .5s;
+}   
+
+
+.login-container{
+    margin: 0;
+    position: relative;
+    top: 120px;
+}
+
+.input-form{
+    width: 210px;
+    display: flex;
+    padding: 10px;
+    margin: 0 auto;
+    font-family: sans-serif;
+    font-size: 14px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    color: #ffffff;
+    border-color: rgb(255, 255, 255);
+    background-color: #164A41;
+    outline: none;
+}
+
+::placeholder {
+    color: rgba(227, 227, 227, 0.626);
+    font-family: sans-serif;
+}
+
+.button-form{
+    display: flex;
+    margin: 0 auto;
+    margin-top: 15px;
+    padding: 7px 45px 7px 45px;
+    border-radius: 6px;
+    border: none;
+    background-color: #164A41;
+    font-family: sans-serif;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.button-form:hover{
+    background-color: #7DA87E;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.logo-footer{
+    height: 70px;
+    margin-top: 10px;
+    padding: 0;
+    margin-left: 48%;
+    position: relative;
+    place-items: center;
+}
+
+.foot-text{
+    text-align: center;
+    margin-top: 0;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    color: rgb(70, 65, 65);
+}
+
+#loadingSpinner {
+    display: none;
+    position: fixed;
+    top: 58%;
+    left: 48.9%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

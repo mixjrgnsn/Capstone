@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Account Archive</title>
+    <link rel="stylesheet" href="../CSS/archive.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="header">
+        <img class="logo-header" src="../Pictures/LOGO HOA.png"/>
+        <h2>Admin</h2>
+        <button class="btn-logout">Log out</button>
+    </div>
+    <nav class="main-container">
+        <div class="left-middle">
+            <a class="link" id="dashboard" href="../HTML/dashboard.html"><i class="fa-solid fa-computer"></i>Dashboard</a>
+            <a class="link" id="announcement" href="../HTML/announcement.html"><i class="fa-solid fa-bullhorn"></i>Announcement</a>
+            <a class="link" id="reports" href="../HTML/reports.html"><i class="fa-solid fa-scroll"></i>Reports</a>
+            <a class="link" id="complaints" href="../HTML/complaints.html"><i class="fa-solid fa-receipt"></i>Complaints</a>
+            <a class="link" id="residents" href="../HTML/residents.html"><i class="fa-solid fa-user"></i>Residents</a>
+            <a class="link" id="reservation" href="../HTML/reservation.html"><i class="fa-solid fa-calendar-days"></i>Reservation</a>
+        </div>
+        <div class="right-middle">
+            <p>Account Archive</p>
+            <input type="text" id="search-box" placeholder="Search..." />
+            <button class="residentsbtn" id="residentsbtn">Go back to residents</button>
+            <div class="line-middle"></div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr id="header-row"></tr>
+                    </thead>
+                    <tbody id="body-row"></tbody>
+                </table>
+            </div>
+        </div>
+    </nav>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modal-message"></p>
+            <button id="restore-button">Restore</button>
+            <button id="delete-button">Delete</button>
+        </div>
+    </div>
+    <script src="../JS/archive.js"></script>
+</body>
+</html>

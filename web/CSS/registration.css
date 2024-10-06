@@ -1,0 +1,9 @@
+body{
+    margin: 0;
+    background: linear-gradient(to bottom, #164A41, #4D774E);
+    color: antiquewhite;
+    text-align: center;
+    margin-top: 250px;
+    font-size: 30px;
+    font-family: verdana;
+}

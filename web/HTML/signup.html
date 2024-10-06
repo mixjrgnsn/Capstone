@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="../CSS/signup.css"/>
+</head>
+<body>
+    <nav>
+        <div class="create-form">
+            <h1 class="create">Create new Account</h1>
+        </div>
+        <form action="registration.php" method="post" class="input-form" id="signupForm">
+            <span class="fname">FIRST NAME</span></br><input id="firstname" class="input-text" type="text" name="firstName" required/></br>
+            <span class="lname">LAST NAME</span></br><input id="lastname" class="input-text" type="text" name="lastName" required/></br>
+            <span class="mail">EMAIL</span></br><input id="email" class="input-text" type="email" name="email" required/></br>
+            <span class="pass">PASSWORD</span></br><input id="password" class="input-text" type="password" name="password" required/></br>
+            <span class="confirm-pass">CONFIRM PASSWORD</span></br><input id="confirmPassword" class="input-text" type="password" name="confPassword" required/></br>
+            <span class="add">BLK AND LOT</span></br><input id="blkAndLot" class="input-text" type="text" name="number" required/></br>
+            <span class="add-1">STREET</span></br><input id="street" class="input-text" type="text" name="street" required/></br>
+            
+            <button type="submit" class="btn-submit">Sign Up</button>
+            <p>Already Registered?</p>
+            <a class="link" href="login.html">Log in here.</a></br>
+        </form>
+        <div id="loadingSpinner"></div>
+    </nav>
+
+    <script src="/web/JS/signup.js"></script>
+
+</body>
+</html>

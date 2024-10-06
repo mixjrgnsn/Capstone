@@ -1,0 +1,122 @@
+body{
+    margin: 0;
+    overflow: hidden;
+}
+
+.main-container{
+    display: flex;
+}
+
+.header{
+    padding: 5px;
+    margin: 0 100px 0 100px;
+    background-color: #7DA87E;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Verdana;
+    color: rgb(42, 65, 40);
+}
+
+.logo-header{
+    height: 60px;
+    margin: 0;
+    margin-left: 10px;
+    padding: 0;
+}
+
+.btn-logout{
+    float: right;
+    position: relative;
+    left: -30px;
+    top: 20px;
+    color: rgb(42, 65, 40);
+    font-size: 16px;
+    font-family: verdana;
+    font-weight: 600;
+    background-color: transparent;
+    border: 0;
+}
+
+.btn-logout:hover{
+    color: rgb(233, 225, 225);
+    cursor: pointer;
+}
+
+.left-middle{
+    margin-top: 0;
+    margin-left: 100px;
+    width: 485px;
+    height: 795px;
+    padding-bottom: 100%;
+    background-color: rgb(234, 239, 243);
+}
+
+.link{
+    position: relative;
+    display: block;
+    text-align: center;
+    top: 70px;
+    font-family: verdana;
+    text-decoration: none;
+    padding: 15px;
+    font-size: 18px;
+    color: rgb(70, 73, 75);
+    border: 1px solid #000;
+}
+
+.link:hover{
+    background-color: rgb(190, 195, 198);
+}
+
+.fa-solid fa-bullhorn{
+    position: relative;
+}
+
+.right-middle{
+    padding: 10px;
+    margin: 0 auto;
+    width: calc(100% - 220px);
+    margin-right: 100px;
+    position: relative;
+    background-color: rgb(246, 252, 252);
+    color: rgb(22, 25, 26);
+    font-family: verdana;
+    border-bottom: 1px;
+}
+
+.line-middle{
+    padding: 1px 0 1px 0;
+    background-color: rgb(0, 0, 0);
+    margin-bottom: 20px;
+}
+
+#complaints{
+    background-color: #7DA87E;
+}
+
+#subject-details{
+    height: 400px;
+    background-color: #ffffff;
+    border: 2px solid black;
+    padding: 10px;
+}
+
+#Btn {
+    margin-top: 20px;
+    font-family: Verdana, sans-serif; /* It's good to include a generic font family */
+    padding: 3px;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    border: 2px solid #000;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 150px; /* Set a width to center the element */
+    display: block; /* Ensure it is a block-level element to center it */
+    margin-left: auto; /* Horizontal centering */
+    margin-right: auto; /* Horizontal centering */
+}
+
+#Btn:hover{
+    background-color: rgb(190, 195, 198);
+}
