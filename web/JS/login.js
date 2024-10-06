@@ -35,7 +35,7 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         if (result.trim() === 'Login successful') {
             alert("Login Successful");
             window.history.replaceState(null, '', window.location.href); // Prevent back navigation
-            window.location.replace('home.html'); // Redirect to the home page on success
+            window.location.replace('/HTML/home.html'); // Redirect to the home page on success
         } else {
             alert('Login Failed: ' + result);
         }
