@@ -14,35 +14,18 @@ class DataBase
     public function __construct()
     {
         $this->connect = null;
+        $this->data = null;
         $this->sql = null;
-
-        // Check if running on Heroku
-        if (getenv("CLEARDB_DATABASE_URL")) {
-            // Parse ClearDB connection string for Heroku
-            $dbUrl = parse_url(getenv("CLEARDB_DATABASE_URL"));
-            $this->servername = $dbUrl["host"];
-            $this->email = $dbUrl["user"];
-            $this->password = $dbUrl["pass"];
-            $this->databasename = ltrim($dbUrl["path"], '/');
-        } else {
-            // Local XAMPP configuration
-            $this->servername = "localhost";
-            $this->email = "root"; // Default username for XAMPP
-            $this->password = "";   // Default password for XAMPP
-            $this->databasename = "loginregister"; // Change this to your local database name
-        }
-
-        // Establish connection
-        $this->dbConnect();
+        $dbc = new DataBaseConfig();
+        $this->servername = $dbc->servername;
+        $this->email = $dbc->email;
+        $this->password = $dbc->password;
+        $this->databasename = $dbc->databasename;
     }
 
     function dbConnect()
     {
         $this->connect = mysqli_connect($this->servername, $this->email, $this->password, $this->databasename);
-
-        if (!$this->connect) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
         return $this->connect;
     }
 
