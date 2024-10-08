@@ -31,12 +31,12 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
 
     // Validate blk and lot: Must be two-digit positive numbers
     if (!/^\d{1,2}$/.test(blk) || parseInt(blk) < 0 || parseInt(blk) > 99) {
-        alert("BLK must be a two-digit positive number (00-99).");
+        alert("BLK must be a two-digit positive number (0-99).");
         return;
     }
 
     if (!/^\d{1,2}$/.test(lot) || parseInt(lot) < 0 || parseInt(lot) > 99) {
-        alert("LOT must be a two-digit positive number (00-99).");
+        alert("LOT must be a two-digit positive number (0-99).");
         return;
     }
 
