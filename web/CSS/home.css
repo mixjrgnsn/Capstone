@@ -165,7 +165,7 @@ i {
 }
 
 .announcement-pic {
-    height: 380px;
+    height: 320px;
     width: 100%;
     background-color: #7DA87E;
     color: white;
@@ -264,6 +264,11 @@ i {
 
 body.overlay-active .overlay {
     display: block; /* Show the overlay when active */
+}
+
+.hamburger-menu:has(input:checked) ~ .main-container .prev,
+.hamburger-menu:has(input:checked) ~ .main-container .next {
+    display: none;
 }
 
 
