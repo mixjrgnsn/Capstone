@@ -15,10 +15,33 @@ body {
     margin-top: 10px;
 }
 
-@media (max-width: 768px) {
+.announcements-container {
+    margin: 20px;
+}
 
+.announcement {
+    border: 2px solid #ffffff;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: white;
+    background-color: #7DA87E;
+    border-radius: 5px;
+}
+
+h2 {
+    margin: 0;
+}
+
+small {
+    color: gray;
+}
+
+.announcement p {
+    white-space: pre-wrap; /* This will maintain spacing and line breaks */
+}
+
+@media (max-width: 768px) {
     .heading {
         font-size: 100%; 
     }
-    
 }
