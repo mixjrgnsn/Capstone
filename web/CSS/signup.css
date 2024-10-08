@@ -46,7 +46,7 @@ p{
 .input-form{
     text-align: center;
     font-family: sans-serif;
-    margin-top: 30spx;
+    margin-top: 30px;
     color: rgb(252, 255, 248);
     padding-bottom: 20px; /*updated*/
 }
@@ -60,6 +60,54 @@ p{
     background-color: #164A41;
     border: 2px white solid;    
     margin: 10px 0;
+    color: rgb(252, 255, 248);
+}
+
+.input-text2{
+    outline: none;
+    border-radius: 8px;
+    height: 25px;
+    padding: 5px 10px;
+    width: 70px;
+    background-color: #164A41;
+    border: 2px white solid;    
+    margin: 10px -232px;
+    color: rgb(252, 255, 248);
+}
+
+.input-text2{
+    outline: none;
+    border-radius: 8px;
+    height: 25px;
+    padding: 5px 10px;
+    width: 70px;
+    background-color: #164A41;
+    border: 2px white solid;    
+    margin: 10px -232px;
+    color: rgb(252, 255, 248);
+}
+
+.input-text1{
+    outline: none;
+    border-radius: 8px;
+    height: 25px;
+    padding: 5px 10px;
+    width: 70px;
+    background-color: #164A41;
+    border: 2px white solid;    
+    margin: 10px -232px;
+    color: rgb(252, 255, 248);
+}
+
+.input-text2{
+    outline: none;
+    border-radius: 8px;
+    height: 25px;
+    padding: 5px 10px;
+    width: 70px;
+    background-color: #164A41;
+    border: 2px white solid;    
+    margin: 10px -168px;
     color: rgb(252, 255, 248);
 }
 
@@ -90,6 +138,16 @@ p{
 
 .add{
     font-size: 13px;
+    margin-right: 90px;
+    margin-left: -130px;
+}
+
+.add3{
+    font-size: 13px;
+}
+
+.add2{
+    font-size: 13px;
     margin-right: 185px;
 }
 
@@ -108,6 +166,11 @@ p{
     border: 2px white solid;    
     margin: 10px 0;
     color: rgb(252, 255, 248);
+}
+
+.street1:focus {
+    background-color: white; 
+    color: black; 
 }
 
 .btn-submit{

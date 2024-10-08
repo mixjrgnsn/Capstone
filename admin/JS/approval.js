@@ -101,7 +101,30 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.getElementById('reject-button').addEventListener('click', () => {
-        document.getElementById('modal').style.display = 'none'; // Hide modal
+        const row = currentRowData;
+    
+        fetch(`http://localhost/loginregister/database/deleteRejectedRow.php`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: row.ID }) // Ensure this is correct
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                alert(result.message);
+                row.trElement.remove(); // Remove the row from the DOM
+            } else {
+                alert(result.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error processing the deletion.');
+        });
+    
+        document.getElementById('modal').style.display = 'none';
     });
 
     // Close modal when clicking on the close button
