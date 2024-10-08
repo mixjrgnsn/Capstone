@@ -514,6 +514,16 @@ class DataBase
         return mysqli_stmt_execute($stmt);
     }
 
-    
+    function announcement($content)
+    {
+        $content = $this->prepareData($content);
+        $this->sql = "INSERT INTO announcements (content) VALUES ('$content')";
+        if (mysqli_query($this->connect, $this->sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
 ?>

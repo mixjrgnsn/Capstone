@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Announcement</title>
     <link rel="stylesheet" href="../CSS/announcement.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -31,12 +31,13 @@
                 <div class="right-body">
                     <div>
                         <p class="create">Create Announcement</p>
-                        <textarea class="announce-text" name="description" rows="5" cols="100%" placeholder="Enter text..." name="message" autocomplete="off" required></textarea>  
-                        <button class="post-btn">Post</button>
+                        <textarea class="content-text" name="description" rows="5" cols="100%" placeholder="Enter text..." name="message" autocomplete="off" required></textarea>  
+                        <button id="post-btn" class="post-btn">Post</button>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
+    <script src="../JS/announcement.js"></script>
 </body>
 </html>
