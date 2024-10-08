@@ -7,13 +7,13 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
     let email = document.getElementById("email").value.trim();
     let password = document.getElementById("password").value.trim();
     let confPassword = document.getElementById("confirmPassword").value.trim();
-    let number = document.getElementById("blkAndLot").value.trim().toUpperCase();
+    let blk = document.getElementById("lot").value.trim(); // Adjusted for the correct ID
+    let lot = document.getElementById("blk").value.trim(); // Adjusted for the correct ID
     let street = document.getElementById("street").value.trim().toUpperCase();
-    var loadingSpinner = document.getElementById('loadingSpinner');
 
     // Front-end validation: Check if any field is empty
-    if (firstName === "" || lastName === "" || email === "" || password === "" || confPassword === "" || number === "" || street === "") {
-        alert("All fields are required");
+    if (!firstName || !lastName || !email || !password || !confPassword || !blk || !lot || !street) {
+        alert("All fields are required.");
         return;
     }
 
@@ -23,8 +23,22 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
         return; // Prevent form submission
     }
 
-    // Show the loading spinner
-    loadingSpinner.style.display = 'block';
+    // Check if password meets the minimum length requirement
+    if (password.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return; // Prevent form submission
+    }
+
+    // Validate blk and lot: Must be two-digit positive numbers
+    if (!/^\d{1,2}$/.test(blk) || parseInt(blk) < 0 || parseInt(blk) > 99) {
+        alert("BLK must be a two-digit positive number (00-99).");
+        return;
+    }
+
+    if (!/^\d{1,2}$/.test(lot) || parseInt(lot) < 0 || parseInt(lot) > 99) {
+        alert("LOT must be a two-digit positive number (00-99).");
+        return;
+    }
 
     // Create a FormData object to send data to the backend
     let formData = new FormData();
@@ -32,23 +46,24 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
     formData.append("lastname", lastName);
     formData.append("email", email);
     formData.append("password", password);
-    formData.append("address", number + ' ' + street);
+    formData.append("address", `BLK ${blk} LOT ${lot} ${street}`);
 
     // Make a fetch request to the PHP backend
     fetch('http://localhost/loginregister/database/signup.php', {
         method: 'POST',
         body: formData
     })
-    .then(response => response.text()) // Convert the response to text
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text(); // Convert the response to text
+    })
     .then(data => {
-        // Hide the loading spinner
-        loadingSpinner.style.display = 'none';
-
         // Handle the server response
         if (data.includes("Your account is waiting to approve")) {
             alert("Registration completed successfully! Your account is waiting for approval.");
-            window.history.replaceState(null, '', window.location.href);
-            window.location.href = '/web/HTML/login.html'; // Redirect to login page
+            window.location.href = '../HTML/index.html'; // Redirect to login page
         } else if (data.includes("Sign up Failed")) {
             alert("Sign up failed. Please try again.");
         } else {
@@ -56,9 +71,6 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
         }
     })
     .catch(error => {
-        // Hide the loading spinner
-        loadingSpinner.style.display = 'none';
-        
         console.error('Error:', error);
         alert("An error occurred while registering.");
     });
