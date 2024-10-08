@@ -2,7 +2,7 @@ document.getElementById("signupLink").addEventListener("click", function (e) {
     e.preventDefault(); // Prevent the default link behavior
     // Replace the current history entry before redirecting to the signup page
     window.history.replaceState(null, '', window.location.href);
-    window.location.href = 'signup.html'; // Redirect to the signup page
+    window.location.href = '../HTML/signup.html'; // Redirect to the signup page
 });
 
 document.getElementById('loginForm').addEventListener('submit', function (e) {
