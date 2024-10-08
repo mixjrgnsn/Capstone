@@ -56,11 +56,11 @@ body {
 .btn-container {
     position: relative;
     text-align: center;
-    margin-left: 1000px; /* Adjust as needed */
+    margin-left: 70%; /* Adjust as needed */
 }
 
 .btn-click {
-    width: 120px;
+    width: 25%;
     height: 40px;
     border-radius: 20px;
     border: 0;
@@ -100,7 +100,7 @@ body {
 
     .box-text2 {
         font-size: 100%; 
-        width: 96%;
+        width: 94%;
     }
 
     .btn-container {
@@ -113,5 +113,6 @@ body {
         max-width: 25%; 
         height: 30px;
         font-size: 100%; 
+
     }
 }

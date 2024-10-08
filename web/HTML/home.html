@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,52 +10,67 @@
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
+    <div class="overlay"></div>
     <label class="hamburger-menu">
         <input type="checkbox" />
     </label>
+
     <aside class="sidebar">
         <nav class="square-container">
-            <div class="head">HI</div>
+            <div class="head">Welcome</div>
             <div class="top">
-                <a class="link" href="../HTML/account.html"><i class="fa-solid fa-user"></i> Account</a>
-                <a class="link" href="../HTML/notification.html"><i class="fa-solid fa-bell"></i> Notification</a>
-                <a class="link" href="../HTML/privacy.html"><i class="fa-solid fa-user"></i> Privacy & Security</a>
+                <a class="link" href="/web/HTML/account.html"><i class="fa-solid fa-user"></i> Account</a>
+                <a class="link" href="/web/HTML/notification.html"><i class="fa-solid fa-bell"></i> Notification</a>
+                <a class="link" href="/web/HTML/privacy.html"><i class="fa-solid fa-user"></i> Privacy & Security</a>
                 <a class="link" href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
             </div>
         </nav>
     </aside>
+
     <div class="main-container">
         <div class="announcement-pic">
-            <p>Pictures here</p>
+            <div class="slideshow-container"> <!--Nabago-->
+                <img class="pics" src="/web/PICTURES/Pics/Entrance1.png" style="display: block;" /><!--Nabago-->
+                <img class="pics" src="/web/PICTURES/Pics/Entrance2.png" style="display: none;" /><!--Nabago-->
+            </div>
+            <button class="prev" onclick="changeSlide(-1)">&#10094;</button><!--Nabago-->
+            <button class="next" onclick="changeSlide(1)">&#10095;</button><!--Nabago-->
         </div>
     </div>
+
     <div class="btn-container">
         <div class="btn-item">
             <a class="link-two">Complaints</a>
-            <a href="../HTML/complaints.html">
-                <img class="pic-btn" src="../PICTURES/Icons/complaints.png" />
+            <a href="/web/HTML/complaints.html">
+                <img class="pic-btn" src="/web/PICTURES/Icons/complaints.png" />
             </a>
         </div>
         <div class="btn-item">
             <a class="link-two">Announcement</a>
-            <a href="../HTML/announcement.html">
-                <img class="pic-btn" src="../PICTURES/Icons/announcement.png" />
+            <a href="/web/HTML/announcement.html">
+                <img class="pic-btn" src="/web/PICTURES/Icons/announcement.png" />
             </a>
         </div>
         <div class="btn-item">
             <a class="link-two">Reservation</a>
-            <a href="../HTML/reservation.html">
-                <img class="pic-btn" src="../PICTURES/Icons/reservation.png" />
+            <a href="/web/HTML/reservation.html">
+                <img class="pic-btn" src="/web/PICTURES/Icons/reservation.png" />
             </a>
         </div>
         <div class="btn-item">
             <a class="link-two">Incident Reports</a>
-            <a href="../HTML/reports.html">
-                <img class="pic-btn" src="../PICTURES/Icons/incident_report.png" />
+            <a href="/web/HTML/reports.html">
+                <img class="pic-btn" src="/web/PICTURES/Icons/incident_report.png" />
             </a>
         </div>
     </div>
+
+    <script src="/web/JS/home.js">
+
+    </script>
+    
 </body>
-<script src="../JS/home.js"></script>
+
 </html>

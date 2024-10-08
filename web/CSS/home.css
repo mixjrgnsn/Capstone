@@ -173,10 +173,54 @@ i {
     border-radius: 14px;
     padding: 5px; 
     display: flex;
+    flex-direction: column;
     font-size: 20px;
     justify-content: center;
     align-items: center;
     text-align: center;
+    position: relative; /* Positioning for buttons */
+}
+
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.pics {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the area */
+    margin: auto;
+    border-radius: 14px;
+    display: none; /* Hide all images by default */
+}
+
+.pics.active {
+    display: block; /* Show the active image */
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
 }
 
 .btn-container {
@@ -206,6 +250,22 @@ i {
     margin: 10px 0;
     background-color: #164A41;
 }
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    display: none; /* Hidden by default */
+    z-index: 1; /* Below the hamburger menu and sidebar */
+}
+
+body.overlay-active .overlay {
+    display: block; /* Show the overlay when active */
+}
+
 
 @media (max-width: 768px) {
     .sidebar {
