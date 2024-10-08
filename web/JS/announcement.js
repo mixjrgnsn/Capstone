@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     announcementDiv.classList.add('announcement');
                     announcementDiv.innerHTML = `
                         <p>${announcement.content}</p>
+                        <small> Posted on ${new Date(announcement.created_at).toLocaleString()}</small>
                     `;
                     announcementsContainer.appendChild(announcementDiv);
                 });

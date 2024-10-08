@@ -1,11 +1,15 @@
 html, body {
-    height: 100%;
     margin: 0;
     padding: 0;
 }
 
 body {
+    margin: 0;
     background: linear-gradient(to bottom, #164A41, #4D774E);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;     
+    font-family: Arial, sans-serif;
 }
 
 .create-form{
@@ -32,6 +36,7 @@ p{
     font-family: verdana;
     font-size: 13px;
     color: rgb(252, 255, 248);
+    margin-bottom: 20px;
 }
 
 .link:hover{
@@ -43,6 +48,7 @@ p{
     font-family: sans-serif;
     margin-top: 30spx;
     color: rgb(252, 255, 248);
+    padding-bottom: 20px; /*updated*/
 }
 
 .input-text{
@@ -92,6 +98,18 @@ p{
     margin-right: 220px;
 }
 
+.street1{
+    outline: none;
+    border-radius: 8px;
+    height: 38px;
+    padding: 5px 10px;
+    width: 271px;
+    background-color: #164A41;
+    border: 2px white solid;    
+    margin: 10px 0;
+    color: rgb(252, 255, 248);
+}
+
 .btn-submit{
     margin-top: 15px;
     position: flex;
@@ -107,23 +125,4 @@ p{
 
 .btn-submit:hover{
     background-color: #7DA87E;
-}
-
-#loadingSpinner {
-    display: none;
-    position: fixed;
-    top: 58%;
-    left: 48.9%;
-    transform: translate(-50%, -50%);
-    border: 3px solid #f3f3f3;
-    border-top: 3px solid #3498db;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
 }

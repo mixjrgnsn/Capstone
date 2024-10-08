@@ -11,23 +11,36 @@
         <div class="create-form">
             <h1 class="create">Create new Account</h1>
         </div>
-        <form action="registration.php" method="post" class="input-form" id="signupForm">
+        <form method="post" class="input-form" id="signupForm">
             <span class="fname">FIRST NAME</span></br><input id="firstname" class="input-text" type="text" name="firstName" required/></br>
             <span class="lname">LAST NAME</span></br><input id="lastname" class="input-text" type="text" name="lastName" required/></br>
             <span class="mail">EMAIL</span></br><input id="email" class="input-text" type="email" name="email" required/></br>
             <span class="pass">PASSWORD</span></br><input id="password" class="input-text" type="password" name="password" required/></br>
             <span class="confirm-pass">CONFIRM PASSWORD</span></br><input id="confirmPassword" class="input-text" type="password" name="confPassword" required/></br>
-            <span class="add">BLK AND LOT</span></br><input id="blkAndLot" class="input-text" type="text" name="number" required/></br>
-            <span class="add-1">STREET</span></br><input id="street" class="input-text" type="text" name="street" required/></br>
-            
+            <span class="add">BLK AND LOT</span></br><input id="blkAndLot" class="input-text" type="text" name="number" required/></br> 
+            <span class="add-1">STREET</span></br>
+            <select id="street" class="street1" name="street" required>
+                <option value="" disabled selected>Select a Street</option>
+                <option value="ISAIAH ST">ISAIAH ST.</option>
+                <option value="ISAAC ST">ISAAC ST.</option>
+                <option value="JACOB ST">JACOB ST.</option>
+                <option value="MOSES ST">MOSES ST.</option>
+                <option value="RUTH ST">RUTH ST.</option>
+                <option value="SACRED HEART ST">SACRED HEART ST.</option>
+                <option value="SGT DE LIMA ST">SGT DE LIMA ST.</option>
+                <option value="ST JAMES ST">ST JAMES ST.</option>
+                <option value="ST MICHAEL ST">ST MICHAEL ST.</option>
+                <option value="ST PETER ST">ST PETER ST.</option>
+                <option value="TAJUNA ST">TAJUNA ST.</option>
+                <option value="YAHWEH ST">YAHWEH ST.</option>
+            </select></br>
+
             <button type="submit" class="btn-submit">Sign Up</button>
             <p>Already Registered?</p>
             <a class="link" href="login.html">Log in here.</a></br>
         </form>
-        <div id="loadingSpinner"></div>
     </nav>
 
     <script src="/web/JS/signup.js"></script>
-
 </body>
 </html>
