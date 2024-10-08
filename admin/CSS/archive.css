@@ -210,7 +210,20 @@ button:hover{
     cursor: pointer;
 }
 
-#restore-button:hover, #delete-button:hover {
+#close-button {
+    display: block; /* Ensure it's block level for centering */
+    margin: 0 auto; /* Center the button */
+    background-color: #7DA87E;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-family: verdana;
+    cursor: pointer;
+    border: 2px solid rgb(35, 34, 34);
+    padding: 10px 10px;
+}
+
+#restore-button:hover, #delete-button:hover, #close-button:hover {
     background-color: rgb(190, 195, 198);
 }
 

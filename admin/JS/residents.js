@@ -85,15 +85,15 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(result => {
             if (result.status === 'success') {
-                showAlert(result.message);
+                alert(result.message);
                 row.trElement.remove();
             } else {
-                showAlert(result.message);
+                alert(result.message);
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            showAlert('There was an error processing the deletion.');
+            alert('There was an error processing the deletion.');
         });
 
         document.getElementById('modal').style.display = 'none';
@@ -127,13 +127,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     displayUsers();
 });
-
-function showAlert(message) {
-    document.getElementById('modal-message').textContent = message;
-    document.getElementById('modal').style.display = 'block';
-    document.getElementById('yes-button').style.display = 'none'; // Hide Yes button for simple alerts
-    document.getElementById('cancel-button').textContent = 'Close'; // Change Cancel button text
-}
 
 document.getElementById('accApprovalbtn').addEventListener('click', function() {
     window.location.href = '../HTML/approval.html';

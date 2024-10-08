@@ -185,7 +185,7 @@ button:hover {
     cursor: pointer;
 }
 
-#accept-button, #reject-button {
+#accept-button, #reject-button{
     border: 2px solid rgb(35, 34, 34);
     padding: 10px 10px;
     margin: 10px;
@@ -197,7 +197,20 @@ button:hover {
     cursor: pointer;
 }
 
-#accept-button:hover, #reject-button:hover {
+#close-button {
+    display: block; /* Ensure it's block level for centering */
+    margin: 0 auto; /* Center the button */
+    background-color: #7DA87E;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-family: verdana;
+    cursor: pointer;
+    border: 2px solid rgb(35, 34, 34);
+    padding: 10px 10px;
+}
+
+#accept-button:hover, #reject-button:hover, #close-button:hover {
     background-color: rgb(190, 195, 198);
 }
 

@@ -478,13 +478,13 @@ class DataBase
             "INSERT INTO " . $table . " (id, firstname, lastname, email, password, address) VALUES ('" . $id . "','" . $firstname . "','" . $lastname . "','" . $email . "','" . $password . "','" . $address . "')";
         if (mysqli_query($this->connect, $this->sql)) {
             // If insert was successful, delete the row from the pending table
-            return $this->deleteArchiveRow($id);
+            return $this->deleteRow($id);
         } else {
             return false;
         }
     }
 
-    function deleteArchiveRow($id)
+    function deleteRow($id)
     {
         $id = $this->prepareData($id);
 
@@ -492,7 +492,18 @@ class DataBase
         return mysqli_query($this->connect, $this->sql);
     }
 
-    function deleteArchiveRow2($table, $id)
+    function deleteArchiveRow($table, $id)
+    {
+        $table = $this->prepareData($table);
+        $id = $this->prepareData($id);
+    
+        $this->sql = "DELETE FROM $table WHERE id = ?";
+        $stmt = mysqli_prepare($this->connect, $this->sql);
+        mysqli_stmt_bind_param($stmt, 'i', $id); // Assuming id is an integer
+        return mysqli_stmt_execute($stmt);
+    }
+
+    function deleteRejectedRow($table, $id)
     {
         $table = $this->prepareData($table);
         $id = $this->prepareData($id);
