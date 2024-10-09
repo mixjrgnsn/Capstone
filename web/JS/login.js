@@ -39,11 +39,17 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         loadingSpinner.style.display = 'none';
 
         if (result.status === 'success') {
+            loadingSpinner.style.display = 'block';
             // Store user data in localStorage or sessionStorage
             localStorage.setItem('userData', JSON.stringify(result.data));
             //alert("Login Successful");
-            window.history.replaceState(null, '', window.location.href); // Prevent back navigation
-            window.location.replace('../HTML/home.html'); // Redirect to the home page on success
+            
+            setTimeout(() => {
+                //alert("Logout Successful");
+                // Redirect to the login page and replace the history state
+                window.location.replace('../HTML/home.html');
+                window.history.replaceState(null, '', window.location.href); // Prevent back navigation
+            }, 1000); // Adjust the time as needed
         } else {
             alert('Login Failed: ' + result.message);
         }
