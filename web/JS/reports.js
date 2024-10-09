@@ -41,6 +41,7 @@ function showModal(message, onConfirm) {
 document.addEventListener('DOMContentLoaded', () => {
     const currentDate = new Date().toISOString().split('T')[0];
     document.getElementById('date').value = " " + currentDate;
+    let loadingSpinner = document.getElementById('loadingSpinner');
 
     const userData = JSON.parse(localStorage.getItem('userData'));
     const name = `${userData.firstname} ${userData.lastname}`;
@@ -67,7 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(response => response.text())
             .then(data => {
+                loadingSpinner.style.display = 'block';
                 alert(data);
+                document.getElementById('subject').value = '';
                 window.location.href = "home.html";
             })
             .catch(error => {
