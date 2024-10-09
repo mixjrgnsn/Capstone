@@ -47,14 +47,17 @@ document.getElementById('logout-btn').addEventListener('click', function() {
 
 // Handle the confirmation button
 document.getElementById('confirm-logout').addEventListener('click', function() {
-    loadingSpinner.style.display = 'block';
+    loadingSpinner.style.display = 'block'; // Show the loading spinner
     // Clear user data from localStorage
     localStorage.removeItem('userData');
-    alert("Logout Successful");
-
-    // Redirect to the login page and replace the history state
-    window.location.replace('../HTML/index.html');
-    history.replaceState(null, '', '../HTML/index.html'); // Replace the current history state
+    
+    // Simulate a delay for loading spinner (optional)
+    setTimeout(() => {
+        alert("Logout Successful");
+        // Redirect to the login page and replace the history state
+        window.location.replace('../HTML/index.html');
+        history.replaceState(null, '', '../HTML/index.html'); // Replace the current history state
+    }, 1000); // Adjust the time as needed
 });
 
 // Handle the cancel button
