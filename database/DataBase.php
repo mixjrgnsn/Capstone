@@ -319,26 +319,34 @@ class DataBase
         return $data;
     }
 
-    function loginWeb($table, $email, $password)
-    {
-        $email = $this->prepareData($email);
-        $this->sql = "SELECT * FROM " . $table . " WHERE email = '" . $email . "'";
-        $result = mysqli_query($this->connect, $this->sql);
-        $row = mysqli_fetch_assoc($result);
+    public function loginWeb($table, $email, $password)
+{
+    $email = $this->prepareData($email);
+    $this->sql = "SELECT * FROM " . $table . " WHERE email = '" . $email . "'";
+    $result = mysqli_query($this->connect, $this->sql);
+    $row = mysqli_fetch_assoc($result);
 
-        if (mysqli_num_rows($result) != 0) {
-            $dbemail = $row['email'];
-            $dbpassword = $row['password'];
-            
-            if ($dbemail == $email && password_verify($password, $dbpassword)) {
-                return "Login successful";
-            } else {
-                return "Email or Password wrong";
-            }
+    if (mysqli_num_rows($result) != 0) {
+        $dbemail = $row['email'];
+        $dbpassword = $row['password'];
+        
+        if ($dbemail == $email && password_verify($password, $dbpassword)) {
+            // Prepare user data to return
+            $userData = [
+                'id' => $row['id'],
+                'firstname' => $row['firstname'],
+                'lastname' => $row['lastname'],
+                'address' => $row['address']
+            ];
+            return json_encode(['status' => 'success', 'data' => $userData]);
         } else {
-            return "No user found with this email";
+            return json_encode(['status' => 'error', 'message' => 'Email or Password wrong']);
         }
+    } else {
+        return json_encode(['status' => 'error', 'message' => 'No user found with this email']);
     }
+}
+
 
 
     function displayLogbook($table)

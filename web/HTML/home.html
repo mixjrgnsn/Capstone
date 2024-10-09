@@ -24,7 +24,7 @@
                 <a class="link" href="../HTML/account.html"><i class="fa-solid fa-user"></i> Account</a>
                 <a class="link" href="../HTML/notification.html"><i class="fa-solid fa-bell"></i> Notification</a>
                 <a class="link" href="../HTML/privacy.html"><i class="fa-solid fa-user"></i> Privacy & Security</a>
-                <a class="link" href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                <a class="link" id="logout-btn" ><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
             </div>
         </nav>
     </aside>
@@ -66,11 +66,14 @@
             </a>
         </div>
     </div>
-
-    <script src="../JS/home.js">
-
-    </script>
-    
+    <div id="custom-alert" class="custom-alert" style="display:none;">
+        <div class="alert-content">
+            <p>Are you sure you want to logout?</p>
+            <button id="confirm-logout">Yes</button>
+            <button id="cancel-logout">No</button>
+        </div>
+    </div>
+    <script src="../JS/home.js"></script>
 </body>
 
 </html>

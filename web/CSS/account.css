@@ -18,6 +18,7 @@ body{
 
 .display-name{
     color: rgb(255, 255, 255);
+    font-weight: bold;
     font-family: verdana;
     margin-left: 50px;
     padding-top: 20px;
@@ -25,15 +26,12 @@ body{
 }
 
 @media (max-width: 768px) {
-
     .body-container{
         width: 85%;
         height: auto;
     }
-
     .display-name{
         font-size: 100%;
         margin-top: 0; 
     }
-
 }

@@ -1,3 +1,8 @@
+if (!localStorage.getItem('userData')) {
+    // Redirect to login if there's no user data
+    window.location.replace('../HTML/index.html');
+}
+
 let slideIndex = 0;
 
 const changeSlide = (n) => {
@@ -31,4 +36,26 @@ sidebarLinks.forEach(link => {
         checkbox.checked = false; // Uncheck the checkbox
         document.body.classList.remove('overlay-active'); // Remove overlay class
     });
+});
+
+document.getElementById('logout-btn').addEventListener('click', function() {
+    // Show the custom alert
+    document.getElementById('custom-alert').style.display = 'flex';
+});
+
+// Handle the confirmation button
+document.getElementById('confirm-logout').addEventListener('click', function() {
+    // Clear user data from localStorage
+    localStorage.removeItem('userData');
+    alert("Logout Successful");
+
+    // Redirect to the login page and replace the history state
+    window.location.replace('../HTML/index.html');
+    history.replaceState(null, '', '../HTML/index.html'); // Replace the current history state
+});
+
+// Handle the cancel button
+document.getElementById('cancel-logout').addEventListener('click', function() {
+    // Hide the custom alert
+    document.getElementById('custom-alert').style.display = 'none';
 });
