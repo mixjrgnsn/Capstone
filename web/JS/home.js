@@ -28,6 +28,8 @@ setInterval(() => changeSlide(1), 5000); // Automatic slide transition every 5 s
 
 document.querySelector('.hamburger-menu input').addEventListener('change', function() {
     document.body.classList.toggle('overlay-active', this.checked);
+    // Add this line to ensure the overlay prevents background interaction
+    document.querySelector('.overlay').style.pointerEvents = this.checked ? 'auto' : 'none';
 });
 
 const sidebarLinks = document.querySelectorAll('.sidebar .link');

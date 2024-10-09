@@ -258,20 +258,21 @@ i {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    background-color: rgba(0, 0, 0, 0.5);
     display: none; /* Hidden by default */
-    z-index: 1; /* Below the hamburger menu and sidebar */
+    z-index: 1;
+    pointer-events: none; /* Prevent interaction */
 }
 
 body.overlay-active .overlay {
     display: block; /* Show the overlay when active */
+    pointer-events: auto; /* Allow interaction */
 }
 
 .hamburger-menu:has(input:checked) ~ .main-container .prev,
 .hamburger-menu:has(input:checked) ~ .main-container .next {
     display: none;
 }
-
 
 @media (max-width: 768px) {
     .sidebar {
@@ -398,3 +399,12 @@ body.overlay-active .overlay {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+@media (max-width: 768px) {
+
+    .alert-content {
+        width: 50%;
+        padding: 5px;
+    }
+}
+
