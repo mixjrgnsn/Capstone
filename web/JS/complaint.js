@@ -18,11 +18,13 @@ function showModal(message, onConfirm) {
 
     confirmButton.onclick = function() {
         modal.style.display = "none";
+        loadingSpinner.style.display = "block";
         onConfirm();
     };
 
     cancelButton.onclick = function() {
         modal.style.display = "none";
+        loadingSpinner.style.display = "block";
     };
 
     // Remove the close button functionality
@@ -71,6 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => {
                 console.error('Error:', error);
+            })
+            .finally(() => {
+                loadingSpinner.style.display = "none";
             });
         });
     };

@@ -1,11 +1,9 @@
 document.querySelector(".btn-click").addEventListener("click", function(event) {
-    // Check if the button clicked is the "Cancel" button
     if (this.textContent === "Cancel") {
-        // Show a confirmation dialog
         const confirmCancel = confirm("Are you sure you want to cancel and go back to the home page?");
-        
-        // If the user confirms, redirect to home.html
         if (confirmCancel) {
+            // Show loading spinner before redirecting
+            loadingSpinner.style.display = "block"; 
             window.location.href = "home.html";
         }
     }
@@ -22,17 +20,17 @@ function showModal(message, onConfirm) {
 
     confirmButton.onclick = function() {
         modal.style.display = "none";
+        loadingSpinner.style.display = "block"; // Show loading spinner when confirmed
         onConfirm();
     };
 
     cancelButton.onclick = function() {
         modal.style.display = "none";
+        loadingSpinner.style.display = "block";
     };
 
-    // Remove the close button functionality
     window.onclick = function(event) {
         if (event.target === modal) {
-            // Prevent closing by clicking outside
             event.stopPropagation();
         }
     };
@@ -47,11 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = `${userData.firstname} ${userData.lastname}`;
 
     window.sendReport = function() {
-        const subject = document.getElementById('subject').value.trim(); // Get the subject and trim whitespace
+        const subject = document.getElementById('subject').value.trim();
 
-        if (!subject) { // Check if the subject is empty
+        if (!subject) {
             alert("Please enter a subject before sending the report.");
-            return; // Exit the function if the subject is empty
+            return;
         }
 
         showModal("Are you sure you want to send this report?", function() {
@@ -68,13 +66,15 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(response => response.text())
             .then(data => {
-                loadingSpinner.style.display = 'block';
                 alert(data);
                 document.getElementById('subject').value = '';
                 window.location.href = "home.html";
             })
             .catch(error => {
                 console.error('Error:', error);
+            })
+            .finally(() => {
+                loadingSpinner.style.display = "none"; // Hide spinner after request completes
             });
         });
     };
