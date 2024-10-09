@@ -116,3 +116,43 @@ body {
 
     }
 }
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-color: #ebebeb;
+    margin: 15% auto;
+    font-family: verdana;
+    padding: 10px;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 20px;
+    width: 20%;
+    text-align: center;
+}
+
+#confirm-button, #cancel-button{
+    border: 2px solid rgb(35, 34, 34);
+    padding: 7px;
+    margin: 10px;
+    background-color: #a0a0a0;
+    border-radius: 3px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-family: verdana;
+    cursor: pointer;
+}
+
+#confirm-button:hover, #cancel-button:hover, #close-button:hover {
+    background-color: rgb(190, 195, 198);
+}

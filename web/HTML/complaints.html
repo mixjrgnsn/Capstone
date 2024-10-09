@@ -13,15 +13,21 @@
             </div>
         </nav>
         <div class="body-container">    
-            <span class="second">Date: </span><input class="box-text2" type="date"/>
+            <span class="second">Date: </span><input id="date" class="box-text2" type="text" readonly/>
             <p class="third">Subject: </p>
-            <textarea class="box-text3"></textarea>
+            <textarea id="subject" class="box-text3"></textarea>
         </div>
         <div class="btn-container">
-            <button class="btn-click">Cancel</button>
-            <button class="btn-click">Send</button>
+            <button class="btn-click" onclick="cancel()">Cancel</button>
+            <button class="btn-click" onclick="sendReport()">Send</button>
         </div>
+        <div id="customModal" class="modal">
+            <div class="modal-content">
+                <p id="modal-message"></p>
+                <button id="confirm-button">Yes</button>
+                <button id="cancel-button">No</button>
+            </div>
+        </div>        
+        <script src="../JS/complaint.js"></script>
     </body>
-    <script src="/web/JS/complaint.js">
-    </script>
 </html>
