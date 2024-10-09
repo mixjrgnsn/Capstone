@@ -53,7 +53,7 @@ document.getElementById('confirm-logout').addEventListener('click', function() {
     
     // Simulate a delay for loading spinner (optional)
     setTimeout(() => {
-        alert("Logout Successful");
+        //alert("Logout Successful");
         // Redirect to the login page and replace the history state
         window.location.replace('../HTML/index.html');
         history.replaceState(null, '', '../HTML/index.html'); // Replace the current history state
