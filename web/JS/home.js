@@ -3,6 +3,8 @@ if (!localStorage.getItem('userData')) {
     window.location.replace('../HTML/index.html');
 }
 
+var loadingSpinner = document.getElementById('loadingSpinner');
+
 let slideIndex = 0;
 
 const changeSlide = (n) => {
@@ -45,6 +47,7 @@ document.getElementById('logout-btn').addEventListener('click', function() {
 
 // Handle the confirmation button
 document.getElementById('confirm-logout').addEventListener('click', function() {
+    loadingSpinner.style.display = 'block';
     // Clear user data from localStorage
     localStorage.removeItem('userData');
     alert("Logout Successful");

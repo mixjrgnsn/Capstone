@@ -354,8 +354,47 @@ body.overlay-active .overlay {
 }
 
 .alert-content {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
+    background-color: #ebebeb;
+    margin: 15% auto;
+    font-family: verdana;
+    padding: 10px;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 20px;
+    width: 20%;
     text-align: center;
+}
+
+#confirm-logout, #cancel-logout{
+    border: 2px solid rgb(35, 34, 34);
+    padding: 7px;
+    margin: 10px;
+    background-color: #a0a0a0;
+    border-radius: 3px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-family: verdana;
+    cursor: pointer;
+}
+
+#confirm-logout:hover, #cancel-logout:hover, #close-button:hover {
+    background-color: rgb(190, 195, 198);
+}
+
+#loadingSpinner {
+    display: none;
+    position: fixed;
+    top: 58%;
+    left: 48.9%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
