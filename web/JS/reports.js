@@ -1,11 +1,9 @@
 document.querySelector(".btn-click").addEventListener("click", function(event) {
     if (this.textContent === "Cancel") {
-        const confirmCancel = confirm("Are you sure you want to cancel and go back to the home page?");
-        if (confirmCancel) {
-            // Show loading spinner before redirecting
-            loadingSpinner.style.display = "block"; 
+        event.preventDefault(); // Prevent the default action
+        showModal("Are you sure you want to cancel and go back to the home page?", function() {
             window.location.href = "home.html";
-        }
+        });
     }
 });
 
