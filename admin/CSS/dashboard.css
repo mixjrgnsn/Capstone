@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    overflow: hidden;
 }
 
 .main-container {
@@ -44,8 +43,7 @@ body {
     margin-top: 0;
     margin-left: 100px;
     width: 485px;
-    height: 795px;
-    padding-bottom: 100%;
+    height: calc(100vh - 83px); 
     background-color: rgb(234, 239, 243);
 }
 
@@ -60,7 +58,10 @@ body {
     font-size: 18px;
     color: rgb(70, 73, 75);
     border: 1px solid #000;
+    display: flex; 
+    gap: 20px;
 }
+
 
 .link:hover, .link.active {
     background-color: rgb(190, 195, 198);
@@ -81,12 +82,13 @@ body {
     background-color: rgb(0, 0, 0);
 }
 
-.dash1 {
-    font-size: 60px;
-    font-weight: 0;
-    text-align: center;
-}
-
 #dashboard{
     background-color: #7DA87E;
+}
+
+.dashphoto {
+    height: 540px;
+    width: 540px;
+    margin: 0 auto;
+    display: block; 
 }

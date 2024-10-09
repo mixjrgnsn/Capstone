@@ -11,7 +11,7 @@ body{
     padding: 40px 0;
     height: 500px;
     width: 40%;
-    margin: 20px auto;
+    margin: 10px auto;
     margin-top: 90px;
     border-radius: 12px;
 }
@@ -19,8 +19,8 @@ body{
 .display-name{
     color: rgb(255, 255, 255);
     font-weight: bold;
-    font-family: verdana;
-    margin-left: 50px;
+    font-family: Verdana, sans-serif;
+    margin-left: 5%;
     padding-top: 20px;
     font-size: 23px;
 }

@@ -39,6 +39,7 @@ body {
     background-color: #164A41;
     border-radius: 10px;
     color: rgb(255, 255, 255);
+    font-family: Verdana, sans-serif;
 }
 
 .box-text2 {
@@ -50,17 +51,17 @@ body {
     height: 400px;
     background-color: #164A41;
     border-radius: 10px;
-    color: rgb(219, 244, 218);
+    color: rgb(255, 255, 255);
+    font-family: Verdana, sans-serif;
 }
 
 .btn-container {
     position: relative;
     text-align: center;
-    margin-left: 70%; /* Adjust as needed */
 }
 
 .btn-click {
-    width: 25%;
+    width: 120px;
     height: 40px;
     border-radius: 20px;
     border: 0;

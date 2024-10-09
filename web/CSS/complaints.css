@@ -38,16 +38,17 @@ body {
 .box-text2 {
     outline: none;
     font-size: 20px;
-    width: 15%; 
+    width: 250px; 
     height: 35px;
     background-color: #164A41;
     border-radius: 10px;
     color: rgb(255, 255, 255);
     border: 1px solid rgb(255, 255, 255);
+    font-family: Verdana, sans-serif;
 }
 
 .box-text3 {
-    padding: 5px;
+    padding: 10px;
     outline: none;
     border: 2px solid rgb(255, 255, 255);
     font-size: 20px;
@@ -55,7 +56,8 @@ body {
     height: 400px;
     background-color: #164A41;
     border-radius: 10px;
-    color: rgb(219, 244, 218);
+    color: rgb(255, 255, 255);
+    font-family: Verdana, sans-serif;
 }
 
 .btn-container {
@@ -106,7 +108,7 @@ body {
     }
 
     .box-text3 {
-        width: 97%; 
+        width: 95%; 
         font-size: 100%; 
     }
 
@@ -121,6 +123,7 @@ body {
         height: 30px; 
         font-size: 100%; 
     }
+    
 }
 
 .modal {
@@ -180,4 +183,12 @@ body {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+
+    .modal-content {
+        width: 50%; /* Make it wider on mobile */
+        padding: 5px; /* Add padding for better appearance */
+    }
 }

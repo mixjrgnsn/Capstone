@@ -1,6 +1,5 @@
 body{
     margin: 0;
-    overflow: hidden;
 }
 
 .main-container{
@@ -42,16 +41,15 @@ body{
     cursor: pointer;
 }
 
-.left-middle{
+.left-middle {
     margin-top: 0;
     margin-left: 100px;
     width: 485px;
-    height: 795px;
-    padding-bottom: 100%;
+    height: calc(100vh - 83px); 
     background-color: rgb(234, 239, 243);
 }
 
-.link{
+.link {
     position: relative;
     display: block;
     text-align: center;
@@ -62,8 +60,9 @@ body{
     font-size: 18px;
     color: rgb(70, 73, 75);
     border: 1px solid #000;
+    display: flex; 
+    gap: 20px;
 }
-
 .link:hover{
     background-color: rgb(190, 195, 198);
 }
