@@ -94,3 +94,10 @@ body{
     font-weight: 0;
     text-align: center;
 }
+
+.dashphoto {
+    height: 540px;
+    width: 540px;
+    margin: 0 auto;
+    display: block; 
+}

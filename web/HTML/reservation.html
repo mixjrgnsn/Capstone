@@ -1,46 +1,39 @@
 <!DOCTYPE html>
 <html>
-    
-    <head>
-
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Reservation</title>
-        <link rel="stylesheet" href="../CSS/reservation.css"/>
-
-    </head>
-
-    <body>
-
-        <nav class="main-container">
-
-            <div>
-
-                <h1 class="heading">Reservation</h1>
-
-            </div>
-
-        </nav>
-        
-        <div class="body-container">
-
-            <span class="first">Date: </span><input class="box-text1" type="date"/>
-            
-            <span class="text1">From: </span><input class="time-one" type="time"/>
-            <span class="text2">To: </span><input class="time-one" type="time"/>
-
-
-            <p class="second">Subject: </p>
-            <textarea class="box-text2"></textarea>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation</title>
+    <link rel="stylesheet" href="../CSS/reservation.css"/>
+</head>
+<body>
+    <nav class="main-container">
+        <div>
+            <h1 class="heading">Reservation</h1>
         </div>
+    </nav>
+    <div class="body-container">
+        <span class="first">Date: </span><input class="box-text1" type="date" id="reservation-date"/>
+        <span class="text1">From: </span>
+        <input class="time-one" type="time" id="time-from"/>
+        <span class="text2">To: </span>
+        <input class="time-one" type="time" id="time-to"/>
+        <p class="second">Subject: </p>
+        <textarea class="box-text2" id="purpose"></textarea>
+    </div>
+    <div class="btn-container">
+        <button class="btn-click" id="submit-btn">Submit</button>
+    </div>
 
-        <div class="btn-container">
-
-            <button class="btn-click">Submit</button>
-
+    <div id="customModal" class="modal">
+        <div class="modal-content">
+            <p id="modal-message"></p>
+            <button id="confirm-button">Yes</button>
+            <button id="cancel-button">No</button>
         </div>
+    </div>
+    <div id="loadingSpinner"></div>
 
-    </body>
-
+    <script src="../JS/reservation.js"></script>
+</body>
 </html>
