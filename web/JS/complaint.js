@@ -24,7 +24,6 @@ function showModal(message, onConfirm) {
 
     cancelButton.onclick = function() {
         modal.style.display = "none";
-        loadingSpinner.style.display = "block";
     };
 
     // Remove the close button functionality

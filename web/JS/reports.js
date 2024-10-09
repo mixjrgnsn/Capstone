@@ -26,7 +26,6 @@ function showModal(message, onConfirm) {
 
     cancelButton.onclick = function() {
         modal.style.display = "none";
-        loadingSpinner.style.display = "block";
     };
 
     window.onclick = function(event) {
