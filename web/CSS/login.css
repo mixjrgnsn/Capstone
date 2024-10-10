@@ -5,7 +5,12 @@ html, body {
 }
 
 body {
+    margin: 0;
     background: linear-gradient(to bottom, #164A41, #4D774E);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;     
+    font-family: Arial, sans-serif;
 }
 
 .header {
