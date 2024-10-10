@@ -104,6 +104,7 @@ p {
     top: 10px;
     color: rgb(252, 255, 248);
     font-family: sans-serif;
+    padding-bottom: 10px;
 }
 
 .link2:hover {
