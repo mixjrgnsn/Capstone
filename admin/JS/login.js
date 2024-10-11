@@ -82,9 +82,9 @@ document.addEventListener('contextmenu', function(event) {
 });
 
 // Optional: Prevent navigating back to login page if already logged in
-/*window.onload = function() {
+window.onload = function() {
     if (localStorage.getItem('isLoggedIn') === 'true') {
         // Redirect to appropriate page if already logged in
         window.location.href = '../HTML/announcement.html'; // or the appropriate page
     }
-};*/
+};
