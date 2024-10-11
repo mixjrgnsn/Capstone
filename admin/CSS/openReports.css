@@ -111,3 +111,22 @@ body{
     border: 2px solid black;
     padding: 10px;
 }
+
+#Btn {
+    margin-top: 20px;
+    font-family: Verdana, sans-serif; /* It's good to include a generic font family */
+    padding: 3px;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    border: 2px solid #000;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 150px; /* Set a width to center the element */
+    display: block; /* Ensure it is a block-level element to center it */
+    margin-left: auto; /* Horizontal centering */
+    margin-right: auto; /* Horizontal centering */
+}
+
+#Btn:hover{
+    background-color: rgb(190, 195, 198);
+}

@@ -173,7 +173,7 @@ class DataBase
 
     function displayReports($table)
     {
-        $columns = 'id AS TAG, name AS NAME, date AS DATE';
+        $columns = 'id AS TAG, name AS NAME, date AS DATE, status AS STATUS';
         
         $this->sql = "SELECT $columns FROM " . $table;
         $result = mysqli_query($this->connect, $this->sql);
@@ -561,6 +561,17 @@ class DataBase
     public function updateReadStatus($id) {
         $id = $this->prepareData($id);
         $this->sql = "UPDATE complaints SET status = 'READ' WHERE id = '$id'";
+
+        if (mysqli_query($this->connect, $this->sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateReadStatus2($id) {
+        $id = $this->prepareData($id);
+        $this->sql = "UPDATE reports SET status = 'READ' WHERE id = '$id'";
 
         if (mysqli_query($this->connect, $this->sql)) {
             return true;

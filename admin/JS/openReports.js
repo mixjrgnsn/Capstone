@@ -38,4 +38,41 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch subject details based on the query parameter
     const id = getQueryParameter('id');
     getSubjectDetailsReports(id);
+
+    // Check if the subject has already been marked as read
+    if (localStorage.getItem(`subject-read2-${id}`) === 'true') {
+        document.getElementById('Btn').style.display = 'none';
+    }
+
+    document.getElementById('Btn').addEventListener('click', function() {
+        if (!id) {
+            alert('No subject selected to mark as read.');
+            return;
+        }
+
+        // Update the read status in the database
+        fetch(`http://localhost/loginregister/database/updateReadStatus2.php?id=${encodeURIComponent(id)}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ read: true })
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Marked as read successfully!');
+                // Hide the button after successful marking
+                document.getElementById('Btn').style.display = 'none';
+                // Save the read status in localStorage
+                localStorage.setItem(`subject-read2-${id}`, 'true');
+                window.location.href = 'reports.html';
+            } else {
+                throw new Error('Failed to mark as read');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating read status:', error);
+            alert('Error marking as read');
+        });
+    });
 });

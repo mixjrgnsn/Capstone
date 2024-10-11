@@ -35,6 +35,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         bodyRow.appendChild(tr);
                     });
 
+                    searchBox.addEventListener('input', function() {
+                        const query = searchBox.value.toLowerCase();
+                        Array.from(bodyRow.getElementsByTagName('tr')).forEach(row => {
+                            const cells = row.getElementsByTagName('td');
+                            const match = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(query));
+                            row.style.display = match ? '' : 'none';
+                        });
+                    });
+
                 } else {
                     // Handle case where no data is available
                     bodyRow.innerHTML = '<tr><td colspan="100%">No data available</td></tr>';
