@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     detailsContainer.innerHTML = `
                     <h5><strong>Name:</strong> ${subject.NAME} </h5>
                     <h5><strong>Date:</strong> ${subject.DATE}</h5>
-                    </br>
+                    <br>
                     <p>${subject.SUBJECT}</p>`;
                 } else {
                     detailsContainer.innerText = 'No details available for this subject.';
@@ -39,8 +39,40 @@ document.addEventListener('DOMContentLoaded', function() {
     const id = getQueryParameter('id');
     getSubjectDetailsComplaints(id);
 
+    // Check if the subject has already been marked as read
+    if (localStorage.getItem(`subject-read-${id}`) === 'true') {
+        document.getElementById('Btn').style.display = 'none';
+    }
+
     document.getElementById('Btn').addEventListener('click', function() {
-        alert('Button clicked!'); // Placeholder for the actual action
-        // Add logic here to handle the button click, such as marking the complaint as read
+        if (!id) {
+            alert('No subject selected to mark as read.');
+            return;
+        }
+
+        // Update the read status in the database
+        fetch(`http://localhost/loginregister/database/updateReadStatus.php?id=${encodeURIComponent(id)}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ read: true })
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Marked as read successfully!');
+                // Hide the button after successful marking
+                document.getElementById('Btn').style.display = 'none';
+                // Save the read status in localStorage
+                localStorage.setItem(`subject-read-${id}`, 'true');
+                window.location.href = 'complaints.html';
+            } else {
+                throw new Error('Failed to mark as read');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating read status:', error);
+            alert('Error marking as read');
+        });
     });
 });

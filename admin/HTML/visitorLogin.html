@@ -38,14 +38,14 @@
                     <p class="login-text">Log In</p>
                 </div>
                 <div class="password-form">
-                    <span class="f-name">First Name: &nbsp;</span>
-                    <input class="firstname" type="text"/><br/><br/>
+                    <span class="f-name">First Name:</span>
+                    <input class="firstname" type="text"/></br>
                     
-                    <span class="l-name">Last Name: </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input class="lastname" type="text"/><br/><br/>
+                    <span class="l-name">Last Name:</span>
+                    <input class="lastname" type="text"/></br>
                     
-                    <span class="purpose-text">Purpose: </span>
-                    <textarea class="prps-txt" rows="5" cols="50"></textarea><br/><br/>
+                    <span class="purpose-text">Purpose:</span>
+                    <textarea class="prps-txt"></textarea></br>
                     
                     <button class="cancel-btn" type="button">Reset</button>
                     <button class="save-btn" type="button">Submit</button>
@@ -54,7 +54,14 @@
             </div>
         </div>
     </nav>
-    
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <p id="modal-message"></p>
+            <button id="yes-button">Yes</button>
+            <button id="cancel-button">Cancel</button>
+        </div>
+
     <script src="../JS/visitorLogin.js"></script>
 </body>
 </html>

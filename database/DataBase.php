@@ -155,7 +155,7 @@ class DataBase
 
     function displayComplaints($table)
     {
-        $columns = 'id AS TAG, name AS NAME, date AS DATE';
+        $columns = 'id AS TAG, name AS NAME, date AS DATE, status AS STATUS';
         
         $this->sql = "SELECT $columns FROM " . $table;
         $result = mysqli_query($this->connect, $this->sql);
@@ -556,6 +556,17 @@ class DataBase
         $stmt = mysqli_prepare($this->connect, $this->sql);
         mysqli_stmt_bind_param($stmt, 's', $content);
         return mysqli_stmt_execute($stmt);
+    }
+
+    public function updateReadStatus($id) {
+        $id = $this->prepareData($id);
+        $this->sql = "UPDATE complaints SET status = 'READ' WHERE id = '$id'";
+
+        if (mysqli_query($this->connect, $this->sql)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
