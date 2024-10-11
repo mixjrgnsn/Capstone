@@ -62,3 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+document.getElementById('postedAnnouncements-btn').addEventListener('click', function() {
+    window.location.href = '../HTML/postedAnnouncement.html';
+});

@@ -122,6 +122,12 @@ body{
     margin: 27px;
 }
 
+.prps-txt{
+    padding: 5px;
+    margin-left: -20px;
+    outline: none;
+}
+
 .current-time{
     margin-left: 30px;
 }
@@ -143,12 +149,6 @@ body{
     padding: 3px;
     margin-left: -39px;
     height: 20px;
-    outline: none;
-}
-
-.prps-txt{
-    padding: 5px;
-    margin-left: -20px;
     outline: none;
 }
 

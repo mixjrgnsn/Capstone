@@ -25,11 +25,12 @@ body {
 }
 
 .announcement {
-    border: 2px solid #ffffff;
+    border: 2px solid #272626;
     padding: 10px;
     margin-bottom: 10px;
     color: white;
-    background-color: #7DA87E;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #2d3d2e;
     border-radius: 5px;
 }
 

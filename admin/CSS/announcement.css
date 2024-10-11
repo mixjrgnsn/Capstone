@@ -201,3 +201,73 @@ body{
 #confirmBtn:hover, #cancelBtn:hover {
     background-color: rgb(190, 195, 198);
 }
+
+#postedAnnouncements-btn {
+    font-family: verdana;
+    padding: 3px;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    border: 2px solid #000;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#postedAnnouncements-btn:hover {
+    background-color: rgb(190, 195, 198);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid black;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #7DA87E;
+}
+table tr {
+    cursor: pointer;
+}
+
+table tr:hover {
+    background-color: rgb(190, 195, 198);
+}
+
+.table-container {
+    margin-top: 5px;
+    max-height: 460px; /* Adjust this value as needed */
+    overflow-y: auto;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+#search-box {
+    width: calc(20% - 20px);
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: 16px;
+    border: 2px solid #000000;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#announcements-btn {
+    font-family: verdana;
+    padding: 3px;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    border: 2px solid #000;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    float: right;
+}
+
+#announcements-btn:hover {
+    background-color: rgb(190, 195, 198);
+}

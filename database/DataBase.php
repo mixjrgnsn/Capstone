@@ -533,5 +533,30 @@ class DataBase
         }
     }
 
+    function displayAnnouncements($table)
+    {
+        $columns = 'content, created_at';
+        
+        $this->sql = "SELECT $columns FROM " . $table . " ORDER BY id DESC";
+        $result = mysqli_query($this->connect, $this->sql);
+        
+        if ($result) {
+            $data = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    function deleteAnnouncementByContent($content) {
+        $this->sql = "DELETE FROM announcements WHERE content = ?";
+        $stmt = mysqli_prepare($this->connect, $this->sql);
+        mysqli_stmt_bind_param($stmt, 's', $content);
+        return mysqli_stmt_execute($stmt);
+    }
+
 }
 ?>

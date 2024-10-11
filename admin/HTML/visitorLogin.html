@@ -1,45 +1,60 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Visitor Log In</title>
-        <link rel="stylesheet" href="../CSS/visitorLogin.css"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    </head>
-    <body>
-            <div class="header">
-                <img class="logo-header" src="../Pictures/LOGO HOA.png"/>
-                <h2>Security</h2>
-                <button class="btn-logout" id="btn-logout">Log out</button>
-            </div>
-        <nav class="main-container">
-            <div class="left-middle">
-                <a class="link" id="dashboard" href="../HTML/dashboardsecurity.html"><i class="fa-solid fa-computer"></i>Dashboard</a>
-                <a class="link" id="visitor" href="../HTML/visitorLogin.html"><i class="fa-solid fa-right-to-bracket"></i>Visitor Log In</a>
-                <a class="link" id="resident-authentication" href="../HTML/residentAuthentication.html"><i class="fa-solid fa-user"></i>Resident Authentication</a>
-                <a class="link" id="visitor-record" href="../HTML/visitorRecord.html"><i class="fa-solid fa-person"></i>Visitor Record</a>
-            </div>
-            <div class="right-middle">
-                <p>Security</p>
-                <div class="line-middle">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visitor Log In</title>
+    <link rel="stylesheet" href="../CSS/visitorLogin.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+    <div class="header">
+        <img class="logo-header" src="../Pictures/LOGO HOA.png" alt="Logo"/>
+        <h2>Security</h2>
+        <button class="btn-logout" id="btn-logout">Log out</button>
+    </div>
+    
+    <nav class="main-container">
+        <div class="left-middle">
+            <a class="link" id="dashboard" href="../HTML/dashboardsecurity.html">
+                <i class="fa-solid fa-computer"></i> Dashboard
+            </a>
+            <a class="link" id="visitor" href="../HTML/visitorLogin.html">
+                <i class="fa-solid fa-right-to-bracket"></i> Visitor Log In
+            </a>
+            <a class="link" id="resident-authentication" href="../HTML/residentAuthentication.html">
+                <i class="fa-solid fa-user"></i> Resident Authentication
+            </a>
+            <a class="link" id="visitor-record" href="../HTML/visitorRecord.html">
+                <i class="fa-solid fa-person"></i> Visitor Record
+            </a>
+        </div>
+        
+        <div class="right-middle">
+            <p>Security</p>
+            <div class="line-middle"></div>
+            <div class="right-body">
+                <div class="border-div"></div>
+                <div class="login-container">
+                    <p class="login-text">Log In</p>
                 </div>
-                    <div class="right-body">
-                        <div class="border-div">
-                        </div>
-                        <div class="login-container">
-                            <p class="login-text">Log In</p>
-                        </div>
-                        <div class="password-form">
-                            <span class="f-name">First Name: &nbsp;</span><input class="firstname" type="text"/></br></br>
-                            <span class="l-name">Last Name: </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="lastname" type="text"/></br></br>
-                            <span class="purpose-text">Purpose: </span><textarea class="prps-txt" rows="5" cols="50%"></textarea></br></br>
-                            <button class="cancel-btn" type="button">Reset</button>
-                            <button class="save-btn" type="button">Save</button>
-                            <div id="loadingSpinner"></div>
-                        </div>
-                    </div>
+                <div class="password-form">
+                    <span class="f-name">First Name: &nbsp;</span>
+                    <input class="firstname" type="text"/><br/><br/>
+                    
+                    <span class="l-name">Last Name: </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="lastname" type="text"/><br/><br/>
+                    
+                    <span class="purpose-text">Purpose: </span>
+                    <textarea class="prps-txt" rows="5" cols="50"></textarea><br/><br/>
+                    
+                    <button class="cancel-btn" type="button">Reset</button>
+                    <button class="save-btn" type="button">Submit</button>
+                    <div id="loadingSpinner"></div>
+                </div>
             </div>
-        </nav>
-        <script src="../JS/visitorLogin.js"></script>
-    </body>
+        </div>
+    </nav>
+    
+    <script src="../JS/visitorLogin.js"></script>
+</body>
 </html>
