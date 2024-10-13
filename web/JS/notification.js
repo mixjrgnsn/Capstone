@@ -57,7 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         reportDiv.innerHTML = `
                             <big>Your report has been marked as <span style="color: #4aed75">${report.status}</span></big><br><br>
                             <p>${report.subject}</p><br>
-                            <small>Date of your report: ${report.date}</small>
+                            <small>Date of your report: ${report.date}</small><br>
+                            <small>Tag/Report Number: ${report.id}</small>
                         `;
                         reportsContainer.appendChild(reportDiv);
                     });
