@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const statusFilter = document.getElementById('status-filter');
+
+    // Load saved filter from localStorage
+    const savedFilter = localStorage.getItem('statusFilter');
+    if (savedFilter) {
+        statusFilter.value = savedFilter;
+    }
+
     function displayComplaints() {
         fetch('http://localhost/loginregister/database/displayComplaints.php')
             .then(response => response.json())
@@ -23,29 +31,31 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Create table rows
                     data.forEach(row => {
                         const tr = document.createElement('tr');
+                        tr.dataset.status = row.STATUS; // Add a data attribute for status
 
                         tr.addEventListener('click', () => handleRowClick(row));
 
-                        Object.values(row).forEach(value => {
+                        headers.forEach(header => {
                             const td = document.createElement('td');
-                            td.textContent = value;
+                            td.textContent = row[header];
+
+                            // Change font color for "STATUS" column
+                            if (header === 'STATUS') {
+                                td.style.color = getStatusColor(row[header]);
+                            }
+
                             tr.appendChild(td);
                         });
 
                         bodyRow.appendChild(tr);
                     });
 
-                    searchBox.addEventListener('input', function() {
-                        const query = searchBox.value.toLowerCase();
-                        Array.from(bodyRow.getElementsByTagName('tr')).forEach(row => {
-                            const cells = row.getElementsByTagName('td');
-                            const match = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(query));
-                            row.style.display = match ? '' : 'none';
-                        });
-                    });
-
+                    // Event listeners for search and status filtering
+                    setupFilters(searchBox, bodyRow);
+                    
+                    // Apply filter on initial load
+                    filterTable(searchBox, bodyRow);
                 } else {
-                    // Handle case where no data is available
                     bodyRow.innerHTML = '<tr><td colspan="100%">No data available</td></tr>';
                 }
             })
@@ -54,8 +64,44 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
+    function getStatusColor(status) {
+        switch (status) {
+            case 'UNREAD':
+                return 'red';
+            case 'ON GOING':
+                return 'blue';
+            case 'COMPLETED':
+                return 'green';
+            default:
+                return 'black';
+        }
+    }
+
+    function setupFilters(searchBox, bodyRow) {
+        searchBox.addEventListener('input', () => filterTable(searchBox, bodyRow));
+        statusFilter.addEventListener('change', () => filterTable(searchBox, bodyRow));
+
+        // Initial filter application
+        filterTable(searchBox, bodyRow);
+    }
+
+    function filterTable(searchBox, bodyRow) {
+        const query = searchBox.value.toLowerCase();
+        const selectedStatus = statusFilter.value;
+
+        // Save selected status to localStorage
+        localStorage.setItem('statusFilter', selectedStatus);
+
+        Array.from(bodyRow.getElementsByTagName('tr')).forEach(row => {
+            const cells = row.getElementsByTagName('td');
+            const matchQuery = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(query));
+            const matchStatus = !selectedStatus || row.dataset.status === selectedStatus;
+
+            row.style.display = matchQuery && matchStatus ? '' : 'none';
+        });
+    }
+
     function handleRowClick(row) {
-        // Check if row data exists
         if (row && row.TAG) {
             window.location.href = `../HTML/openComplaints.html?id=${encodeURIComponent(row.TAG)}`;
         } else {

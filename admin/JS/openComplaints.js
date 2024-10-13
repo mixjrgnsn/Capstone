@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return urlParams.get(name);
     }
 
-    // Function to fetch and display subject details based on the id
     function getSubjectDetailsComplaints(id) {
         if (!id) {
             document.getElementById('subject-details').innerText = 'No subject selected';
@@ -21,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data && data.length > 0) {
                     const subject = data[0];
                     detailsContainer.innerHTML = `
+                    <h5><strong>Tag/Complaint Number:</strong> ${subject.ID} </h5>
                     <h5><strong>Name:</strong> ${subject.NAME} </h5>
                     <h5><strong>Date:</strong> ${subject.DATE}</h5>
                     <br>
@@ -35,22 +35,25 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // Fetch subject details based on the query parameter
     const id = getQueryParameter('id');
     getSubjectDetailsComplaints(id);
+    document.getElementById('Btn2').style.display = 'none';
 
     // Check if the subject has already been marked as read
-    if (localStorage.getItem(`subject-read-${id}`) === 'true') {
-        document.getElementById('Btn').style.display = 'none';
+    if (localStorage.getItem(`subject-read1-${id}`) === 'true') {
+        document.getElementById('Btn1').style.display = 'none';
+        document.getElementById('Btn2').style.display = 'block';
     }
-
-    document.getElementById('Btn').addEventListener('click', function() {
+    if (localStorage.getItem(`subject-completed-${id}`) === 'true') {
+        document.getElementById('Btn2').style.display = 'none';
+    }
+    
+    document.getElementById('Btn1').addEventListener('click', function() {
         if (!id) {
             alert('No subject selected to mark as read.');
             return;
         }
 
-        // Update the read status in the database
         fetch(`http://localhost/loginregister/database/updateReadStatus.php?id=${encodeURIComponent(id)}`, {
             method: 'POST',
             headers: {
@@ -60,19 +63,50 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => {
             if (response.ok) {
-                alert('Marked as read successfully!');
-                // Hide the button after successful marking
-                document.getElementById('Btn').style.display = 'none';
+                alert('Marked as ON GOING successfully!');
+                document.getElementById('Btn1').style.display = 'none';
                 // Save the read status in localStorage
-                localStorage.setItem(`subject-read-${id}`, 'true');
+                localStorage.setItem(`subject-read1-${id}`, 'true');
+                
+                document.getElementById('Btn2').style.display = 'block';
                 window.location.href = 'complaints.html';
             } else {
-                throw new Error('Failed to mark as read');
+                throw new Error('Failed to mark as ON GOING');
             }
         })
         .catch(error => {
-            console.error('Error updating read status:', error);
-            alert('Error marking as read');
+            console.error('Error updating status:', error);
+            alert('Error marking as ON GOING');
+        });
+    });
+
+
+    document.getElementById('Btn2').addEventListener('click', function() {
+        if (!id) {
+            alert('No subject selected to mark as read.');
+            return;
+        }
+
+        fetch(`http://localhost/loginregister/database/updateStatusToCompleted.php?id=${encodeURIComponent(id)}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ read: true })
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Marked as COMPLETED successfully!');
+                localStorage.setItem(`subject-completed-${id}`, 'true');
+                document.getElementById('Btn2').style.display = 'none';
+                window.location.href = 'complaints.html';
+            } else {
+                throw new Error('Failed to mark as COMPLETED');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating status:', error);
+            alert('Error marking as COMPLETED');
         });
     });
 });

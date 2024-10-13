@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data && data.length > 0) {
                     const subject = data[0];
                     detailsContainer.innerHTML = `
+                    <h5><strong>Tag/Complaint Number:</strong> ${subject.ID} </h5>
                     <h5><strong>Name:</strong> ${subject.NAME} </h5>
                     <h5><strong>Date:</strong> ${subject.DATE}</h5>
                     </br>

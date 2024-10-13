@@ -136,3 +136,13 @@ table tr:hover {
 #reports{
     background-color: #7DA87E;
 }
+
+#status-filter {
+    width: 150px;
+    padding: 5px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    border: 2px solid #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+}

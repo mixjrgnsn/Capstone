@@ -560,7 +560,7 @@ class DataBase
 
     public function updateReadStatus($id) {
         $id = $this->prepareData($id);
-        $this->sql = "UPDATE complaints SET status = 'READ' WHERE id = '$id'";
+        $this->sql = "UPDATE complaints SET status = 'ON GOING' WHERE id = '$id'";
 
         if (mysqli_query($this->connect, $this->sql)) {
             return true;
@@ -572,6 +572,17 @@ class DataBase
     public function updateReadStatus2($id) {
         $id = $this->prepareData($id);
         $this->sql = "UPDATE reports SET status = 'READ' WHERE id = '$id'";
+
+        if (mysqli_query($this->connect, $this->sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateStatusToCompleted($id) {
+        $id = $this->prepareData($id);
+        $this->sql = "UPDATE complaints SET status = 'COMPLETED' WHERE id = '$id'";
 
         if (mysqli_query($this->connect, $this->sql)) {
             return true;
