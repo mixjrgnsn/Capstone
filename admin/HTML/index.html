@@ -1,64 +1,35 @@
 <!DOCTYPE html>
 <html>
-
     <head>
-
         <meta charset="UTF-8">
         <title>Login</title>
         <link rel="stylesheet" href="../CSS/login.css"/>
-
     </head>
-
     <body>
-        
         <nav class="header">
-
             <div class="main-container">
-
                 <form>
-
                     <img class="logo-header" src="../Pictures/HOA LOGO.png"/>
-
                 </form>
-
             </div>
-
         </nav>
-
         <nav class="middle">
-
             <div class="form-box">
-
                 <div class="button-box">
-
                     <div class="btn"></div>
-
                     <button class="toggle-btn" type="button" onclick="leftClick()">Login as Admin</button>
-                    <button class="toggle-btn" type="button" onclick="rightClick()">Login as Security</button>
-                    
+                    <button class="toggle-btn" type="button" onclick="rightClick()">Login as Security</button>      
                 </div>
-
             </div>
-
             <div class="login-container">
-
                 <form id="loginForm">
-
-                    <input id="username" class="input-form" type="text" placeholder="Username"/>
-                    
+                    <input id="username" class="input-form" type="text" placeholder="Username"/>                  
                     <input id="password" class="input-form" type="password" placeholder="Password"/>
                     <button class="button-form" type="submit">Log In</button>
-
                 </form>
-                
                 <div id="loadingSpinner"></div>
-
             </div>
-
         </nav>
-
         <script src="../JS/login.js"></script>
-
     </body>
-
 </html>

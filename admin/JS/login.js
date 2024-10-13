@@ -48,9 +48,10 @@ function handleFormSubmit(event) {
     .then(data => {
         console.log("Server Response:", data);
         if (data.trim() === "Login Success") {
-            alert(data);
-            // Set login state in local storage or session storage
+            //alert(data);
+            // Set login state and role in local storage
             localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('role', currentAction);
             // Use history.replaceState to prevent back navigation
             history.replaceState(null, null, redirectUrl);
             window.location.href = redirectUrl;
@@ -84,7 +85,12 @@ document.addEventListener('contextmenu', function(event) {
 // Optional: Prevent navigating back to login page if already logged in
 window.onload = function() {
     if (localStorage.getItem('isLoggedIn') === 'true') {
-        // Redirect to appropriate page if already logged in
-        window.location.href = '../HTML/announcement.html'; // or the appropriate page
+        const role = localStorage.getItem('role');
+        // Redirect to appropriate page based on the role
+        if (role === 'admin') {
+            window.location.href = '../HTML/dashboard.html';
+        } else if (role === 'security') {
+            window.location.href = '../HTML/dashboardsecurity.html';
+        }
     }
 };

@@ -12,8 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnLogout) { // Ensure the button exists before adding the event listener
         btnLogout.addEventListener('click', () => {
             if (confirm("Are you sure you want to log out?")) {
-                // Set the login state to false
+                // Clear the login state and role
                 localStorage.setItem('isLoggedIn', 'false');
+                localStorage.removeItem('role');
 
                 // Use replaceState to prevent back navigation
                 history.replaceState(null, '', '../HTML/index.html'); // Replace the current history state
