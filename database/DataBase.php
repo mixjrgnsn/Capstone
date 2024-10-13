@@ -137,7 +137,7 @@ class DataBase
 
     function displayReservations($table)
     {
-        $columns = 'name AS NAME, date AS DATE, CONCAT(timeFrom, " ", am_pm_from) AS `TIME FROM`, CONCAT(timeTo, " ", am_pm_to) AS `TIME TO`, purpose AS PURPOSE';
+        $columns = 'id AS TAG, name AS NAME, date AS DATE, CONCAT(timeFrom, " ", am_pm_from) AS `TIME FROM`, CONCAT(timeTo, " ", am_pm_to) AS `TIME TO`, purpose AS PURPOSE';
         
         $this->sql = "SELECT $columns FROM " . $table;
         $result = mysqli_query($this->connect, $this->sql);
@@ -589,6 +589,12 @@ class DataBase
         } else {
             return false;
         }
+    }
+
+    function rejectReservation($id) {
+        $id = $this->prepareData($id);
+        $this->sql = "DELETE FROM reservations WHERE id = '" . $id . "'";
+        return mysqli_query($this->connect, $this->sql);
     }
 
 }
