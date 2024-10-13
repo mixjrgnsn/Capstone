@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const statusFilter = document.getElementById('status-filter');
 
-    // Load saved filter from localStorage with a different key
+    // Load saved filter from localStorage
     const savedFilter = localStorage.getItem('reportsStatusFilter');
     if (savedFilter) {
         statusFilter.value = savedFilter;
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Create table rows
                     data.forEach(row => {
                         const tr = document.createElement('tr');
-                        tr.dataset.status = row.STATUS; // Add a data attribute for status
+                        tr.dataset.status = row.STATUS;
 
                         tr.addEventListener('click', () => handleRowClick(row));
 
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const query = searchBox.value.toLowerCase();
         const selectedStatus = statusFilter.value;
 
-        // Save selected status to localStorage with a different key
+        // Save selected status to localStorage
         localStorage.setItem('reportsStatusFilter', selectedStatus);
 
         Array.from(bodyRow.getElementsByTagName('tr')).forEach(row => {
@@ -109,4 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fetch data when the page loads
     displayReports();
+
+    // Set an interval to refresh the data every 5 seconds (5000 milliseconds)
+    setInterval(displayReports, 3000);
 });

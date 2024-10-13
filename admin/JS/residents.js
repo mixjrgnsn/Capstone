@@ -126,6 +126,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     displayUsers();
+    
+    setInterval(displayUsers, 3000);
 });
 
 document.getElementById('accApprovalbtn').addEventListener('click', function() {

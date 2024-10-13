@@ -68,4 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fetch data when the page loads
     displayReservations();
+
+    setInterval(displayReservations, 3000);
 });

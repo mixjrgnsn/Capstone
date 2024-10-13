@@ -111,4 +111,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fetch data when the page loads
     displayComplaints();
+
+    setInterval(displayComplaints, 3000);
 });

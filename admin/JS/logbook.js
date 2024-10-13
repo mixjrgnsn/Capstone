@@ -68,4 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     displaylogbook2();
+
+    setInterval(displaylogbook2, 3000);
 });

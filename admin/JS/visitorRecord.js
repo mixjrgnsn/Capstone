@@ -151,4 +151,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     displayVisitorRecord();
+
+    setInterval(displayVisitorRecord, 3000);
 });

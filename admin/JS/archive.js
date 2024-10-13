@@ -139,6 +139,8 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     displayAccountArchive();
+
+    setInterval(displayAccountArchive, 3000);
 });
 
 document.getElementById('residentsbtn').addEventListener('click', function() {

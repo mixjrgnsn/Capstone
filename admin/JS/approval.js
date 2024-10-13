@@ -141,6 +141,8 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     displayAccountApproval();
+
+    setInterval(displayAccountApproval, 3000);
 });
 
 document.getElementById('residentsbtn').addEventListener('click', function() {
