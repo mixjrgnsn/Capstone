@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Function to get the query parameter value by its name
     function getQueryParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
@@ -11,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Fetch data from the server using the provided id
         fetch(`http://localhost/loginregister/database/getSubjectDetailsComplaints.php?id=${encodeURIComponent(id)}`)
             .then(response => response.json())
             .then(data => {
@@ -37,16 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const id = getQueryParameter('id');
     getSubjectDetailsComplaints(id);
-    document.getElementById('Btn2').style.display = 'none';
-
-    // Check if the subject has already been marked as read
-    if (localStorage.getItem(`subject-read1-${id}`) === 'true') {
-        document.getElementById('Btn1').style.display = 'none';
-        document.getElementById('Btn2').style.display = 'block';
-    }
-    if (localStorage.getItem(`subject-completed-${id}`) === 'true') {
-        document.getElementById('Btn2').style.display = 'none';
-    }
     
     document.getElementById('Btn1').addEventListener('click', function() {
         if (!id) {
@@ -64,11 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => {
             if (response.ok) {
                 alert('Marked as ON GOING successfully!');
-                document.getElementById('Btn1').style.display = 'none';
-                // Save the read status in localStorage
-                localStorage.setItem(`subject-read1-${id}`, 'true');
-                
-                document.getElementById('Btn2').style.display = 'block';
+                localStorage.setItem(`subject-read-${id}`, 'true');
                 window.location.href = 'complaints.html';
             } else {
                 throw new Error('Failed to mark as ON GOING');
@@ -97,8 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => {
             if (response.ok) {
                 alert('Marked as COMPLETED successfully!');
-                localStorage.setItem(`subject-completed-${id}`, 'true');
-                document.getElementById('Btn2').style.display = 'none';
                 window.location.href = 'complaints.html';
             } else {
                 throw new Error('Failed to mark as COMPLETED');

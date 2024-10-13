@@ -95,12 +95,14 @@ body{
     background-color: #7DA87E;
 }
 
-#subject-details{
+#subject-details {
     height: 400px;
     background-color: #ffffff;
     border: 2px solid black;
     padding: 10px;
+    overflow-y: auto; /* Enables vertical scrolling */
 }
+
 
 #Btn1, #Btn2 {
     margin-top: 20px;

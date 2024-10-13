@@ -3,9 +3,15 @@ body{
     background: linear-gradient(to bottom, #164A41, #4D774E);
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;     
+    background-attachment: fixed;       
 }
 
+.head-container p{
+    font-size: 35px;
+    color: #ffffff;
+    margin-bottom: -1px;
+    margin-top: 6px;
+}
 p{
     margin: 50px;
     text-align: center;
@@ -15,9 +21,49 @@ p{
 }
 
 @media (max-width: 768px) {
-
     p{
         font-size: 100%;
     }
+}
 
+.notif-container {
+    margin: 20px;
+    max-height: 400px; /* Set a maximum height */
+    overflow-y: auto;  /* Enable vertical scrolling */
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1); /* Optional: Add a background for visibility */
+    border-radius: 5px;
+}
+
+.notification {
+    border: 2px solid #272626;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #2d3d2e;
+    border-radius: 5px;
+}
+
+.notification p {
+    margin: 0;
+    font-size: 15px;
+    font-family: verdana;
+}
+
+.notification big {
+    margin: 0;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: verdana;
+}
+
+.notification small {
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    font-family: verdana;
+}
+
+#reports-container {
+    margin-top: 20px; /* Add space between the two containers */
 }
