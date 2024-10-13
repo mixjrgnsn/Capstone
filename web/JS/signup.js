@@ -49,7 +49,7 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
     formData.append("address", `BLK ${blk} LOT ${lot} ${street}`);
 
     // Make a fetch request to the PHP backend
-    fetch('http://localhost/loginregister/database/signup.php', {
+    fetch('http://185.27.134.60/htdocs/signup.php', {
         method: 'POST',
         body: formData
     })
