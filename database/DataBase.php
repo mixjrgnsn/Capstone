@@ -597,5 +597,51 @@ class DataBase
         return mysqli_query($this->connect, $this->sql);
     }
 
+    function acceptReservation($table, $id, $name, $date, $timeFrom, $timeTo, $purpose)
+    {
+        $id = $this->prepareData($id); 
+        $name = $this->prepareData($name);
+        $date = $this->prepareData($date);
+        $timeFrom = $this->prepareData($timeFrom);
+        $timeTo = $this->prepareData($timeTo);
+        $purpose = $this->prepareData($purpose);
+
+        // Insert the data into the users table
+        $this->sql = "INSERT INTO " . $table . " (id, name, date, timeFrom, timeTo, purpose) VALUES ('" . $id . "','" . $name . "','" . $date . "','" . $timeFrom . "','" . $timeTo . "','" . $purpose . "')";
+
+        if (mysqli_query($this->connect, $this->sql)) {
+            // If insert was successful, delete the row from the pending table
+            return $this->deleteRowAcceptedReservation($id);
+        } else {
+            return false;
+        }
+    }
+
+    function deleteRowAcceptedReservation($id)
+    {
+        $id = $this->prepareData($id);
+
+        $this->sql = "DELETE FROM reservations WHERE id = '" . $id . "'";
+        return mysqli_query($this->connect, $this->sql);
+    }
+
+    function displayReservedList($table)
+    {
+        $columns = 'id AS TAG, name AS NAME, date AS DATE, timeFrom AS `TIME FROM`, timeTo AS `TIME TO`, purpose AS PURPOSE';
+        
+        $this->sql = "SELECT $columns FROM " . $table;
+        $result = mysqli_query($this->connect, $this->sql);
+        
+        if ($result) {
+            $data = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
 }
 ?>
