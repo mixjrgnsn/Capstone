@@ -49,7 +49,7 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
     formData.append("address", `BLK ${blk} LOT ${lot} ${street}`);
 
     // Make a fetch request to the PHP backend
-    fetch('https://in6abxok.infinityfree.com/signup.php', {
+    fetch('https://ftpupload.net/signup.php', {
         method: 'POST',
         body: formData
     })
