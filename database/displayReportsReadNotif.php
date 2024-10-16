@@ -16,9 +16,9 @@ if ($db->dbConnect()) {
     $reports = array();
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            $row['updated_at'] = date("h:i A", strtotime($row['updated_at']));
+            $row['updated_at'] = date("Y-m-d h:i A", strtotime($row['updated_at']));
             $reports[] = $row;
-        }
+        }        
         echo json_encode($reports);
     } else {
         echo json_encode(array("message" => "No report found."));

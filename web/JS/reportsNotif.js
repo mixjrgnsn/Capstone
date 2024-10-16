@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
-
             if (data.message) {
                 reportsContainer.innerHTML += `<p>${data.message}</p>`;
             } else {
@@ -31,4 +30,5 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Fetch error:', error);
             reportsContainer.innerHTML += `<p>Error fetching reports: ${error.message}</p>`;
         });
+        
 });

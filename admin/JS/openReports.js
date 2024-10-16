@@ -1,20 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
     const userData = JSON.parse(localStorage.getItem('userData'));
     const RID = `${userData.id}`;
-    // Function to get the query parameter value by its name
+
     function getQueryParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
     }
 
-    // Function to fetch and display subject details based on the id
     function getSubjectDetailsReports(id) {
         if (!id) {
             document.getElementById('subject-details').innerText = 'No subject selected';
             return;
         }
 
-        // Fetch data from the server using the provided id
         fetch(`http://localhost/loginregister/database/getSubjectDetailsReports.php?id=${encodeURIComponent(id)}`)
             .then(response => response.json())
             .then(data => {
@@ -39,11 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // Fetch subject details based on the query parameter
     const id = getQueryParameter('id');
     getSubjectDetailsReports(id);
 
-    // Check if the subject has already been marked as read
     if (localStorage.getItem(`subject-read2-${id}`) === 'true') {
         document.getElementById('Btn').style.display = 'none';
     }
@@ -54,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Update the read status in the database
         fetch(`http://localhost/loginregister/database/updateReadStatus2.php?id=${encodeURIComponent(id)}`, {
             method: 'POST',
             headers: {
@@ -65,9 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => {
             if (response.ok) {
                 alert('Marked as read successfully!');
-                // Hide the button after successful marking
                 document.getElementById('Btn').style.display = 'none';
-                // Save the read status in localStorage
                 localStorage.setItem(`subject-read2-${id}`, 'true');
                 window.location.href = 'reports.html';
             } else {

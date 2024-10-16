@@ -16,7 +16,7 @@ if ($db->dbConnect()) {
     $complaints = array();
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            $row['updated_at'] = date("h:i A", strtotime($row['updated_at']));
+            $row['updated_at'] = date("Y-m-d h:i A", strtotime($row['updated_at']));
             $complaints[] = $row;
         }
         echo json_encode($complaints);

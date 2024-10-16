@@ -12,6 +12,12 @@ body{
     margin-bottom: -1px;
     margin-top: 6px;
 }
+
+#head{
+    font-weight: bold;
+    font-style: oblique;
+}
+
 p{
     margin: 50px;
     text-align: center;
