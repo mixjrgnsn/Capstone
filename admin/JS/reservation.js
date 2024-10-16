@@ -96,7 +96,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 date: row.DATE,
                 timeFrom: row['TIME FROM'],
                 timeTo: row['TIME TO'],
-                purpose: row.PURPOSE
+                purpose: row.PURPOSE,
+                status: 'ACCEPTED'
             };
 
             // Send data to the server to accept the reservation

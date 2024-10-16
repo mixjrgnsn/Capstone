@@ -590,7 +590,7 @@ class DataBase
         return mysqli_query($this->connect, $this->sql);
     }
 
-    function acceptReservation($table, $id, $name, $date, $timeFrom, $timeTo, $purpose)
+    function acceptReservation($table, $id, $name, $date, $timeFrom, $timeTo, $purpose, $status)
     {
         $id = $this->prepareData($id); 
         $name = $this->prepareData($name);
@@ -598,9 +598,10 @@ class DataBase
         $timeFrom = $this->prepareData($timeFrom);
         $timeTo = $this->prepareData($timeTo);
         $purpose = $this->prepareData($purpose);
+        $status = $this->prepareData($status);
 
         // Insert the data into the users table
-        $this->sql = "INSERT INTO " . $table . " (id, name, date, timeFrom, timeTo, purpose) VALUES ('" . $id . "','" . $name . "','" . $date . "','" . $timeFrom . "','" . $timeTo . "','" . $purpose . "')";
+        $this->sql = "INSERT INTO " . $table . " (id, name, date, timeFrom, timeTo, purpose, status) VALUES ('" . $id . "','" . $name . "','" . $date . "','" . $timeFrom . "','" . $timeTo . "','" . $purpose . "','" . $status ."')";
 
         if (mysqli_query($this->connect, $this->sql)) {
             // If insert was successful, delete the row from the pending table
@@ -620,7 +621,7 @@ class DataBase
 
     function displayReservedList($table)
     {
-        $columns = 'id AS TAG, name AS NAME, date AS DATE, timeFrom AS `TIME FROM`, timeTo AS `TIME TO`, purpose AS PURPOSE';
+        $columns = 'id AS TAG, name AS NAME, date AS DATE, timeFrom AS `TIME FROM`, timeTo AS `TIME TO`, purpose AS PURPOSE, status AS STATUS';
         
         $this->sql = "SELECT $columns FROM " . $table;
         $result = mysqli_query($this->connect, $this->sql);

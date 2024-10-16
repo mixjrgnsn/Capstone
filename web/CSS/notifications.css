@@ -22,19 +22,20 @@ p{
 }
 
 .notif-btns{
-    
+    display: flex;/*AAYUSIN*/
 }
 
 .btn{
     font-family: verdana;
     padding: 10px;
     font-size: 20px;
-    color: rgb(0, 0, 0);
-    border: 2px solid #000;
-    border-radius: 20px;
+    color: rgb(255, 255, 255);
+    border: 2px solid #B8B6B6;
+    background-color: #2d3d2e;
+    border-radius: 5px;
     margin-bottom: 10px;
 }
 
 .btn:hover {
-    background-color: rgb(190, 195, 198);
+    background-color: rgb(104, 104, 104);
 }

@@ -9,9 +9,9 @@ $db = new DataBase();
 $response = array();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['date']) && isset($_POST['timeFrom']) && isset($_POST['timeTo']) && isset($_POST['purpose'])) {
+    if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['date']) && isset($_POST['timeFrom']) && isset($_POST['timeTo']) && isset($_POST['purpose']) && isset($_POST['status'])) {
         if ($db->dbConnect()) {
-            if ($db->acceptReservation("reservedlist", $_POST['id'], $_POST['name'], $_POST['date'], $_POST['timeFrom'], $_POST['timeTo'], $_POST['purpose'])) {
+            if ($db->acceptReservation("reservedlist", $_POST['id'], $_POST['name'], $_POST['date'], $_POST['timeFrom'], $_POST['timeTo'], $_POST['purpose'], $_POST['status'])) {
                 $response['status'] = 'success';
                 $response['message'] = 'Reservation Accepted Successfully';
             } else {
