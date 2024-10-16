@@ -8,20 +8,20 @@ $db = new DataBase();
 if ($db->dbConnect()) {
     $name = isset($_GET['name']) ? mysqli_real_escape_string($db->connect, $_GET['name']) : '';
 
-    $sql = "SELECT * FROM reports 
-            WHERE status = 'READ' AND name = '$name' ORDER BY updated_at DESC";
+    $sql = "SELECT * FROM reservedList 
+            WHERE status = 'ACCEPTED' AND name = '$name' ORDER BY updated_at DESC";
 
     $result = mysqli_query($db->connect, $sql);
     
-    $reports = array();
+    $reservations = array();
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
             $row['updated_at'] = date("Y-m-d h:i A", strtotime($row['updated_at']));
-            $reports[] = $row;
+            $reservations[] = $row;
         }        
-        echo json_encode($reports);
+        echo json_encode($reservations);
     } else {
-        echo json_encode(array("message" => "No report found."));
+        echo json_encode(array("message" => "No reservation found."));
     }
 } else {
     echo json_encode(array("message" => "Error: Database connection"));

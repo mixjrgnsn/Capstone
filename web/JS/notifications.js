@@ -5,3 +5,7 @@ document.getElementById('complaints-btn').addEventListener('click', function() {
 document.getElementById('reports-btn').addEventListener('click', function() {
     window.location.href = '../HTML/reportsNotif.html';
 });
+
+document.getElementById('reservations-btn').addEventListener('click', function() {
+    window.location.href = '../HTML/reservationsNotif.html';
+});
