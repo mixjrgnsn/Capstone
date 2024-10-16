@@ -8,13 +8,15 @@ $db = new DataBase();
 if ($db->dbConnect()) {
     $name = isset($_GET['name']) ? mysqli_real_escape_string($db->connect, $_GET['name']) : '';
 
-    // SQL query to fetch complaints with status 'ON GOING' or 'COMPLETED', ordered by a specific column (e.g., created_at) in descending order
-    $sql = "SELECT * FROM complaints WHERE (status = 'ON GOING' OR status = 'COMPLETED') AND name = '$name' ORDER BY id DESC";
+    $sql = "SELECT * FROM complaints 
+            WHERE (status = 'ON GOING' OR status = 'COMPLETED') AND name = '$name' ORDER BY updated_at DESC";
+
     $result = mysqli_query($db->connect, $sql);
     
     $complaints = array();
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
+            $row['updated_at'] = date("h:i A", strtotime($row['updated_at']));
             $complaints[] = $row;
         }
         echo json_encode($complaints);

@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
         statusFilter.value = savedFilter;
     }
 
+    const statusOrder = ['UNREAD', 'ON GOING', 'COMPLETED'];
+
     function displayComplaints() {
         fetch('http://localhost/loginregister/database/displayComplaints.php')
             .then(response => response.json())
@@ -27,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         th.textContent = header;
                         headerRow.appendChild(th);
                     });
+
+                    // Sort the data based on status order
+                    data.sort((a, b) => statusOrder.indexOf(a.STATUS) - statusOrder.indexOf(b.STATUS));
 
                     // Create table rows
                     data.forEach(row => {

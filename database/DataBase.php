@@ -137,7 +137,7 @@ class DataBase
 
     function displayReservations($table)
     {
-        $columns = 'id AS TAG, name AS NAME, date AS DATE, CONCAT(timeFrom, " ", am_pm_from) AS `TIME FROM`, CONCAT(timeTo, " ", am_pm_to) AS `TIME TO`, purpose AS PURPOSE';
+        $columns = 'id AS TAG, name AS NAME, date AS DATE, CONCAT(timeFrom, " ", am_pm_from) AS `TIME FROM`, CONCAT(timeTo, " ", am_pm_to) AS `TIME TO`, DATE_FORMAT(updated_at, "%Y-%m-%d %h:%i %p") AS `CREATED/MODIFIED`, purpose AS PURPOSE';
         
         $this->sql = "SELECT $columns FROM " . $table;
         $result = mysqli_query($this->connect, $this->sql);
@@ -155,9 +155,9 @@ class DataBase
 
     function displayComplaints($table)
     {
-        $columns = 'id AS TAG, name AS NAME, date AS DATE, status AS STATUS';
+        $columns = 'id AS TAG, name AS NAME, date AS DATE, DATE_FORMAT(updated_at, "%Y-%m-%d %h:%i %p") AS `CREATED/MODIFIED`, status AS STATUS';
         
-        $this->sql = "SELECT $columns FROM " . $table;
+        $this->sql = "SELECT $columns FROM " . $table. " ORDER BY id DESC";
         $result = mysqli_query($this->connect, $this->sql);
         
         if ($result) {
@@ -173,9 +173,9 @@ class DataBase
 
     function displayReports($table)
     {
-        $columns = 'id AS TAG, name AS NAME, date AS DATE, status AS STATUS';
+        $columns = 'id AS TAG, name AS NAME, date AS DATE, DATE_FORMAT(updated_at, "%Y-%m-%d %h:%i %p") AS `CREATED/MODIFIED`, status AS STATUS';
         
-        $this->sql = "SELECT $columns FROM " . $table;
+        $this->sql = "SELECT $columns FROM " . $table. " ORDER BY id DESC";
         $result = mysqli_query($this->connect, $this->sql);
         
         if ($result) {
@@ -188,6 +188,7 @@ class DataBase
             return false;
         }
     }
+
 
     function displayAccountApproval($table)
     {
@@ -559,36 +560,28 @@ class DataBase
     }
 
     public function updateReadStatus($id) {
-        $id = $this->prepareData($id);
-        $this->sql = "UPDATE complaints SET status = 'ON GOING' WHERE id = '$id'";
+        $sql = "UPDATE complaints SET status = 'ON GOING', updated_at = NOW() WHERE id = ?";
+        $stmt = $this->connect->prepare($sql);
+        $stmt->bind_param("i", $id); // Assuming id is an integer
 
-        if (mysqli_query($this->connect, $this->sql)) {
-            return true;
-        } else {
-            return false;
-        }
+        return $stmt->execute();
     }
 
     public function updateReadStatus2($id) {
-        $id = $this->prepareData($id);
-        $this->sql = "UPDATE reports SET status = 'READ' WHERE id = '$id'";
-
-        if (mysqli_query($this->connect, $this->sql)) {
-            return true;
-        } else {
-            return false;
-        }
+        $sql = "UPDATE reports SET status = 'READ', updated_at = NOW() WHERE id = ?";
+        $stmt = $this->connect->prepare($sql);
+        $stmt->bind_param("i", $id); // Assuming id is an integer
+    
+        return $stmt->execute();
     }
+    
 
     public function updateStatusToCompleted($id) {
-        $id = $this->prepareData($id);
-        $this->sql = "UPDATE complaints SET status = 'COMPLETED' WHERE id = '$id'";
+        $sql = "UPDATE complaints SET status = 'COMPLETED', updated_at = NOW() WHERE id = ?";
+        $stmt = $this->connect->prepare($sql);
+        $stmt->bind_param("i", $id); // Assuming id is an integer
 
-        if (mysqli_query($this->connect, $this->sql)) {
-            return true;
-        } else {
-            return false;
-        }
+        return $stmt->execute();
     }
 
     function rejectReservation($id) {

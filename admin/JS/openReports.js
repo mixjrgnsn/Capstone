@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const RID = `${userData.id}`;
     // Function to get the query parameter value by its name
     function getQueryParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -23,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     detailsContainer.innerHTML = `
                     <h5><strong>Tag/Complaint Number:</strong> ${subject.ID} </h5>
                     <h5><strong>Name:</strong> ${subject.NAME} </h5>
+                    <h5><strong>Residents ID:</strong> ${RID} </h5>
                     <h5><strong>Date:</strong> ${subject.DATE}</h5>
                     </br>
                     <p>${subject.SUBJECT}</p>`;

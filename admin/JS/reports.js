@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
         statusFilter.value = savedFilter;
     }
 
+    const statusOrder = ['UNREAD', 'READ']; // Define the status order
+
     function displayReports() {
         fetch('http://localhost/loginregister/database/displayReports.php')
             .then(response => response.json())
@@ -27,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         th.textContent = header;
                         headerRow.appendChild(th);
                     });
+
+                    // Sort the data based on status order
+                    data.sort((a, b) => statusOrder.indexOf(a.STATUS) - statusOrder.indexOf(b.STATUS));
 
                     // Create table rows
                     data.forEach(row => {
@@ -110,6 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch data when the page loads
     displayReports();
 
-    // Set an interval to refresh the data every 5 seconds (5000 milliseconds)
+    // Set an interval to refresh the data every 3 seconds (3000 milliseconds)
     setInterval(displayReports, 3000);
 });
