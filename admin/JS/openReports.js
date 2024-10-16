@@ -40,9 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const id = getQueryParameter('id');
     getSubjectDetailsReports(id);
 
-    if (localStorage.getItem(`subject-read2-${id}`) === 'true') {
-        document.getElementById('Btn').style.display = 'none';
-    }
 
     document.getElementById('Btn').addEventListener('click', function() {
         if (!id) {
@@ -60,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => {
             if (response.ok) {
                 alert('Marked as read successfully!');
-                document.getElementById('Btn').style.display = 'none';
                 localStorage.setItem(`subject-read2-${id}`, 'true');
                 window.location.href = 'reports.html';
             } else {
