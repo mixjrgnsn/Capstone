@@ -24,6 +24,18 @@ window.onload = function() {
             return;
         }
 
+        // Check if new password meets minimum character requirement
+        if (newPass.length < 6) {
+            alert("New password must be at least 6 characters long.");
+            return;
+        }
+
+        // Confirmation alert before proceeding
+        const confirmSubmit = confirm("Are you sure you want to change your password?");
+        if (!confirmSubmit) {
+            return; // Stop submission if not confirmed
+        }
+
         // Create request payload
         const formData = new FormData();
         formData.append('email', userEmail);

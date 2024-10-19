@@ -6,41 +6,32 @@ require "DataBase.php";
 $db = new DataBase();
 
 if ($db->dbConnect()) {
-    // Get the POST data
     $email = isset($_POST['email']) ? mysqli_real_escape_string($db->connect, $_POST['email']) : '';
     $oldPass = isset($_POST['oldPass']) ? mysqli_real_escape_string($db->connect, $_POST['oldPass']) : '';
     $newPass = isset($_POST['newPass']) ? mysqli_real_escape_string($db->connect, $_POST['newPass']) : '';
 
-    if (!empty($email) && !empty($oldPass) && !empty($newPass)) {
-        // Fetch the user by email
-        $sql = "SELECT password FROM users WHERE email = '$email'";
-        $result = mysqli_query($db->connect, $sql);
+    // Check if the email and old password are correct
+    $sql = "SELECT password FROM users WHERE email = '$email'";
+    $result = mysqli_query($db->connect, $sql);
 
-        if ($result && mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
-            $storedHashedPassword = $row['password'];
-
-            // Verify the old password
-            if (password_verify($oldPass, $storedHashedPassword)) {
-                // Old password matches, proceed to update the password
-                $newPassHashed = password_hash($newPass, PASSWORD_DEFAULT);
-                $updateSql = "UPDATE users SET password = '$newPassHashed' WHERE email = '$email'";
-
-                if (mysqli_query($db->connect, $updateSql)) {
-                    echo json_encode(array("status" => "success", "message" => "Password updated successfully"));
-                } else {
-                    echo json_encode(array("status" => "error", "message" => "Failed to update password"));
-                }
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        if (password_verify($oldPass, $row['password'])) {
+            // Update the password
+            $hashedNewPass = password_hash($newPass, PASSWORD_DEFAULT);
+            $updateSql = "UPDATE users SET password = '$hashedNewPass' WHERE email = '$email'";
+            if (mysqli_query($db->connect, $updateSql)) {
+                echo json_encode(array("status" => "success", "message" => "Password updated successfully"));
             } else {
-                echo json_encode(array("status" => "error", "message" => "Incorrect old password"));
+                echo json_encode(array("status" => "error", "message" => "Error updating password"));
             }
         } else {
-            echo json_encode(array("status" => "error", "message" => "User not found"));
+            echo json_encode(array("status" => "error", "message" => "Incorrect old password"));
         }
     } else {
-        echo json_encode(array("status" => "error", "message" => "Missing required fields"));
+        echo json_encode(array("status" => "error", "message" => "Email not found"));
     }
 } else {
-    echo json_encode(array("message" => "Error: Database connection"));
+    echo json_encode(array("status" => "error", "message" => "Database connection failed"));
 }
 ?>
