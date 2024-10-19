@@ -2,6 +2,7 @@ document.getElementById("submit-btn").addEventListener("click", function() {
     // Retrieve user data
     const userData = JSON.parse(localStorage.getItem('userData'));
     const name = `${userData.firstname} ${userData.lastname}`;
+    
 
     // Get input values
     const date = document.getElementById("reservation-date").value;
@@ -12,6 +13,17 @@ document.getElementById("submit-btn").addEventListener("click", function() {
     // Validate input
     if (!date || !timeFrom || !timeTo || !purpose) {
         alert("All fields are required");
+        return;
+    }
+
+    // Validate date is within one week
+    const today = new Date();
+    const selectedDate = new Date(date);
+    const oneWeekFromNow = new Date(today);
+    oneWeekFromNow.setDate(today.getDate() + 8);
+
+    if (selectedDate < today || selectedDate > oneWeekFromNow) {
+        alert("Reservations can only be made for today or within the next 7 days.");
         return;
     }
 
