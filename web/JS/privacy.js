@@ -2,66 +2,103 @@ window.onload = function() {
     // Retrieve the email from localStorage
     const userEmail = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).email : '';
 
-    // Get the email input field by its ID
     const emailInput = document.getElementById('email');
     emailInput.value = userEmail;
-    emailInput.disabled = true; // Make the input non-editable
+    emailInput.disabled = true;
 
-    // Add event listener for form submission
-    const submitButton = document.querySelector('input[type="submit"]'); // Ensure submit button exists
+    const submitButton = document.querySelector('input[type="submit"]');
     submitButton.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault();
 
-        // Get the form inputs
         const oldPassInput = document.getElementById('oldPass');
         const newPassInput = document.getElementById('newPass');
         const oldPass = oldPassInput.value;
         const newPass = newPassInput.value;
 
-        // Validate inputs
         if (!oldPass || !newPass) {
-            alert("Please fill all fields.");
+            showAlert("Please fill all fields.");
             return;
         }
 
-        // Check if new password meets minimum character requirement
         if (newPass.length < 6) {
-            alert("New password must be at least 6 characters long.");
+            showAlert("New password must be at least 6 characters long.");
             return;
         }
 
-        // Confirmation alert before proceeding
-        const confirmSubmit = confirm("Are you sure you want to change your password?");
-        if (!confirmSubmit) {
-            return; // Stop submission if not confirmed
-        }
+        // Show confirm modal
+        showConfirm("Are you sure you want to change your password?", function() {
+            // Confirmed - proceed with form submission
+            const formData = new FormData();
+            formData.append('email', userEmail);
+            formData.append('oldPass', oldPass);
+            formData.append('newPass', newPass);
 
-        // Create request payload
-        const formData = new FormData();
-        formData.append('email', userEmail);
-        formData.append('oldPass', oldPass);
-        formData.append('newPass', newPass);
-
-        // Send request to PHP server to check credentials and update password
-        fetch('http://localhost/loginregister/database/privacy.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                alert(data.message);
-
-                // Clear the old and new password fields
-                oldPassInput.value = '';
-                newPassInput.value = '';
-            } else {
-                alert(data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while processing your request.');
+            fetch('http://localhost/loginregister/database/privacy.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    showAlert(data.message);  // Show alert with success message
+                    oldPassInput.value = '';  // Clear inputs
+                    newPassInput.value = '';
+                } else {
+                    showAlert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showAlert('An error occurred while processing your request.');
+            });
         });
     });
+
+    // Alert Modal Functions
+    const alertModal = document.getElementById("alertModal");
+    const alertMessage = document.getElementById("alertMessage");
+    const closeAlert = document.querySelector("#alertModal .close");
+
+    function showAlert(message) {
+        alertMessage.innerText = message;
+        alertModal.style.display = "block";
+    }
+
+    closeAlert.onclick = function() {
+        alertModal.style.display = "none";
+
+        // Check if the alert message is "Password updated successfully"
+        if (alertMessage.innerText === "Password updated successfully") {
+            window.location.href = 'home.html';  // Redirect to home.html
+        }
+    };
+
+    // Confirm Modal Functions
+    const confirmModal = document.getElementById("confirmModal");
+    const confirmMessage = document.getElementById("confirmMessage");
+    const confirmBtn = document.getElementById("confirmBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
+
+    function showConfirm(message, onConfirm) {
+        confirmMessage.innerText = message;
+        confirmModal.style.display = "block";
+
+        confirmBtn.onclick = function() {
+            confirmModal.style.display = "none";
+            onConfirm();
+        };
+
+        cancelBtn.onclick = function() {
+            confirmModal.style.display = "none";
+        };
+    }
+
+    // Close modals when clicking outside
+    window.onclick = function(event) {
+        if (event.target == alertModal) {
+            alertModal.style.display = "none";
+        } else if (event.target == confirmModal) {
+            confirmModal.style.display = "none";
+        }
+    };
 };

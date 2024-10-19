@@ -12,15 +12,38 @@
                 <p class="first">Privacy & Security</p>
             </div>
             <div class="body-container">
-                <label class="title">Email:</label><br>
-                <input class="btn" type="email" id="email" name="email" required/><br>
-                <label class="title">Old password:</label><br>
-                <input class="btn" type="password" id="oldPass" name="oldPass" required/><br>
-                <label class="title">New password:</label><br>
-                <input class="btn" type="password" id="newPass" name="newPass" required/><br>
-                <input class="button" type="submit" value="Change Password"/>
-            </div>
+                <div class="form-group">
+                    <label class="title" for="email">Email</label>
+                    <input class="btn" type="email" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                    <label class="title" for="oldPass">Old password</label>
+                    <input class="btn" type="password" id="oldPass" name="oldPass" required />
+                </div>
+                <div class="form-group">
+                    <label class="title" for="newPass">New password</label>
+                    <input class="btn" type="password" id="newPass" name="newPass" required />
+                </div>
+                <input class="button" type="submit" value="Change Password" />
+            </div>            
         </nav>
+
+        <!-- Modals -->
+        <div id="alertModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p id="alertMessage"></p>
+            </div>
+        </div>
+
+        <div id="confirmModal" class="modal">
+            <div class="modal-content">
+                <p id="confirmMessage"></p>
+                <button id="confirmBtn">Confirm</button>
+                <button id="cancelBtn">Cancel</button>
+            </div>
+        </div>
+
         <script src="../JS/privacy.js"></script>
     </body>
 </html>
