@@ -13,7 +13,7 @@ function loadUserData() {
         // Handle case where no user data is found (e.g., redirect to login)
         document.body.innerHTML = '<h1>No user data found. Please log in.</h1>';
         // Optionally, you can redirect to the login page
-        // window.location.replace('../HTML/login.html');
+        window.location.replace('../HTML/index.html');
     }
 }
 

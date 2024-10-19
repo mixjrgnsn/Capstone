@@ -336,6 +336,7 @@ class DataBase
             $userData = [
                 'id' => $row['id'],
                 'firstname' => $row['firstname'],
+                'email' => $row['email'],
                 'lastname' => $row['lastname'],
                 'address' => $row['address']
             ];
