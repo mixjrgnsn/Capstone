@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        fetch(`http://localhost/loginregister/database/getSubjectDetailsComplaints.php?id=${encodeURIComponent(id)}`)
+        fetch(`https://franciscohomes3.online/loginregister/database/getSubjectDetailsComplaints.php?id=${encodeURIComponent(id)}`)
             .then(response => response.json())
             .then(data => {
                 const detailsContainer = document.getElementById('subject-details');
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        fetch(`http://localhost/loginregister/database/updateReadStatus.php?id=${encodeURIComponent(id)}`, {
+        fetch(`https://franciscohomes3.online/loginregister/database/updateReadStatus.php?id=${encodeURIComponent(id)}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        fetch(`http://localhost/loginregister/database/updateStatusToCompleted.php?id=${encodeURIComponent(id)}`, {
+        fetch(`https://franciscohomes3.online/loginregister/database/updateStatusToCompleted.php?id=${encodeURIComponent(id)}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

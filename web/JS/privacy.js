@@ -33,7 +33,7 @@ window.onload = function() {
             formData.append('oldPass', oldPass);
             formData.append('newPass', newPass);
 
-            fetch('http://localhost/loginregister/database/privacy.php', {
+            fetch('https://franciscohomes3.online/loginregister/database/privacy.php', {
                 method: 'POST',
                 body: formData
             })

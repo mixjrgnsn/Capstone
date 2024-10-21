@@ -30,7 +30,7 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     // Show the loading spinner
     loadingSpinner.style.display = 'block';
 
-    fetch('http://localhost/loginregister/database/loginWeb.php', {  
+    fetch('https://franciscohomes3.online/loginregister/database/loginWeb.php', {  
         method: 'POST',
         body: new URLSearchParams(formData),
     })

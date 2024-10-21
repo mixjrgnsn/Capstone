@@ -33,10 +33,10 @@ function handleFormSubmit(event) {
     let url;
     let redirectUrl;
     if (currentAction === 'admin') {
-        url = 'http://localhost/loginregister/database/adminlogin.php';
+        url = 'https://franciscohomes3.online/loginregister/database/adminlogin.php';
         redirectUrl = '../HTML/dashboard.html';
     } else {
-        url = 'http://localhost/loginregister/database/securitylogin.php';
+        url = 'https://franciscohomes3.online/loginregister/database/securitylogin.php';
         redirectUrl = '../HTML/dashboardsecurity.html';
     }
 

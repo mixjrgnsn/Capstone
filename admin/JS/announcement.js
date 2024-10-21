@@ -13,49 +13,41 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Show the confirmation modal
         confirmationModal.style.display = 'block';
     });
 
-    // When the user clicks on the confirm button
     confirmBtn.addEventListener('click', () => {
         const content = document.querySelector('.content-text').value;
     
-        // Show the loading spinner
         loadingSpinner.style.display = 'block';
     
-        // Create a FormData object to send the data
         const formData = new FormData();
         formData.append('content', content);
     
-        // Send the data to the PHP script using fetch
-        fetch('http://localhost/loginregister/database/announcement.php', {
+        fetch('https://franciscohomes3.online/loginregister/database/announcement.php', {
             method: 'POST',
             body: formData
         })
         .then(response => response.text())
         .then(data => {
-            alert(data); // Display the response message
-            document.querySelector('.content-text').value = ''; // Clear the textarea
-            confirmationModal.style.display = 'none'; // Close the modal
+            alert(data);
+            document.querySelector('.content-text').value = '';
+            confirmationModal.style.display = 'none';
         })
         .catch(error => {
             console.error('Error:', error);
             alert('An error occurred while submitting the announcement.');
         })
         .finally(() => {
-            // Hide the loading spinner after the fetch completes
             loadingSpinner.style.display = 'none';
         });
     });
     
 
-    // When the user clicks on the cancel button
     cancelBtn.addEventListener('click', () => {
-        confirmationModal.style.display = 'none'; // Close the modal
+        confirmationModal.style.display = 'none';
     });
 
-    // Close the modal if the user clicks anywhere outside of it
     window.addEventListener('click', (event) => {
         if (event.target === confirmationModal) {
             confirmationModal.style.display = 'none';

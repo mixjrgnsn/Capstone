@@ -6,7 +6,7 @@ document.getElementById('check').addEventListener('click', function() {
     // Show loading spinner after a 0.5-second delay
     setTimeout(() => {
         if (email) {
-            fetch('http://localhost/loginregister/database/check_email.php', {
+            fetch('https://franciscohomes3.online/loginregister/database/check_email.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

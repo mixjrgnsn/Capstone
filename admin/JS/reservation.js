@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to display reservations
     function displayReservations() {
-        fetch('http://localhost/loginregister/database/displayReservations.php')
+        fetch('https://franciscohomes3.online/loginregister/database/displayReservations.php')
             .then(response => response.json())
             .then(data => {
                 const headerRow = document.getElementById('header-row');
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             // Send data to the server to accept the reservation
-            fetch('http://localhost/loginregister/database/acceptReservation.php', {
+            fetch('https://franciscohomes3.online/loginregister/database/acceptReservation.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to delete reservation
     function deleteReservation(tag) {
         console.log("Deleting reservation with TAG:", tag);
-        fetch('http://localhost/loginregister/database/rejectReservation.php', {
+        fetch('https://franciscohomes3.online/loginregister/database/rejectReservation.php', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

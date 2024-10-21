@@ -66,7 +66,7 @@ document.getElementById("submit-btn").addEventListener("click", function() {
         document.getElementById("loadingSpinner").style.display = "block";
 
         // Send data to PHP
-        fetch('http://localhost/loginregister/database/reservations.php', {
+        fetch('https://franciscohomes3.online/loginregister/database/reservations.php', {
             method: 'POST',
             body: formData
         })

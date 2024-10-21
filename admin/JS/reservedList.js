@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     function displayReservedList() {
-        fetch('http://localhost/loginregister/database/displayReservedList.php')
+        fetch('https://franciscohomes3.online/loginregister/database/displayReservedList.php')
             .then(response => response.json())
             .then(data => {
                 const headerRow = document.getElementById('header-row');

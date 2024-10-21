@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     function displayUsers() {
-        fetch('http://localhost/loginregister/database/displayUsers.php')
+        fetch('https://franciscohomes3.online/loginregister/database/displayUsers.php')
             .then(response => response.json())
             .then(data => {
                 const headerRow = document.getElementById('header-row');

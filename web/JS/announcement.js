@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(announcementsContainer);
 
     const fetchAnnouncements = () => {
-        fetch('http://localhost/loginregister/database/get_announcements.php')
+        fetch('https://franciscohomes3.online/loginregister/database/get_announcements.php')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

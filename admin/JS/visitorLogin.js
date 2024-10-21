@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append("date", currentDate);
 
         // Send the data to the PHP script
-        fetch('http://localhost/loginregister/database/visitorlogin.php', {
+        fetch('https://franciscohomes3.online/loginregister/database/visitorlogin.php', {
             method: 'POST',
             body: formData
         })

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     function displayAccountApproval() {
-        fetch('http://localhost/loginregister/database/displayAccountApproval.php')
+        fetch('https://franciscohomes3.online/loginregister/database/displayAccountApproval.php')
             .then(response => response.json())
             .then(data => {
                 const headerRow = document.getElementById('header-row');
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             address: row.ADDRESS
         });
 
-        fetch('http://localhost/loginregister/database/approveSignup.php', {
+        fetch('https://franciscohomes3.online/loginregister/database/approveSignup.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('reject-button').addEventListener('click', () => {
         const row = currentRowData;
     
-        fetch(`http://localhost/loginregister/database/deleteRejectedRow.php`, {
+        fetch(`https://franciscohomes3.online/loginregister/database/deleteRejectedRow.php`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

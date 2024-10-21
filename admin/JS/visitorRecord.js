@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     function displayVisitorRecord() {
-        fetch('http://localhost/loginregister/database/displayVisitorRecord.php')
+        fetch('https://franciscohomes3.online/loginregister/database/displayVisitorRecord.php')
             .then(response => response.json())
             .then(data => {
                 const headerRow = document.getElementById('header-row');
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
             timeout: formatCurrentTime() // Use the updated format
         };
     
-        fetch('http://localhost/loginregister/database/storeLogbook.php', {
+        fetch('https://franciscohomes3.online/loginregister/database/storeLogbook.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

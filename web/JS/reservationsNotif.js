@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = `${userData.firstname} ${userData.lastname}`;
     const reservationsContainer = document.querySelector('#reservations-container');
 
-    fetch(`http://localhost/loginregister/database/displayReservationsAcceptedNotif.php?name=${name}`)
+    fetch(`https://franciscohomes3.online/loginregister/database/displayReservationsAcceptedNotif.php?name=${name}`)
         .then(response => {
             if (!response.ok) throw new Error('Network response was not ok');
             return response.json();

@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         showModal("Are you sure you want to send this complaint?", function() {
-            fetch('http://localhost/loginregister/database/complaints.php', {
+            fetch('https://franciscohomes3.online/loginregister/database/complaints.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'

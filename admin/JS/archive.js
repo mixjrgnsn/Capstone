@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     function displayAccountArchive() {
-        fetch('http://localhost/loginregister/database/displayAccountArchive.php')
+        fetch('https://franciscohomes3.online/loginregister/database/displayAccountArchive.php')
             .then(response => response.json())
             .then(data => {
                 const headerRow = document.getElementById('header-row');
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
             address: row.ADDRESS
         });
 
-        fetch('http://localhost/loginregister/database/archiveRestore.php', {
+        fetch('https://franciscohomes3.online/loginregister/database/archiveRestore.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -102,18 +102,18 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('delete-button').addEventListener('click', () => {
         const row = currentRowData;
     
-        fetch(`http://localhost/loginregister/database/deleteArchiveRow.php`, {
+        fetch(`https://franciscohomes3.online/loginregister/database/deleteArchiveRow.php`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id: row.ID }) // Ensure this is correct
+            body: JSON.stringify({ id: row.ID })
         })
         .then(response => response.json())
         .then(result => {
             if (result.success) {
                 alert(result.message);
-                row.trElement.remove(); // Remove the row from the DOM
+                row.trElement.remove();
             } else {
                 alert(result.message);
             }

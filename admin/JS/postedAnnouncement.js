@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let announcementToDelete = null; // Store the announcement to delete
 
     // Fetch announcements data
-    fetch('http://localhost/loginregister/database/displayAnnouncements.php')
+    fetch('https://franciscohomes3.online/loginregister/database/displayAnnouncements.php')
         .then(response => response.json())
         .then(data => {
             if (Array.isArray(data) && data.length > 0) {
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Confirm deletion
     confirmBtn.addEventListener('click', () => {
         if (announcementToDelete) {
-            fetch('http://localhost/loginregister/database/deleteAnnouncement.php', {
+            fetch('https://franciscohomes3.online/loginregister/database/deleteAnnouncement.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

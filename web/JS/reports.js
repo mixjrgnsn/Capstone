@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         showModal("Are you sure you want to send this report?", function() {
-            fetch('http://localhost/loginregister/database/reports.php', {
+            fetch('https://franciscohomes3.online/loginregister/database/reports.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
