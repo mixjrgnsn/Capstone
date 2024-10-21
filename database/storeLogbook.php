@@ -2,12 +2,11 @@
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
-require "DataBase.php"; // Ensure this file contains your DB connection class
+require "DataBase.php";
 $db = new DataBase();
 
 $response = array();
 
-// Get the raw POST data
 $data = json_decode(file_get_contents('php://input'), true);
 
 if (isset($data['firstname']) && isset($data['lastname']) && isset($data['purpose']) && isset($data['timein']) && isset($data['date']) && isset($data['timeout'])) {

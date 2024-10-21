@@ -9,13 +9,10 @@ class DataBaseConfig
 
     public function __construct()
     {
-
         $this->servername = 'localhost';
         $this->email = 'root';
         $this->password = '';
         $this->databasename = 'loginregister';
-
     }
 }
-
 ?>

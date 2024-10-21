@@ -4,21 +4,18 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: DELETE");
 header("Access-Control-Allow-Headers: Content-Type");
 
-require "DataBase.php"; // Ensure the path to DataBase.php is correct
+require "DataBase.php";
 
 $db = new DataBase();
 
-if ($db->dbConnect()) { // Check if the database connection is successful
+if ($db->dbConnect()) {
 
-    // Get the ID from the request
     parse_str(file_get_contents("php://input"), $_DELETE);
-    $id = $_DELETE['id'] ?? null; // Use null coalescing to avoid undefined index notice
+    $id = $_DELETE['id'] ?? null;
 
     if ($id) {
-        // Log the ID received
         error_log("Received ID for deletion: " . $id);
 
-        // Call the method to delete a reservation
         if ($db->rejectReservation($id)) {
             echo json_encode(["success" => true, "message" => "Reservation rejected successfully."]);
         } else {

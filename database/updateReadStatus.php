@@ -7,7 +7,7 @@ require "DataBase.php";
 $db = new DataBase();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['id'])) {
-    $id = $_GET['id']; // Get the ID from the query parameter
+    $id = $_GET['id'];
 
     if ($db->dbConnect()) {
         if ($db->updateReadStatus($id)) {

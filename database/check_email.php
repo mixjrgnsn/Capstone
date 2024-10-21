@@ -7,15 +7,12 @@ require "DataBase.php";
 $db = new DataBase();
 
 if ($db->dbConnect()) {
-    // Get the JSON input
     $data = json_decode(file_get_contents('php://input'), true);
-    $email = $db->connect->real_escape_string($data['email']); // Use the connection for escaping
+    $email = $db->connect->real_escape_string($data['email']);
 
-    // Prepare and execute the query
-    $sql = "SELECT * FROM users WHERE email='$email'"; // Assuming your table name is 'users'
+    $sql = "SELECT * FROM users WHERE email='$email'";
     $result = mysqli_query($db->connect, $sql);
 
-    // Check if the email exists
     if ($result && mysqli_num_rows($result) > 0) {
         echo json_encode(['message' => 'Email is registered.']);
     } else {

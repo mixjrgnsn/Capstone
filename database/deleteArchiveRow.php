@@ -1,24 +1,21 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS"); // Allow DELETE method
+header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
 header('Content-Type: application/json');
 
-require 'Database.php';
+require 'DataBase.php';
 
-// Create a new instance of the DataBase class
 $db = new DataBase();
 $db->dbConnect();
 
-// Read JSON input
 $data = json_decode(file_get_contents("php://input"), true);
-$id = $data['id'] ?? null; // Get the ID from the decoded JSON
+$id = $data['id'] ?? null;
 
-// Debugging line to log the received ID
-error_log("Received ID: " . print_r($id, true)); // Log the ID for debugging
+error_log("Received ID: " . print_r($id, true));
 
 if ($id) {
-    $table = 'accarchive';  // Your table name
+    $table = 'accarchive';
     $success = $db->deleteArchiveRow($table, $id);
 
     if ($success) {

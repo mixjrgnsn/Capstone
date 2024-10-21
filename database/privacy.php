@@ -10,14 +10,12 @@ if ($db->dbConnect()) {
     $oldPass = isset($_POST['oldPass']) ? mysqli_real_escape_string($db->connect, $_POST['oldPass']) : '';
     $newPass = isset($_POST['newPass']) ? mysqli_real_escape_string($db->connect, $_POST['newPass']) : '';
 
-    // Check if the email and old password are correct
     $sql = "SELECT password FROM users WHERE email = '$email'";
     $result = mysqli_query($db->connect, $sql);
 
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         if (password_verify($oldPass, $row['password'])) {
-            // Update the password
             $hashedNewPass = password_hash($newPass, PASSWORD_DEFAULT);
             $updateSql = "UPDATE users SET password = '$hashedNewPass' WHERE email = '$email'";
             if (mysqli_query($db->connect, $updateSql)) {

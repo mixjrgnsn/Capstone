@@ -1,5 +1,7 @@
 <?php
 require "DataBaseConfig.php";
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 class DataBase
 {
@@ -26,6 +28,9 @@ class DataBase
     function dbConnect()
     {
         $this->connect = mysqli_connect($this->servername, $this->email, $this->password, $this->databasename);
+        if (mysqli_connect_errno()) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
         return $this->connect;
     }
 
@@ -45,12 +50,10 @@ class DataBase
             $dbemail = $row['email'];
             $dbpassword = $row['password'];
 
-            // Verify the hashed password
             if ($dbemail == $email && password_verify($password, $dbpassword)) {
                 return json_encode(array(
                     "id" => $row['id'],
                     "firstname" => $row['firstname'],
-                    "email" => $row['email'],
                     "lastname" => $row['lastname'],
                     "address" => $row['address']
                 ));
@@ -64,7 +67,6 @@ class DataBase
         $lastname = $this->prepareData($lastname);
         $email = $this->prepareData($email);
         
-        // Hash the password before storing it
         $hashedPassword = password_hash($this->prepareData($password), PASSWORD_DEFAULT);
         $address = $this->prepareData($address);
 
@@ -138,7 +140,7 @@ class DataBase
 
     function displayReservations($table)
     {
-        $columns = 'id AS TAG, name AS NAME, date AS DATE, CONCAT(timeFrom, " ", am_pm_from) AS `TIME FROM`, CONCAT(timeTo, " ", am_pm_to) AS `TIME TO`, DATE_FORMAT(updated_at, "%Y-%m-%d %h:%i %p") AS `CREATED/MODIFIED`, purpose AS PURPOSE';
+        $columns = 'id AS TAG, name AS NAME, date AS DATE, CONCAT(timeFrom, " ", am_pm_from) AS `TIME FROM`, CONCAT(timeTo, " ", am_pm_to) AS `TIME TO`, purpose AS PURPOSE';
         
         $this->sql = "SELECT $columns FROM " . $table;
         $result = mysqli_query($this->connect, $this->sql);
@@ -156,9 +158,9 @@ class DataBase
 
     function displayComplaints($table)
     {
-        $columns = 'id AS TAG, name AS NAME, date AS DATE, DATE_FORMAT(updated_at, "%Y-%m-%d %h:%i %p") AS `CREATED/MODIFIED`, status AS STATUS';
+        $columns = 'id AS TAG, name AS NAME, date AS DATE, status AS STATUS';
         
-        $this->sql = "SELECT $columns FROM " . $table. " ORDER BY id DESC";
+        $this->sql = "SELECT $columns FROM " . $table;
         $result = mysqli_query($this->connect, $this->sql);
         
         if ($result) {
@@ -174,9 +176,9 @@ class DataBase
 
     function displayReports($table)
     {
-        $columns = 'id AS TAG, name AS NAME, date AS DATE, DATE_FORMAT(updated_at, "%Y-%m-%d %h:%i %p") AS `CREATED/MODIFIED`, status AS STATUS';
+        $columns = 'id AS TAG, name AS NAME, date AS DATE, status AS STATUS';
         
-        $this->sql = "SELECT $columns FROM " . $table. " ORDER BY id DESC";
+        $this->sql = "SELECT $columns FROM " . $table;
         $result = mysqli_query($this->connect, $this->sql);
         
         if ($result) {
@@ -189,7 +191,6 @@ class DataBase
             return false;
         }
     }
-
 
     function displayAccountApproval($table)
     {
@@ -287,11 +288,9 @@ class DataBase
         $password = $this->prepareData($password);
         $address = $this->prepareData($address);
 
-        // Insert the data into the users table
         $this->sql =
             "INSERT INTO " . $table . " (id, firstname, lastname, email, password, address) VALUES ('" . $id . "','" . $firstname . "','" . $lastname . "','" . $email . "','" . $password . "','" . $address . "')";
         if (mysqli_query($this->connect, $this->sql)) {
-            // If insert was successful, delete the row from the pending table
             return $this->deletePendingRow($id);
         } else {
             return false;
@@ -302,7 +301,6 @@ class DataBase
     {
         $id = $this->prepareData($id);
 
-        // Assume there's a 'pending_users' table where the new signups are stored
         $this->sql = "DELETE FROM accapproval WHERE id = '" . $id . "'";
         return mysqli_query($this->connect, $this->sql);
     }
@@ -333,11 +331,9 @@ class DataBase
         $dbpassword = $row['password'];
         
         if ($dbemail == $email && password_verify($password, $dbpassword)) {
-            // Prepare user data to return
             $userData = [
                 'id' => $row['id'],
                 'firstname' => $row['firstname'],
-                'email' => $row['email'],
                 'lastname' => $row['lastname'],
                 'address' => $row['address']
             ];
@@ -370,16 +366,6 @@ class DataBase
         }
     }
 
-    /*function storeTimeout($firstname, $lastname, $timeout)
-    {
-        $firstname = $this->prepareData($firstname);
-        $lastname = $this->prepareData($lastname);
-        $timeout = $this->prepareData($timeout);
-
-        $this->sql = "UPDATE visitorlogin SET timeout = NOW() WHERE firstname = '$firstname' AND lastname = '$lastname' AND timeout IS NULL"; 
-        return mysqli_query($this->connect, $this->sql);
-    }*/
-
     function storeLogbook($firstname, $lastname, $purpose, $timeIn, $date, $timeout)
     {
         $firstname = $this->prepareData($firstname);
@@ -392,7 +378,6 @@ class DataBase
         $this->sql = "INSERT INTO logbook (firstname, lastname, purpose, timein, date, timeout) 
                     VALUES ('$firstname', '$lastname', '$purpose', '$timeIn', '$date', '$timeout')"; 
         if (mysqli_query($this->connect, $this->sql)) {
-            // If insert was successful, delete the row from the pending table
             return $this->deleteLoginRow($firstname, $lastname);
         } else {
             return false;
@@ -422,7 +407,6 @@ class DataBase
         $firstname = $this->prepareData($firstname);
         $lastname = $this->prepareData($lastname);
 
-        // Corrected SQL query
         $this->sql = "DELETE FROM visitorlogin WHERE firstname = '" . $firstname . "' AND lastname = '" . $lastname . "'";
         return mysqli_query($this->connect, $this->sql);
     }
@@ -432,7 +416,6 @@ class DataBase
         $firstname = $this->prepareData($firstname);
         $lastname = $this->prepareData($lastname);
 
-        // Corrected SQL query
         $this->sql = "DELETE FROM users WHERE firstname = '" . $firstname . "' AND lastname = '" . $lastname . "'";
         return mysqli_query($this->connect, $this->sql);
     }
@@ -446,11 +429,9 @@ class DataBase
         $password = $this->prepareData($password);
         $address = $this->prepareData($address);
 
-        // Insert the data into the users table
         $this->sql =
             "INSERT INTO " . $table . " (id, firstname, lastname, email, password, address) VALUES ('" . $id . "','" . $firstname . "','" . $lastname . "','" . $email . "','" . $password . "','" . $address . "')";
         if (mysqli_query($this->connect, $this->sql)) {
-            // If insert was successful, delete the row from the pending table
             return $this->deleteUserRow($firstname, $lastname);
         } else {
             return false;
@@ -484,11 +465,9 @@ class DataBase
         $password = $this->prepareData($password);
         $address = $this->prepareData($address);
 
-        // Insert the data into the users table
         $this->sql =
             "INSERT INTO " . $table . " (id, firstname, lastname, email, password, address) VALUES ('" . $id . "','" . $firstname . "','" . $lastname . "','" . $email . "','" . $password . "','" . $address . "')";
         if (mysqli_query($this->connect, $this->sql)) {
-            // If insert was successful, delete the row from the pending table
             return $this->deleteRow($id);
         } else {
             return false;
@@ -510,7 +489,7 @@ class DataBase
     
         $this->sql = "DELETE FROM $table WHERE id = ?";
         $stmt = mysqli_prepare($this->connect, $this->sql);
-        mysqli_stmt_bind_param($stmt, 'i', $id); // Assuming id is an integer
+        mysqli_stmt_bind_param($stmt, 'i', $id);
         return mysqli_stmt_execute($stmt);
     }
 
@@ -521,7 +500,7 @@ class DataBase
     
         $this->sql = "DELETE FROM $table WHERE id = ?";
         $stmt = mysqli_prepare($this->connect, $this->sql);
-        mysqli_stmt_bind_param($stmt, 'i', $id); // Assuming id is an integer
+        mysqli_stmt_bind_param($stmt, 'i', $id);
         return mysqli_stmt_execute($stmt);
     }
 
@@ -562,81 +541,42 @@ class DataBase
     }
 
     public function updateReadStatus($id) {
-        $sql = "UPDATE complaints SET status = 'ON GOING', updated_at = NOW() WHERE id = ?";
-        $stmt = $this->connect->prepare($sql);
-        $stmt->bind_param("i", $id); // Assuming id is an integer
+        $id = $this->prepareData($id);
+        $this->sql = "UPDATE complaints SET status = 'ON GOING' WHERE id = '$id'";
 
-        return $stmt->execute();
+        if (mysqli_query($this->connect, $this->sql)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function updateReadStatus2($id) {
-        $sql = "UPDATE reports SET status = 'READ', updated_at = NOW() WHERE id = ?";
-        $stmt = $this->connect->prepare($sql);
-        $stmt->bind_param("i", $id); // Assuming id is an integer
-    
-        return $stmt->execute();
+        $id = $this->prepareData($id);
+        $this->sql = "UPDATE reports SET status = 'READ' WHERE id = '$id'";
+
+        if (mysqli_query($this->connect, $this->sql)) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    
 
     public function updateStatusToCompleted($id) {
-        $sql = "UPDATE complaints SET status = 'COMPLETED', updated_at = NOW() WHERE id = ?";
-        $stmt = $this->connect->prepare($sql);
-        $stmt->bind_param("i", $id); // Assuming id is an integer
+        $id = $this->prepareData($id);
+        $this->sql = "UPDATE complaints SET status = 'COMPLETED' WHERE id = '$id'";
 
-        return $stmt->execute();
+        if (mysqli_query($this->connect, $this->sql)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function rejectReservation($id) {
         $id = $this->prepareData($id);
         $this->sql = "DELETE FROM reservations WHERE id = '" . $id . "'";
         return mysqli_query($this->connect, $this->sql);
-    }
-
-    function acceptReservation($table, $id, $name, $date, $timeFrom, $timeTo, $purpose, $status)
-    {
-        $id = $this->prepareData($id); 
-        $name = $this->prepareData($name);
-        $date = $this->prepareData($date);
-        $timeFrom = $this->prepareData($timeFrom);
-        $timeTo = $this->prepareData($timeTo);
-        $purpose = $this->prepareData($purpose);
-        $status = $this->prepareData($status);
-
-        // Insert the data into the users table
-        $this->sql = "INSERT INTO " . $table . " (id, name, date, timeFrom, timeTo, purpose, status) VALUES ('" . $id . "','" . $name . "','" . $date . "','" . $timeFrom . "','" . $timeTo . "','" . $purpose . "','" . $status ."')";
-
-        if (mysqli_query($this->connect, $this->sql)) {
-            // If insert was successful, delete the row from the pending table
-            return $this->deleteRowAcceptedReservation($id);
-        } else {
-            return false;
-        }
-    }
-
-    function deleteRowAcceptedReservation($id)
-    {
-        $id = $this->prepareData($id);
-
-        $this->sql = "DELETE FROM reservations WHERE id = '" . $id . "'";
-        return mysqli_query($this->connect, $this->sql);
-    }
-
-    function displayReservedList($table)
-    {
-        $columns = 'id AS TAG, name AS NAME, date AS DATE, timeFrom AS `TIME FROM`, timeTo AS `TIME TO`, purpose AS PURPOSE, status AS STATUS';
-        
-        $this->sql = "SELECT $columns FROM " . $table;
-        $result = mysqli_query($this->connect, $this->sql);
-        
-        if ($result) {
-            $data = [];
-            while ($row = mysqli_fetch_assoc($result)) {
-                $data[] = $row;
-            }
-            return $data;
-        } else {
-            return false;
-        }
     }
 
 }

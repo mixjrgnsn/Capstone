@@ -7,12 +7,10 @@ require "DataBase.php";
 $db = new DataBase();
 
 if ($db->dbConnect()) {
-    // Get the user data from the input
     $input = json_decode(file_get_contents("php://input"), true);
     $firstName = $input['firstname'] ?? '';
     $lastName = $input['lastname'] ?? '';
 
-    // Prepare the SQL statement
     $sql = "SELECT * FROM complaints WHERE firstname = ? AND lastname = ? AND status = 'READ'";
     $stmt = $db->connect->prepare($sql);
     $stmt->bind_param("ss", $firstName, $lastName);

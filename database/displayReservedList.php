@@ -3,20 +3,15 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header('Content-Type: application/json');
 
-require 'Database.php';
+require 'DataBase.php';
 
-// Create a new instance of the DataBase class
 $db = new DataBase();
 
-// Connect to the database
 $db->dbConnect();
 
-// Specify the table you want to display
-$table = 'reservedlist';  // Replace with your actual table name
+$table = 'reservedlist';
 
-// Fetch data from the table
 $data = $db->displayReservedList($table);
 
-// Output the data in JSON format
 echo json_encode($data);
 ?>
