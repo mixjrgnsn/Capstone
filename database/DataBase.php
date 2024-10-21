@@ -66,11 +66,20 @@ class DataBase
         $hashedPassword = password_hash($this->prepareData($password), PASSWORD_DEFAULT);
         $address = $this->prepareData($address);
 
-        $this->sql =
-            "INSERT INTO " . $table . " (firstname, lastname, email, password, address) VALUES ('" . $firstname . "','" . $lastname . "','" . $email . "','" . $hashedPassword . "','" . $address . "')";
-        if (mysqli_query($this->connect, $this->sql)) {
-            return true;
-        } else return false;
+        $checkEmailQuery = "SELECT email FROM " . $table . " WHERE email = '$email'";
+        $result = mysqli_query($this->connect, $checkEmailQuery);
+        
+        if (mysqli_num_rows($result) > 0) {
+            return "Email already exists. Please use a different email.";
+        } else {
+            $this->sql =
+                "INSERT INTO " . $table . " (firstname, lastname, email, password, address) VALUES ('$firstname','$lastname','$email','$hashedPassword','$address')";
+            if (mysqli_query($this->connect, $this->sql)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     function complaints($name, $date, $subject)
