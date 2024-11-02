@@ -2,7 +2,6 @@ document.getElementById("submit-btn").addEventListener("click", function() {
     // Retrieve user data
     const userData = JSON.parse(localStorage.getItem('userData'));
     const name = `${userData.firstname} ${userData.lastname}`;
-    
 
     // Get input values
     const date = document.getElementById("reservation-date").value;
@@ -16,27 +15,26 @@ document.getElementById("submit-btn").addEventListener("click", function() {
         return;
     }
 
-    // Validate date is within one week
+    // Validate date is today or within one week
     const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set time to midnight for comparison
     const selectedDate = new Date(date);
     const oneWeekFromNow = new Date(today);
-    oneWeekFromNow.setDate(today.getDate() + 8);
+    oneWeekFromNow.setDate(today.getDate() + 7);
 
     if (selectedDate < today || selectedDate > oneWeekFromNow) {
         alert("Reservations can only be made for today or within the next 7 days.");
         return;
     }
 
-    // Function to convert time to 12-hour format with AM/PM
     function convertTo12HourFormat(time) {
         let hours = parseInt(time.split(':')[0]);
         let minutes = time.split(':')[1];
         let am_pm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12 || 12; // Convert 0 hours to 12 for 12-hour format
+        hours = hours % 12 || 12;
         return { time: `${hours}:${minutes}`, am_pm: am_pm };
     }
 
-    // Convert timeFrom and timeTo to 12-hour format
     const timeFromConverted = convertTo12HourFormat(timeFrom);
     const timeToConverted = convertTo12HourFormat(timeTo);
 
@@ -75,7 +73,9 @@ document.getElementById("submit-btn").addEventListener("click", function() {
             document.getElementById("loadingSpinner").style.display = "none";
             alert(data);
             document.getElementById('purpose').value = '';
-            window.location.href = "home.html";
+            if (data === "Reservation Submitted") {
+                window.location.href = "home.html"; // Redirect only if successful
+            }
         })
         .catch(error => {
             console.error('Error:', error);

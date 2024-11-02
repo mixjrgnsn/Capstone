@@ -95,8 +95,7 @@ class DataBase
         }
     }
 
-    function reservations($name, $date, $timeFrom, $am_pm_from, $timeTo, $am_pm_to, $purpose)
-    {
+    function reservations($name, $date, $timeFrom, $am_pm_from, $timeTo, $am_pm_to, $purpose) {
         $name = $this->prepareData($name);
         $date = $this->prepareData($date);
         $timeFrom = $this->prepareData($timeFrom);
@@ -104,13 +103,29 @@ class DataBase
         $am_pm_from = $this->prepareData($am_pm_from);
         $am_pm_to = $this->prepareData($am_pm_to);
         $purpose = $this->prepareData($purpose);
-        $this->sql = "INSERT INTO reservations (name, date, timeFrom, am_pm_from, timeTo, am_pm_to, purpose) VALUES ('$name', '$date', '$timeFrom', '$am_pm_from', '$timeTo', '$am_pm_to', '$purpose')";
+    
+        // Check for existing reservations
+        $checkSql = "SELECT * FROM reservations WHERE date = '$date' AND 
+                     ((timeFrom <= '$timeTo' AND timeTo >= '$timeFrom') OR 
+                     (timeFrom <= '$timeFrom' AND timeTo >= '$timeFrom'))";
+        
+        $checkResult = mysqli_query($this->connect, $checkSql);
+        
+        if (mysqli_num_rows($checkResult) > 0) {
+            return "The time is already in use"; // Reservation conflict
+        }
+    
+        // Insert new reservation
+        $this->sql = "INSERT INTO reservations (name, date, timeFrom, am_pm_from, timeTo, am_pm_to, purpose) 
+                      VALUES ('$name', '$date', '$timeFrom', '$am_pm_from', '$timeTo', '$am_pm_to', '$purpose')";
+        
         if (mysqli_query($this->connect, $this->sql)) {
             return true;
         } else {
             return false;
         }
     }
+
 
     function reports($name, $date, $subject)
     {
@@ -147,7 +162,7 @@ class DataBase
     {
         $columns = 'id AS TAG, name AS NAME, date AS DATE, CONCAT(timeFrom, " ", am_pm_from) AS `TIME FROM`, CONCAT(timeTo, " ", am_pm_to) AS `TIME TO`, DATE_FORMAT(updated_at, "%Y-%m-%d %h:%i %p") AS `CREATED/MODIFIED`, purpose AS PURPOSE';
         
-        $this->sql = "SELECT $columns FROM " . $table;
+        $this->sql = "SELECT $columns FROM " . $table . " ORDER BY id DESC";
         $result = mysqli_query($this->connect, $this->sql);
         
         if ($result) {
@@ -163,9 +178,9 @@ class DataBase
 
     function displayComplaints($table)
     {
-        $columns = 'id AS TAG, name AS NAME, date AS DATE, DATE_FORMAT(updated_at, "%Y-%m-%d %h:%i %p") AS `CREATED/MODIFIED`, status AS STATUS';
+        $columns = 'id AS TAG, name AS NAME, date AS DATE, DATE_FORMAT(updated_at, "%Y-%m-%d %I:%i %p") AS `CREATED/MODIFIED`, status AS STATUS';
         
-        $this->sql = "SELECT $columns FROM " . $table. " ORDER BY id DESC";
+        $this->sql = "SELECT $columns FROM " . $table. " ORDER BY updated_at DESC";
         $result = mysqli_query($this->connect, $this->sql);
         
         if ($result) {
@@ -183,7 +198,7 @@ class DataBase
     {
         $columns = 'id AS TAG, name AS NAME, date AS DATE, DATE_FORMAT(updated_at, "%Y-%m-%d %h:%i %p") AS `CREATED/MODIFIED`, status AS STATUS';
         
-        $this->sql = "SELECT $columns FROM " . $table. " ORDER BY id DESC";
+        $this->sql = "SELECT $columns FROM " . $table. " ORDER BY updated_at DESC";
         $result = mysqli_query($this->connect, $this->sql);
         
         if ($result) {
@@ -269,9 +284,10 @@ class DataBase
 
     function displayVisitorRecord($table)
     {
-        $columns = 'firstname AS FIRSTNAME, lastname AS LASTNAME, date AS DATE, timein AS `TIME IN`, purpose AS PURPOSE';
-        
-        $this->sql = "SELECT $columns FROM " . $table;
+        $columns = 'id AS TAG, firstname AS FIRSTNAME, lastname AS LASTNAME, purpose AS PURPOSE, 
+            CONCAT(timein, " ", date) AS `TIME IN` , timeout AS `TIME OUT`';
+
+        $this->sql = "SELECT $columns FROM " . $table . " ORDER BY id DESC";
         $result = mysqli_query($this->connect, $this->sql);
         
         if ($result) {
@@ -359,7 +375,7 @@ class DataBase
     {
         $columns = 'firstname AS FIRSTNAME, lastname AS LASTNAME, date AS DATE, timein AS `TIME IN`, timeout AS `TIME OUT`, purpose AS PURPOSE';
         
-        $this->sql = "SELECT $columns FROM " . $table;
+        $this->sql = "SELECT $columns FROM " . $table . " ORDER BY id DESC";
         $result = mysqli_query($this->connect, $this->sql);
         
         if ($result) {
@@ -373,29 +389,18 @@ class DataBase
         }
     }
 
-    function storeLogbook($firstname, $lastname, $purpose, $timeIn, $date, $timeout)
-    {
-        $firstname = $this->prepareData($firstname);
-        $lastname = $this->prepareData($lastname);
-        $purpose = $this->prepareData($purpose);
-        $timeIn = $this->prepareData($timeIn);
-        $date = $this->prepareData($date);
-        $timeout = $this->prepareData($timeout);
-
-        $this->sql = "INSERT INTO logbook (firstname, lastname, purpose, timein, date, timeout) 
-                    VALUES ('$firstname', '$lastname', '$purpose', '$timeIn', '$date', '$timeout')"; 
-        if (mysqli_query($this->connect, $this->sql)) {
-            return $this->deleteLoginRow($firstname, $lastname);
-        } else {
-            return false;
-        }
+    public function updateLogbookTimeout($id, $timeout) {
+        $sql = "UPDATE visitorlogin SET timeout = ? WHERE id = ?"; // Use ID here
+        $stmt = $this->connect->prepare($sql);
+        $stmt->bind_param("si", $timeout, $id); // Assuming timeout is a string and ID is an integer
+        return $stmt->execute();
     }
-
+    
     function displayLogbook2($table)
     {
         $columns = 'firstname AS FIRSTNAME, lastname AS LASTNAME, date AS DATE, timein AS `TIME IN`, timeout AS `TIME OUT`, purpose AS PURPOSE';
         
-        $this->sql = "SELECT $columns FROM " . $table;
+        $this->sql = "SELECT $columns FROM " . $table . " ORDER BY id DESC";
         $result = mysqli_query($this->connect, $this->sql);
         
         if ($result) {
@@ -511,10 +516,11 @@ class DataBase
         return mysqli_stmt_execute($stmt);
     }
 
-    function announcement($content)
+    function announcement($content, $image_name = null)
     {
         $content = $this->prepareData($content);
-        $this->sql = "INSERT INTO announcements (content) VALUES ('$content')";
+        $image_name = $this->prepareData($image_name);
+        $this->sql = "INSERT INTO announcements (content, image_name) VALUES ('$content', '$image_name')";
         if (mysqli_query($this->connect, $this->sql)) {
             return true;
         } else {
@@ -524,7 +530,7 @@ class DataBase
 
     function displayAnnouncements($table)
     {
-        $columns = 'content, created_at';
+        $columns = 'image_name, content, created_at';
         
         $this->sql = "SELECT $columns FROM " . $table . " ORDER BY id DESC";
         $result = mysqli_query($this->connect, $this->sql);
@@ -548,15 +554,16 @@ class DataBase
     }
 
     public function updateReadStatus($id) {
-        $sql = "UPDATE complaints SET status = 'ON GOING', updated_at = NOW() WHERE id = ?";
+        $sql = "UPDATE complaints SET status = 'ON GOING', updated_at = CONVERT_TZ(NOW(), 'SYSTEM', '+08:00') WHERE id = ?";
         $stmt = $this->connect->prepare($sql);
         $stmt->bind_param("i", $id);
-
+    
         return $stmt->execute();
     }
 
+
     public function updateReadStatus2($id) {
-        $sql = "UPDATE reports SET status = 'READ', updated_at = NOW() WHERE id = ?";
+        $sql = "UPDATE reports SET status = 'READ', updated_at = CONVERT_TZ(NOW(), 'SYSTEM', '+08:00') WHERE id = ?";
         $stmt = $this->connect->prepare($sql);
         $stmt->bind_param("i", $id);
     
@@ -565,7 +572,7 @@ class DataBase
     
 
     public function updateStatusToCompleted($id) {
-        $sql = "UPDATE complaints SET status = 'COMPLETED', updated_at = NOW() WHERE id = ?";
+        $sql = "UPDATE complaints SET status = 'COMPLETED', updated_at = CONVERT_TZ(NOW(), 'SYSTEM', '+08:00') WHERE id = ?";
         $stmt = $this->connect->prepare($sql);
         $stmt->bind_param("i", $id);
 
@@ -607,9 +614,9 @@ class DataBase
 
     function displayReservedList($table)
     {
-        $columns = 'id AS TAG, name AS NAME, date AS DATE, timeFrom AS `TIME FROM`, timeTo AS `TIME TO`, purpose AS PURPOSE, status AS STATUS';
+        $columns = 'id AS TAG, name AS NAME, date AS DATE, timeFrom AS `FROM`, timeTo AS `TO`, purpose AS PURPOSE, DATE_FORMAT(updated_at, "%Y-%m-%d %h:%i %p") AS `CREATED/MODIFIED`, status AS STATUS';
         
-        $this->sql = "SELECT $columns FROM " . $table;
+        $this->sql = "SELECT $columns FROM " . $table. " ORDER BY updated_at DESC";
         $result = mysqli_query($this->connect, $this->sql);
         
         if ($result) {
@@ -621,6 +628,14 @@ class DataBase
         } else {
             return false;
         }
+    }
+
+    public function update_status($id) {
+        $sql = "UPDATE reservedlist SET status = 'COMPLETED', updated_at = CONVERT_TZ(NOW(), 'SYSTEM', '+08:00') WHERE id = ?";
+        $stmt = $this->connect->prepare($sql);
+        $stmt->bind_param("i", $id);
+    
+        return $stmt->execute();
     }
 
 }

@@ -1,18 +1,22 @@
 document.getElementById("signupForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent the default form submission behavior.
 
-    // Get form field values and trim them
+    const email = localStorage.getItem('email');
     let firstName = document.getElementById("firstname").value.trim().toUpperCase();
     let lastName = document.getElementById("lastname").value.trim().toUpperCase();
-    let email = document.getElementById("email").value.trim();
     let password = document.getElementById("password").value.trim();
     let confPassword = document.getElementById("confirmPassword").value.trim();
     let blk = document.getElementById("lot").value.trim(); // Adjusted for the correct ID
     let lot = document.getElementById("blk").value.trim(); // Adjusted for the correct ID
     let street = document.getElementById("street").value.trim().toUpperCase();
 
+    if (!email) {
+        alert("Error: Email is gone.");
+        return;
+    }
+
     // Front-end validation: Check if any field is empty
-    if (!firstName || !lastName || !email || !password || !confPassword || !blk || !lot || !street) {
+    if (!firstName || !lastName || !password || !confPassword || !blk || !lot || !street) {
         alert("All fields are required.");
         return;
     }
@@ -49,7 +53,7 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
     formData.append("address", `BLK ${blk} LOT ${lot} ${street}`);
 
     // Make a fetch request to the PHP backend
-    fetch('https://franciscohomes3.online/loginregister/database/signup.php', {
+    fetch('http://localhost/loginregister/database/signup.php', {
         method: 'POST',
         body: formData
     })

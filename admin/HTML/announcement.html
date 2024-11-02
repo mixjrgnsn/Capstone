@@ -14,7 +14,7 @@
     </div>
     <nav class="main-container">
         <div class="left-middle">
-            <a class="link" id="dashboard" href="../HTML/dashboard.html"><i class="fa-solid fa-computer"></i>Dashboard</a>
+            <a class="link" id="dashboard" href="../HTML/dashboard.html"><i class="fa-solid fa-computer"></i>Homepage</a>
             <a class="link" id="announcement" href="../HTML/announcement.html"><i class="fa-solid fa-bullhorn"></i>Announcement</a>
             <a class="link" id="reports" href="../HTML/reports.html"><i class="fa-solid fa-scroll"></i>Reports</a>
             <a class="link" id="complaints" href="../HTML/complaints.html"><i class="fa-solid fa-receipt"></i>Complaints</a>
@@ -30,8 +30,18 @@
                 <div class="right-body">
                     <div>
                         <p class="create">Create Announcement</p>
-                        <textarea class="content-text" name="description" rows="5" cols="100%" placeholder="Enter text..." name="message" autocomplete="off" required></textarea>  
-                        <button id="post-btn" class="post-btn">Post</button>
+                        <div class="upload-container">
+                            <input type="file" id="file-input" accept="image/*">
+                            <div class="flex-container">
+                                <div id="image-preview" class="image-preview">
+                                    <img id="preview-image" src="" alt="Image Preview" style="display: none;">
+                                </div>
+                                <div class="text-container">
+                                    <textarea class="content-text" name="description" rows="5" placeholder="Enter text..." name="message" autocomplete="off" required></textarea>  
+                                </div>
+                            </div>
+                            <button id="post-btn" class="post-btn">Post</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -43,6 +53,12 @@
             <p>Are you sure you want to post this announcement?</p>
             <button id="confirmBtn" class="confirm-btn">Confirm</button>
             <button id="cancelBtn" class="cancel-btn">Cancel</button>
+        </div>
+    </div>
+    <div id="alertModal" class="modal">
+        <div class="modal-content">
+            <p id="alertMessage">Alert message goes here.</p>
+            <button id="alertCloseBtn" class="alert-close-btn">Close</button>
         </div>
     </div>
     <script src="../JS/announcement.js"></script>

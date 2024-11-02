@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    var loadingSpinner = document.getElementById("loadingSpinner");
+    let currentSearchQuery = '';
+
     function displayVisitorRecord() {
         fetch('https://franciscohomes3.online/loginregister/database/displayVisitorRecord.php')
             .then(response => response.json())
@@ -18,7 +21,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         headerRow.appendChild(th);
                     });
 
-                    data.forEach(row => {
+                    const filteredData = data.filter(row => {
+                        return Object.values(row).some(value =>
+                            value.toString().toLowerCase().includes(currentSearchQuery)
+                        );
+                    });
+
+                    filteredData.forEach(row => {
                         const tr = document.createElement('tr');
                         tr.addEventListener('click', () => handleRowClick(row));
 
@@ -31,13 +40,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         bodyRow.appendChild(tr);
                     });
 
+                    searchBox.value = currentSearchQuery;
                     searchBox.addEventListener('input', function() {
-                        const query = searchBox.value.toLowerCase();
-                        Array.from(bodyRow.getElementsByTagName('tr')).forEach(row => {
-                            const cells = row.getElementsByTagName('td');
-                            const match = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(query));
-                            row.style.display = match ? '' : 'none';
-                        });
+                        currentSearchQuery = searchBox.value.toLowerCase();
+                        displayVisitorRecord();
                     });
 
                 } else {
@@ -54,9 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleRowClick(row) {
         if (row && row.FIRSTNAME && row.LASTNAME) {
             const message = `Do you want to record the timeout for ${row.FIRSTNAME} ${row.LASTNAME}?`;
-            document.getElementById('modal-message').textContent = message;
-            document.getElementById('modal').style.display = 'block';
-            currentRowData = row; // Save current row data for further actions
+            document.getElementById('modal-message2').textContent = message;
+            document.getElementById('modal2').style.display = 'block';
+            currentRowData = row;
         } else {
             console.error('Row data is missing or incomplete');
         }
@@ -64,14 +70,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function storeLogbook() {
         const data = {
-            firstname: currentRowData.FIRSTNAME,
-            lastname: currentRowData.LASTNAME,
-            purpose: currentRowData.PURPOSE,
-            timein: currentRowData['TIME IN'],
-            date: currentRowData.DATE,
-            timeout: formatCurrentTime() // Use the updated format
+            timeout: formatCurrentTime(),
+            id: currentRowData.TAG // Change TAG to ID
         };
     
+        console.log("Data being sent:", data);
+        
         fetch('https://franciscohomes3.online/loginregister/database/storeLogbook.php', {
             method: 'POST',
             headers: {
@@ -82,75 +86,54 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(result => {
             if (result.status === 'success') {
-                showAlert(`Timeout for ${currentRowData.FIRSTNAME} ${currentRowData.LASTNAME} has been recorded.`);
-                displayVisitorRecord(); 
+                alert(`Timeout for ${currentRowData.FIRSTNAME} ${currentRowData.LASTNAME} has been recorded.`);
+                displayVisitorRecord();
+                loadingSpinner.style.display = 'none';
             } else {
-                showAlert('Error: ' + result.message);
+                alert('Error: ' + result.message);
                 console.error('Server error:', result.message);
+                loadingSpinner.style.display = 'none';
             }
         })
         .catch(error => {
             console.error('Error storing timeout:', error);
+            loadingSpinner.style.display = 'none';
         });
     }
     
     
-    
-    // Helper function to format current time
     function formatCurrentTime() {
         const now = new Date();
         let hours = now.getHours();
         const minutes = now.getMinutes();
         const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12; // Convert to 12-hour format
-        hours = hours ? hours : 12; // Hour '0' should be '12'
-        const formattedMinutes = minutes < 10 ? '0' + minutes : minutes; // Add leading zero if needed
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
     
         const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0'); // Month is 0-based
-        const day = String(now.getDate()).padStart(2, '0'); // Add leading zero if needed
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
     
-        return `${hours}:${formattedMinutes} ${ampm} ${year}-${month}-${day}`; // Return formatted time
-    }
+        return `${hours}:${formattedMinutes} ${ampm} ${year}-${month}-${day}`;
+    } 
 
-    function showAlert(message) {
-        document.getElementById('modal-message').textContent = message;
-        document.getElementById('modal').style.display = 'block';
-        document.getElementById('yes-button').style.display = 'none'; // Hide Yes button for simple alerts
-        document.getElementById('cancel-button').textContent = 'Close'; // Change Cancel button text
-    }
-    
-    
-    // Modal Yes button action
-    document.getElementById('yes-button').addEventListener('click', () => {
-        storeLogbook(); // Store the timeout when the user confirms
-        document.getElementById('modal').style.display = 'none'; // Hide modal
+    document.getElementById('yes-button2').addEventListener('click', () => {
+        loadingSpinner.style.display = 'block';
+        storeLogbook();
+        document.getElementById('modal2').style.display = 'none';
     });
 
-    // Modal Cancel button action
-    document.getElementById('cancel-button').addEventListener('click', () => {
-        document.getElementById('modal').style.display = 'none'; // Hide modal
+    document.getElementById('cancel-button2').addEventListener('click', () => {
+        document.getElementById('modal2').style.display = 'none';
     });
 
-    // Close modal when clicking on the close button
-    document.querySelector('.close').addEventListener('click', () => {
-        document.getElementById('modal').style.display = 'none';
-    });
-
-    // Close modal when clicking outside of it
     window.onclick = function(event) {
-        const modal = document.getElementById('modal');
+        const modal = document.getElementById('modal2');
         if (event.target === modal) {
             modal.style.display = 'none';
         }
     };
-
-    // Navigation to logbook page
-    document.getElementById('logbook').addEventListener('click', function() {
-        window.location.href = 'logbook.html';
-    });
-
     displayVisitorRecord();
-
-    setInterval(displayVisitorRecord, 3000);
+    setInterval(displayVisitorRecord, 5000);
 });

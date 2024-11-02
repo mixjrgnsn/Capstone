@@ -37,5 +37,5 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchAnnouncements();
 
     // Set an interval to fetch announcements every 10 seconds (10000 milliseconds)
-    setInterval(fetchAnnouncements, 10000);
+    setInterval(fetchAnnouncements, 5000);
 });

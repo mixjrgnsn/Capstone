@@ -1,18 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
+    let currentSearchQuery = '';
+
     function displaylogbook2() {
-        fetch('https://franciscohomes3.online/loginregister/database/displaylogbook2.php')
+        fetch('https://franciscohomes3.online/loginregister/database/displayLogbook2.php')
             .then(response => response.json())
             .then(data => {
                 const headerRow = document.getElementById('header-row');
                 const bodyRow = document.getElementById('body-row');    
                 const searchBox = document.getElementById('search-box');
 
-                // Clear existing table content
                 headerRow.innerHTML = '';
                 bodyRow.innerHTML = '';
 
                 if (data.length > 0) {
-                    // Create table headers
                     const headers = Object.keys(data[0]);
                     headers.forEach(header => {
                         const th = document.createElement('th');
@@ -20,10 +20,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         headerRow.appendChild(th);
                     });
 
-                    // Create table rows
-                    data.forEach(row => {
-                        const tr = document.createElement('tr');
+                    const filteredData = data.filter(row => {
+                        return Object.values(row).some(value =>
+                            value.toString().toLowerCase().includes(currentSearchQuery)
+                        );
+                    });
 
+                    filteredData.forEach(row => {
+                        const tr = document.createElement('tr');
                         tr.addEventListener('click', () => handleRowClick(row));
 
                         Object.values(row).forEach(value => {
@@ -35,18 +39,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         bodyRow.appendChild(tr);
                     });
 
-                    // Add search functionality
+                    searchBox.value = currentSearchQuery;
                     searchBox.addEventListener('input', function() {
-                        const query = searchBox.value.toLowerCase();
-                        Array.from(bodyRow.getElementsByTagName('tr')).forEach(row => {
-                            const cells = row.getElementsByTagName('td');
-                            const match = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(query));
-                            row.style.display = match ? '' : 'none';
-                        });
+                        currentSearchQuery = searchBox.value.toLowerCase();
+                        displaylogbook2();
                     });
-
                 } else {
-                    // Handle case where no data is available
                     bodyRow.innerHTML = '<tr><td colspan="100%">No data available</td></tr>';
                 }
             })
@@ -57,9 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function handleRowClick(row) {
         if (row && row.FIRSTNAME && row.LASTNAME) {
-            //alert(`You clicked on row with Name: ${row.FIRSTNAME} ${row.LASTNAME}`);
-        } else {
-            console.error('Row data is missing or incomplete');
+            // Action on row click can be here
         }
     }
 
@@ -68,6 +64,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     displaylogbook2();
-
     setInterval(displaylogbook2, 3000);
 });

@@ -9,16 +9,12 @@ $response = array();
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-if (isset($data['firstname']) && isset($data['lastname']) && isset($data['purpose']) && isset($data['timein']) && isset($data['date']) && isset($data['timeout'])) {
+if (isset($data['timeout']) && isset($data['id'])) { // Change TAG to ID
     if ($db->dbConnect()) {
-        $firstname = $data['firstname'];
-        $lastname = $data['lastname'];
-        $purpose = $data['purpose'];
-        $timein = $data['timein'];
-        $date = $data['date'];
         $timeout = $data['timeout'];
+        $id = $data['id']; // Change TAG to ID
 
-        if ($db->storeLogbook($firstname, $lastname, $purpose, $timein, $date, $timeout)) {
+        if ($db->updateLogbookTimeout($id, $timeout)) { // Change TAG to ID
             $response['status'] = 'success';
             $response['message'] = 'Entry added successfully';
         } else {

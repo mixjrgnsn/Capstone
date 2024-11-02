@@ -8,7 +8,6 @@ body{
 
 .header{
     padding: 5px;
-    margin: 0 100px 0 100px;
     background-color: #7DA87E;
     display: flex;
     align-items: center;
@@ -43,10 +42,9 @@ body{
 
 .left-middle {
     margin-top: 0;
-    margin-left: 100px;
-    width: 485px;
+    width: 300px;
     height: calc(100vh - 83px); 
-    background-color: rgb(234, 239, 243);
+    background-color: #eaeff3;
 }
 
 .link {
@@ -76,7 +74,6 @@ body{
     padding: 10px;
     margin: 0 auto;
     width: calc(100% - 220px);
-    margin-right: 100px;
     position: relative;
     background-color: rgb(246, 252, 252);
     color: rgb(22, 25, 26);
@@ -240,4 +237,23 @@ table tr:hover {
 
 #backBtn:hover {
     background-color: rgb(190, 195, 198);
+}
+
+#loadingSpinner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 6px solid #1a1a1a;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Fetch data when the page loads
-    displayReservations();
-    setInterval(displayReservations, 3000);
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    let currentSearchQuery = '';
 
-    // Function to display reservations
+    displayReservations();
+    setInterval(displayReservations, 5000);
+
     function displayReservations() {
         fetch('https://franciscohomes3.online/loginregister/database/displayReservations.php')
             .then(response => response.json())
@@ -12,12 +13,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 const bodyRow = document.getElementById('body-row');
                 const searchBox = document.getElementById('search-box');
 
-                // Clear existing table content
                 headerRow.innerHTML = '';
                 bodyRow.innerHTML = '';
 
                 if (data.length > 0) {
-                    // Create table headers
                     const headers = Object.keys(data[0]);
                     headers.forEach(header => {
                         const th = document.createElement('th');
@@ -25,11 +24,15 @@ document.addEventListener('DOMContentLoaded', function () {
                         headerRow.appendChild(th);
                     });
 
-                    // Create table rows
-                    data.forEach(row => {
+                    const filteredData = data.filter(row => {
+                        return Object.values(row).some(value =>
+                            value.toString().toLowerCase().includes(currentSearchQuery)
+                        );
+                    });
+
+                    filteredData.forEach(row => {
                         const tr = document.createElement('tr');
 
-                        // Add row click event
                         tr.addEventListener('click', () => handleRowClick(row));
 
                         Object.values(row).forEach(value => {
@@ -41,17 +44,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         bodyRow.appendChild(tr);
                     });
 
-                    // Add search functionality
+                    searchBox.value = currentSearchQuery;
                     searchBox.addEventListener('input', function () {
-                        const query = searchBox.value.toLowerCase();
-                        Array.from(bodyRow.getElementsByTagName('tr')).forEach(row => {
-                            const cells = row.getElementsByTagName('td');
-                            const match = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(query));
-                            row.style.display = match ? '' : 'none';
-                        });
+                        currentSearchQuery = searchBox.value.toLowerCase();
+                        displayReservations();
                     });
                 } else {
-                    // Handle case where no data is available
                     bodyRow.innerHTML = '<tr><td colspan="100%">No data available</td></tr>';
                 }
             })
@@ -60,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
-    // Function to handle row click
     function handleRowClick(row) {
         if (row && row.NAME) {
             openActionModal(row);
@@ -69,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Function to open action modal
     function openActionModal(row) {
         const actionModal = document.getElementById('actionModal');
         const acceptBtn = document.getElementById('acceptBtn');
@@ -88,8 +84,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         };
 
-        // Accept button functionality: Move the reservation to reserved list
         acceptBtn.onclick = function () {
+            loadingSpinner.style.display = 'block';
             const reservationData = {
                 id: row.TAG,
                 name: row.NAME,
@@ -100,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 status: 'ACCEPTED'
             };
 
-            // Send data to the server to accept the reservation
             fetch('https://franciscohomes3.online/loginregister/database/acceptReservation.php', {
                 method: 'POST',
                 headers: {
@@ -108,33 +103,35 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 body: new URLSearchParams(reservationData)
             })
-            .then(response => response.text()) // Temporarily change to .text() to see the raw output
+            .then(response => response.text())
             .then(text => {
-                console.log(text); // Log the response to check if it's an HTML error page or something else
-                const data = JSON.parse(text); // Then attempt to parse as JSON
+                console.log(text);
+                const data = JSON.parse(text);
                 if (data.status === 'success') {
-                    openConfirmationModal(data.message);
-                    displayReservations(); // Refresh the table
+                    alert(data.message);
+                    displayReservations();
+                    loadingSpinner.style.display = 'none';
                 } else {
-                    openConfirmationModal(data.message);
+                    alert(data.message);
+                    loadingSpinner.style.display = 'none';
                 }
             })
             .catch(error => {
                 console.error('Error accepting reservation:', error);
-                openConfirmationModal("An error occurred while accepting the reservation. Please try again.");
+                alert("An error occurred while accepting the reservation. Please try again.");
+                loadingSpinner.style.display = 'none';
             });
             
-            actionModal.style.display = 'none'; // Close the action modal
+            actionModal.style.display = 'none';
         };
 
-        // Reject button functionality
         rejectBtn.onclick = function () {
-            actionModal.style.display = 'none'; // Close the action modal
-            deleteReservation(row.TAG); // Existing reject functionality
+            loadingSpinner.style.display = 'block';
+            actionModal.style.display = 'none';
+            deleteReservation(row.TAG);
         };
     }
 
-    // Function to delete reservation
     function deleteReservation(tag) {
         console.log("Deleting reservation with TAG:", tag);
         fetch('https://franciscohomes3.online/loginregister/database/rejectReservation.php', {
@@ -153,42 +150,23 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(data => {
             if (data.success) {
-                openConfirmationModal(data.message);
-                displayReservations(); // Refresh the table
+                alert(data.message);
+                displayReservations();
+                loadingSpinner.style.display = 'none';
             } else {
-                openConfirmationModal(data.message);
+                alert(data.message);
+                loadingSpinner.style.display = 'none';
             }
         })
         .catch(error => {
             console.error('Error deleting reservation:', error);
-            openConfirmationModal("An error occurred while deleting the reservation. Please try again.");
+            alert("An error occurred while deleting the reservation. Please try again.");
+            loadingSpinner.style.display = 'none';
         });
-    }    
+    } 
 
-    // Function to open confirmation modal
-    function openConfirmationModal(message) {
-        const confirmationModal = document.getElementById('confirmationModal');
-        const confirmationMessage = document.getElementById('confirmation-message');
-        const okBtn = document.getElementById('okBtn');
-
-        confirmationMessage.textContent = message;
-
-        confirmationModal.style.display = 'block';
-
-        okBtn.onclick = function () {
-            confirmationModal.style.display = 'none';
-        };
-
-        window.onclick = function (event) {
-            if (event.target == confirmationModal) {
-                confirmationModal.style.display = 'none';
-            }
-        };
-    }
-
-    // Reserved button functionality
     const reservedButton = document.getElementById("reservedBtn");
     reservedButton.addEventListener("click", function () {
-        window.location.href = "../HTML/reservedlist.html"; // Redirect to reservedlist.html
+        window.location.href = "../HTML/reservedList.html";
     });
 });

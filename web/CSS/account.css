@@ -7,9 +7,10 @@ body{
 }
 
 .body-container{
-    background-color: #7DA87E;
+    background-color: #2d3d2e;
+    border: 2px solid #ffffff;
     padding: 40px 0;
-    height: 500px;
+    height: 400px;
     width: 40%;
     margin: 10px auto;
     margin-top: 90px;

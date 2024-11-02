@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const userData = JSON.parse(localStorage.getItem('userData'));
-    const RID = `${userData.id}`;
-
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const btn = document.getElementById('Btn');
+    
     function getQueryParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
@@ -21,12 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data && data.length > 0) {
                     const subject = data[0];
                     detailsContainer.innerHTML = `
-                    <h5><strong>Tag/Complaint Number:</strong> ${subject.ID} </h5>
-                    <h5><strong>Name:</strong> ${subject.NAME} </h5>
-                    <h5><strong>Residents ID:</strong> ${RID} </h5>
-                    <h5><strong>Date:</strong> ${subject.DATE}</h5>
-                    </br>
-                    <p>${subject.SUBJECT}</p>`;
+                        <h5><strong>Tag/Complaint Number:</strong> ${subject.ID} </h5>
+                        <h5><strong>Name:</strong> ${subject.NAME} </h5>
+                        <h5><strong>Date:</strong> ${subject.DATE}</h5>
+                        <br>
+                        <p>${subject.SUBJECT}</p>`;
                 } else {
                     detailsContainer.innerText = 'No details available for this subject.';
                 }
@@ -40,10 +39,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const id = getQueryParameter('id');
     getSubjectDetailsReports(id);
 
+    // Check local storage to see if the button should be hidden
+    if (id && localStorage.getItem(`subject-read3-${id}`) === 'true') {
+        btn.style.display = 'none'; // Only hide if the specific ID is found in localStorage
+    }
 
-    document.getElementById('Btn').addEventListener('click', function() {
+    btn.addEventListener('click', function() {
+        loadingSpinner.style.display = 'block';
         if (!id) {
             alert('No subject selected to mark as read.');
+            loadingSpinner.style.display = 'none';
             return;
         }
 
@@ -57,8 +62,10 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => {
             if (response.ok) {
                 alert('Marked as read successfully!');
-                localStorage.setItem(`subject-read2-${id}`, 'true');
-                window.location.href = 'reports.html';
+                loadingSpinner.style.display = 'none';
+                localStorage.setItem(`subject-read3-${id}`, 'true'); // Store the read status
+                btn.style.display = 'none'; // Hide the button after marking as read
+                window.location.href = 'reports.html'; // Redirect after success
             } else {
                 throw new Error('Failed to mark as read');
             }
@@ -66,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error('Error updating read status:', error);
             alert('Error marking as read');
+            loadingSpinner.style.display = 'none';
         });
     });
 });

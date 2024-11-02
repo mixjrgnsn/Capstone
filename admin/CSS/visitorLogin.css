@@ -227,7 +227,37 @@ body{
     margin-bottom: 20px;
 }
 
+#loadingSpinner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 6px solid #1a1a1a;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+#recbtn{
+    font-family: verdana;
+    padding: 3px;
+    margin-top: 13px;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    border: 2px solid #000;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    float: right;
+}
+
+#recbtn:hover{
+    background-color: rgb(190, 195, 198);
 }

@@ -6,7 +6,6 @@ body{
     background-attachment: fixed; 
 }
 
-
 .emailCheck{
     text-align: center;
 }
@@ -38,7 +37,7 @@ body{
 
 #code{
     height: 35px;
-    width: 220px;
+    width: 140px;
     border-radius: 15px;
     margin: 10px 0;
     padding: 0 10px;
@@ -52,17 +51,6 @@ body{
     color: #c7c7c7;
 }
 
-#check{
-    height: 35px;
-    border-radius: 15px;
-    margin: 10px 0;
-    padding: 0 10px;
-    background-color: #0e2420;
-    color: rgb(255, 255, 255);
-    border: 2px white solid;
-    outline: none;
-}
-
 #sendcode{
     height: 35px;
     border-radius: 15px;
@@ -74,9 +62,9 @@ body{
     outline: none;
 }
 
-#verifycode, #submit{
+#verifycode{
     height: 35px;
-    width: 200px;
+    width: 170px;
     border-radius: 15px;
     margin: 10px 0;
     font-size: 15px;
@@ -86,20 +74,31 @@ body{
     outline: none;
 }
 
-#check:hover, #sendcode:hover, #verifycode:hover, #submit:hover{
+#check{
+    height: 35px;
+    border-radius: 15px;
+    margin: 10px 0;
+    padding: 0 10px;
+    background-color: #0e2420;
+    color: rgb(255, 255, 255);
+    border: 2px white solid;
+    outline: none;
+}
+
+#sendcode:hover, #verifycode:hover{
     background-color: #28665a;
 }
 
 .emailCode{
     margin-top: 10px;
     text-align: center;
-    display: none;/*adadwdwd*/
+    display: none;
 }
 
 .container {
     margin-top: 20px;
     text-align: center;
-    display: none;/*adadwdwd*/
+    display: none;
 }
 
 #loadingSpinner {
@@ -131,33 +130,4 @@ body{
     color: rgb(255, 255, 255);
     border: 2px white solid;
     outline: none;
-}
-
-.newPass {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.newPass input {
-    margin: 10px 0; /* Space out the inputs */
-    width: 90%; /* Use a percentage for responsiveness */
-    max-width: 400px; /* Set a maximum width */
-    height: 35px; /* Match other inputs */
-    border-radius: 15px;
-    padding: 0 10px;
-    background-color: #164A41;
-    color: rgb(255, 255, 255);
-    border: 2px white solid;
-    outline: none;
-    box-sizing: border-box; /* Include padding and border in the element's total width */
-}
-
-#new, #cnfrm{
-    width: 320px;
-}
-
-#new, #cnfrm, #submit{
-    display: none;
 }

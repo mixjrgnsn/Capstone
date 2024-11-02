@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    let currentSearchQuery = '';
+
     function displayAccountApproval() {
         fetch('https://franciscohomes3.online/loginregister/database/displayAccountApproval.php')
             .then(response => response.json())
@@ -19,7 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         headerRow.appendChild(th);
                     });
 
-                    data.forEach(row => {
+                    const filteredData = data.filter(row => {
+                        return Object.values(row).some(value =>
+                            value.toString().toLowerCase().includes(currentSearchQuery)
+                        );
+                    });
+
+                    filteredData.forEach(row => {
                         const tr = document.createElement('tr');
                         tr.addEventListener('click', () => handleRowClick(row, tr));
 
@@ -32,15 +41,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         bodyRow.appendChild(tr);
                     });
 
+                    searchBox.value = currentSearchQuery;
                     searchBox.addEventListener('input', function() {
-                        const query = searchBox.value.toLowerCase();
-                        Array.from(bodyRow.getElementsByTagName('tr')).forEach(row => {
-                            const cells = row.getElementsByTagName('td');
-                            const match = Array.from(cells).some(cell => 
-                                cell.textContent.toLowerCase().includes(query)
-                            );
-                            row.style.display = match ? '' : 'none';
-                        });
+                        currentSearchQuery = searchBox.value.toLowerCase();
+                        displayAccountApproval();
                     });
                 } else {
                     bodyRow.innerHTML = '<tr><td colspan="100%">No data available</td></tr>';
@@ -58,13 +62,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const message = `Would you like to approve the account creation for ${row.FIRSTNAME} ${row.LASTNAME}?`;
             document.getElementById('modal-message').textContent = message;
             document.getElementById('modal').style.display = 'block';
-            currentRowData = { ...row, trElement }; // Save current row data for approval
+            currentRowData = { ...row, trElement };
         } else {
             console.error('Row data is missing or incomplete');
         }
     }
 
     document.getElementById('accept-button').addEventListener('click', () => {
+        loadingSpinner.style.display = 'block';
         const row = currentRowData;
 
         const formData = new URLSearchParams({
@@ -87,20 +92,24 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(result => {
             if (result.status === 'success') {
                 alert(result.message);
-                row.trElement.remove();
+                displayAccountApproval()
+                loadingSpinner.style.display = 'none';
             } else {
                 alert(result.message);
+                loadingSpinner.style.display = 'none';
             }
         })
         .catch(error => {
             console.error('Error sending data to approveSignup.php:', error);
             alert('There was an error processing the account creation.');
+            loadingSpinner.style.display = 'none';
         });
 
-        document.getElementById('modal').style.display = 'none'; // Hide modal
+        document.getElementById('modal').style.display = 'none';
     });
 
     document.getElementById('reject-button').addEventListener('click', () => {
+        loadingSpinner.style.display = 'block';
         const row = currentRowData;
     
         fetch(`https://franciscohomes3.online/loginregister/database/deleteRejectedRow.php`, {
@@ -108,31 +117,32 @@ document.addEventListener('DOMContentLoaded', function() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id: row.ID }) // Ensure this is correct
+            body: JSON.stringify({ id: row.ID })
         })
         .then(response => response.json())
         .then(result => {
             if (result.success) {
                 alert(result.message);
-                row.trElement.remove(); // Remove the row from the DOM
+                displayAccountApproval()
+                loadingSpinner.style.display = 'none';
             } else {
                 alert(result.message);
+                loadingSpinner.style.display = 'none';
             }
         })
         .catch(error => {
             console.error('Error:', error);
             alert('There was an error processing the deletion.');
+            loadingSpinner.style.display = 'none';
         });
     
         document.getElementById('modal').style.display = 'none';
     });
 
-    // Close modal when clicking on the close button
     document.querySelector('.close').addEventListener('click', () => {
         document.getElementById('modal').style.display = 'none';
     });
 
-    // Close modal when clicking outside of it
     window.onclick = function(event) {
         const modal = document.getElementById('modal');
         if (event.target === modal) {

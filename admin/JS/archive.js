@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    let currentSearchQuery = '';
+
     function displayAccountArchive() {
         fetch('https://franciscohomes3.online/loginregister/database/displayAccountArchive.php')
             .then(response => response.json())
@@ -18,7 +21,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         headerRow.appendChild(th);
                     });
 
-                    data.forEach(row => {
+                    const filteredData = data.filter(row => {
+                        return Object.values(row).some(value =>
+                            value.toString().toLowerCase().includes(currentSearchQuery)
+                        );
+                    });
+
+                    filteredData.forEach(row => {
                         const tr = document.createElement('tr');
                         tr.addEventListener('click', () => handleRowClick(row, tr));
 
@@ -31,15 +40,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         bodyRow.appendChild(tr);
                     });
 
+                    searchBox.value = currentSearchQuery;
                     searchBox.addEventListener('input', function() {
-                        const query = searchBox.value.toLowerCase();
-                        Array.from(bodyRow.getElementsByTagName('tr')).forEach(row => {
-                            const cells = row.getElementsByTagName('td');
-                            const match = Array.from(cells).some(cell => 
-                                cell.textContent.toLowerCase().includes(query)
-                            );
-                            row.style.display = match ? '' : 'none';
-                        });
+                        currentSearchQuery = searchBox.value.toLowerCase();
+                        displayAccountArchive();
                     });
                 } else {
                     bodyRow.innerHTML = '<tr><td colspan="100%">No data available</td></tr>';
@@ -64,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     document.getElementById('restore-button').addEventListener('click', () => {
+        loadingSpinner.style.display = 'block';
         const row = currentRowData;
 
         const formData = new URLSearchParams({
@@ -86,22 +91,26 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(result => {
             if (result.status === 'success') {
                 alert(result.message);
-                row.trElement.remove();
+                displayAccountArchive();
+                loadingSpinner.style.display = 'none';
             } else {
                 alert(result.message);
+                loadingSpinner.style.display = 'none';
             }
         })
         .catch(error => {
             console.error('Error:', error);
             alert('There was an error processing the restoration.');
+            loadingSpinner.style.display = 'none';
         });
 
         document.getElementById('modal').style.display = 'none';
     });
 
     document.getElementById('delete-button').addEventListener('click', () => {
+        loadingSpinner.style.display = 'block';
         const row = currentRowData;
-    
+
         fetch(`https://franciscohomes3.online/loginregister/database/deleteArchiveRow.php`, {
             method: 'DELETE',
             headers: {
@@ -113,23 +122,26 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(result => {
             if (result.success) {
                 alert(result.message);
-                row.trElement.remove();
+                displayAccountArchive();
+                loadingSpinner.style.display = 'none';
             } else {
                 alert(result.message);
+                loadingSpinner.style.display = 'none';
             }
         })
         .catch(error => {
             console.error('Error:', error);
             alert('There was an error processing the deletion.');
+            loadingSpinner.style.display = 'none';
         });
-    
+
         document.getElementById('modal').style.display = 'none';
     });
-    
 
     document.querySelector('.close').addEventListener('click', () => {
         document.getElementById('modal').style.display = 'none';
     });
+
 
     window.onclick = function(event) {
         const modal = document.getElementById('modal');

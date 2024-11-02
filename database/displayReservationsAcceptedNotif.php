@@ -8,8 +8,8 @@ $db = new DataBase();
 if ($db->dbConnect()) {
     $name = isset($_GET['name']) ? mysqli_real_escape_string($db->connect, $_GET['name']) : '';
 
-    $sql = "SELECT * FROM reservedList 
-            WHERE status = 'ACCEPTED' AND name = '$name' ORDER BY updated_at DESC";
+    $sql = "SELECT * FROM reservedlist 
+            WHERE (status = 'ACCEPTED' OR status = 'COMPLETED') AND name = '$name' ORDER BY updated_at DESC";
 
     $result = mysqli_query($db->connect, $sql);
     

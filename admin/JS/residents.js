@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    let currentSearchQuery = '';
+
     function displayUsers() {
         fetch('https://franciscohomes3.online/loginregister/database/displayUsers.php')
             .then(response => response.json())
@@ -18,7 +21,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         headerRow.appendChild(th);
                     });
 
-                    data.forEach(row => {
+                    const filteredData = data.filter(row => {
+                        return Object.values(row).some(value =>
+                            value.toString().toLowerCase().includes(currentSearchQuery)
+                        );
+                    });
+
+                    filteredData.forEach(row => {
                         const tr = document.createElement('tr');
                         tr.addEventListener('click', () => handleRowClick(row, tr));
 
@@ -31,15 +40,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         bodyRow.appendChild(tr);
                     });
 
+                    searchBox.value = currentSearchQuery;
                     searchBox.addEventListener('input', function() {
-                        const query = searchBox.value.toLowerCase();
-                        Array.from(bodyRow.getElementsByTagName('tr')).forEach(row => {
-                            const cells = row.getElementsByTagName('td');
-                            const match = Array.from(cells).some(cell => 
-                                cell.textContent.toLowerCase().includes(query)
-                            );
-                            row.style.display = match ? '' : 'none';
-                        });
+                        currentSearchQuery = searchBox.value.toLowerCase();
+                        displayUsers();
                     });
                 } else {
                     bodyRow.innerHTML = '<tr><td colspan="100%">No data available</td></tr>';
@@ -54,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function handleRowClick(row, trElement) {
         if (row && row.ID && row.FIRSTNAME && row.LASTNAME) {
-            const message = `Do you want to delete ${row.FIRSTNAME} ${row.LASTNAME}?`;
+            const message = `Do you want to remove ${row.FIRSTNAME} ${row.LASTNAME}?`;
             document.getElementById('modal-message').textContent = message;
             document.getElementById('modal').style.display = 'block';
             currentRowData = { ...row, trElement };
@@ -64,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     document.getElementById('yes-button').addEventListener('click', () => {
+        loadingSpinner.style.display = 'block';
         const row = currentRowData;
 
         const formData = new URLSearchParams({
@@ -75,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
             address: row.ADDRESS
         });
 
-        fetch('http://localhost/loginregister/database/accArchive.php', {
+        fetch('https://franciscohomes3.online/loginregister/database/accArchive.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -86,24 +91,23 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(result => {
             if (result.status === 'success') {
                 alert(result.message);
-                row.trElement.remove();
+                loadingSpinner.style.display = 'none';
+                displayUsers();
             } else {
                 alert(result.message);
+                loadingSpinner.style.display = 'none';
             }
         })
         .catch(error => {
             console.error('Error:', error);
             alert('There was an error processing the deletion.');
+            loadingSpinner.style.display = 'none';
         });
 
         document.getElementById('modal').style.display = 'none';
     });
 
     document.getElementById('cancel-button').addEventListener('click', () => {
-        document.getElementById('modal').style.display = 'none';
-    });
-
-    document.querySelector('.close').addEventListener('click', () => {
         document.getElementById('modal').style.display = 'none';
     });
 
@@ -117,11 +121,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoutButton = document.getElementById('btn-logout');
     if (logoutButton) {
         logoutButton.addEventListener('click', function() {
-            // Clear login state
             localStorage.removeItem('isLoggedIn');
-
-            // Redirect to login page
-            window.location.href = '../HTML/login.html'; // Adjust the path as needed
+            window.location.href = '../HTML/login.html';
         });
     }
 

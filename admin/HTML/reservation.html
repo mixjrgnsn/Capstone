@@ -10,11 +10,11 @@
     <div class="header">
         <img class="logo-header" src="../Pictures/LOGO HOA.png"/>
         <h2>Admin</h2>
-        <button class="btn-logout">Log out</button>
+        <p></p>
     </div>
     <nav class="main-container">
         <div class="left-middle">
-            <a class="link" id="dashboard" href="../HTML/dashboard.html"><i class="fa-solid fa-computer"></i>Dashboard</a>
+            <a class="link" id="dashboard" href="../HTML/dashboard.html"><i class="fa-solid fa-computer"></i>Homepage</a>
             <a class="link" id="announcement" href="../HTML/announcement.html"><i class="fa-solid fa-bullhorn"></i>Announcement</a>
             <a class="link" id="reports" href="../HTML/reports.html"><i class="fa-solid fa-scroll"></i>Reports</a>
             <a class="link" id="complaints" href="../HTML/complaints.html"><i class="fa-solid fa-receipt"></i>Complaints</a>
@@ -45,13 +45,8 @@
             <button id="rejectBtn">Reject</button>
         </div>
     </div>
-    <!-- Modal for Confirmation after action -->
-    <div id="confirmationModal" class="modal">
-        <div class="modal-content">
-            <p id="confirmation-message"></p>
-            <button id="okBtn">OK</button>
-        </div>
-    </div>
+    <div id="loadingSpinner"></div>
     <script src="../JS/reservation.js"></script>
+    <script src="../JS/logout.js"></script>
 </body>
 </html>

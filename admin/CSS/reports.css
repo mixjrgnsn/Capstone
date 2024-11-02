@@ -8,7 +8,6 @@ body{
 
 .header{
     padding: 5px;
-    margin: 0 100px 0 100px;
     background-color: #7DA87E;
     display: flex;
     align-items: center;
@@ -43,8 +42,7 @@ body{
 
 .left-middle {
     margin-top: 0;
-    margin-left: 100px;
-    width: 485px;
+    width: 300px;
     height: calc(100vh - 83px); 
     background-color: rgb(234, 239, 243);
 }
@@ -75,7 +73,6 @@ body{
     padding: 10px;
     margin: 0 auto;
     width: calc(100% - 220px);
-    margin-right: 100px;
     position: relative;
     background-color: rgb(246, 252, 252);
     color: rgb(22, 25, 26);
@@ -109,6 +106,16 @@ table tr {
 
 table tr:hover {
     background-color: rgb(190, 195, 198);
+}
+
+
+.status-column {
+    color: white; /* Text color */
+}
+
+/* Ensure status cells have a transparent background on hover */
+table tr:hover td.status-column {
+    background-color: inherit; /* Or a different hover color */
 }
 
 #reports{

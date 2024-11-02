@@ -8,13 +8,21 @@ body{
 
 .header{
     padding: 5px;
-    margin: 0 100px 0 100px;
+    margin: 0;
     background-color: #7DA87E;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-family: Verdana;
     color: rgb(42, 65, 40);
+}
+
+#v2{
+    display: inline;
+    margin-left: 22.5%;
+    font-size: 20px;
+    font-weight: bold;
+    
 }
 
 .logo-header{
@@ -43,8 +51,7 @@ body{
 
 .left-middle {
     margin-top: 0;
-    margin-left: 100px;
-    width: 485px;
+    width: 300px;
     height: calc(100vh - 83px); 
     background-color: rgb(234, 239, 243);
 }
@@ -72,7 +79,6 @@ body{
     padding: 10px;
     margin: 0 auto;
     width: calc(100% - 220px);
-    margin-right: 100px;
     position: relative;
     background-color: rgb(246, 252, 252);
     color: rgb(22, 25, 26);
@@ -83,10 +89,10 @@ body{
 .line-middle{
     padding: 1px 0 1px 0;
     background-color: rgb(0, 0, 0);
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
     
-#record{
+#visitor{
     background-color: #7DA87E;
 }
 
@@ -116,7 +122,7 @@ table tr:hover {
     width: calc(20% - 20px);
     padding: 5px;
     margin-bottom: 5px;
-    margin-top: 5px;
+    margin-top: 15px;
     font-size: 16px;
     border: 2px solid #000000;
     border-radius: 4px;
@@ -129,23 +135,7 @@ table tr:hover {
     border-radius: 5px;
 }
 
-#logbook{
-    font-family: verdana;
-    padding: 3px;
-    margin-top: 4px;
-    font-size: 15px;
-    color: rgb(0, 0, 0);
-    border: 2px solid #000;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    float: right;
-}
-
-#logbook:hover{
-    background-color: rgb(190, 195, 198);
-}
-
-.modal {
+.modal, .modal2 {
     display: none; 
     position: fixed; 
     z-index: 1000; 
@@ -158,7 +148,7 @@ table tr:hover {
     background-color: rgba(0,0,0,0.4); 
 }
 
-.modal-content {
+.modal-content, .modal-content2 {
     background-color: #fefefe;
     margin: 15% auto;
     font-family: verdana;
@@ -168,21 +158,7 @@ table tr:hover {
     text-align: center;
 }
 
-.close {
-    color: #000000;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: rgb(190, 195, 198);
-    text-decoration: none;
-    cursor: pointer;
-}
-
-#yes-button, #cancel-button {
+#yes-button, #cancel-button, #yes-button2, #cancel-button2 {
     border: 2px solid rgb(35, 34, 34);
     padding: 10px 10px;
     margin: 10px;
@@ -194,14 +170,69 @@ table tr:hover {
     cursor: pointer;
 }
 
-#yes-button:hover, #cancel-button:hover {
+#yes-button:hover, #cancel-button:hover, #yes-button2:hover, #cancel-button2:hover {
     background-color: rgb(190, 195, 198);
 }
 
-.modal-content p {
+.modal-content p, .modal-content2 p {
     margin-bottom: 20px;
 }
 
-#visitor-record{
-    background-color: #7DA87E;
+#loadingSpinner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 6px solid #1a1a1a;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.password-form {
+    background-color: rgb(246, 252, 252);
+    padding: 5px;
+    font-family: verdana;
+    font-weight: bold;
+    color: rgb(90, 94, 95);
+    outline: none;
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping if needed */
+    align-items: center; /* Aligns items vertically */
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.save-btn{
+    width: 150px;
+    font-family: verdana;
+    margin-top: 13px;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    border: 2px solid #000;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.save-btn:hover{
+    background-color: rgb(190, 195, 198);
+}
+
+.password-form span, 
+.password-form input, 
+.password-form textarea, 
+.password-form button {
+    margin-right: 10px; /* Space between elements */
+}
+
+.password-form textarea {
+    resize: none; /* Optional: Disable resizing */
 }

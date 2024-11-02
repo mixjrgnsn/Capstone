@@ -16,7 +16,7 @@
     <nav class="main-container">
         <div class="left-middle">
             <a class="link" id="dashboard" href="../HTML/dashboardsecurity.html">
-                <i class="fa-solid fa-computer"></i> Dashboard
+                <i class="fa-solid fa-computer"></i> Homepage
             </a>
             <a class="link" id="visitor" href="../HTML/visitorLogin.html">
                 <i class="fa-solid fa-right-to-bracket"></i> Visitor Log In
@@ -24,19 +24,13 @@
             <a class="link" id="resident-authentication" href="../HTML/residentAuthentication.html">
                 <i class="fa-solid fa-user"></i> Resident Authentication
             </a>
-            <a class="link" id="visitor-record" href="../HTML/visitorRecord.html">
-                <i class="fa-solid fa-person"></i> Visitor Record
-            </a>
         </div>
         
         <div class="right-middle">
-            <p>Security</p>
+            <button id="recbtn">View Visitors Records</button>
+            <p>Visitor Login </p>
             <div class="line-middle"></div>
             <div class="right-body">
-                <div class="border-div"></div>
-                <div class="login-container">
-                    <p class="login-text">Log In</p>
-                </div>
                 <div class="password-form">
                     <span class="f-name">First Name:</span>
                     <input class="firstname" type="text"/></br>
@@ -61,7 +55,8 @@
             <button id="yes-button">Yes</button>
             <button id="cancel-button">Cancel</button>
         </div>
-
+    </div>
+    <div id="loadingSpinner"></div>
     <script src="../JS/visitorLogin.js"></script>
     <script src="../JS/logout.js"></script>
 </body>
