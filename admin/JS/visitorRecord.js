@@ -58,11 +58,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentRowData;
 
     function handleRowClick(row) {
-        if (row && row.FIRSTNAME && row.LASTNAME) {
-            const message = `Do you want to record the timeout for ${row.FIRSTNAME} ${row.LASTNAME}?`;
-            document.getElementById('modal-message2').textContent = message;
-            document.getElementById('modal2').style.display = 'block';
-            currentRowData = row;
+        if (row && row.FIRSTNAME && row.LASTNAME ) {
+            if (!row["TIME OUT"]) {
+                const message = `Do you want to record the timeout for ${row.FIRSTNAME} ${row.LASTNAME}?`;
+                document.getElementById('modal-message2').textContent = message;
+                document.getElementById('modal2').style.display = 'block';
+                currentRowData = row;
+            }
         } else {
             console.error('Row data is missing or incomplete');
         }
@@ -100,8 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
             loadingSpinner.style.display = 'none';
         });
     }
-    
-    
+
     function formatCurrentTime() {
         const now = new Date();
         let hours = now.getHours();
@@ -134,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.style.display = 'none';
         }
     };
+    
     displayVisitorRecord();
     setInterval(displayVisitorRecord, 5000);
 });
