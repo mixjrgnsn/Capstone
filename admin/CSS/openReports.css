@@ -147,3 +147,10 @@ body{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.image{
+    float: right;
+    height: 250px;
+    width: 400px;
+    border: 2px black solid;
+}

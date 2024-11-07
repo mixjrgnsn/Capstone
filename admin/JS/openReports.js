@@ -8,24 +8,54 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function getSubjectDetailsReports(id) {
+        btn.style.display = 'none';
         if (!id) {
             document.getElementById('subject-details').innerText = 'No subject selected';
             return;
         }
 
-        fetch(`https://franciscohomes3.online/loginregister/database/getSubjectDetailsReports.php?id=${encodeURIComponent(id)}`)
+        fetch(`http://localhost/loginregister/database/getSubjectDetailsReports.php?id=${encodeURIComponent(id)}`)
             .then(response => response.json())
             .then(data => {
                 const detailsContainer = document.getElementById('subject-details');
                 
                 if (data && data.length > 0) {
                     const subject = data[0];
-                    detailsContainer.innerHTML = `
-                        <h5><strong>Tag/Complaint Number:</strong> ${subject.ID} </h5>
-                        <h5><strong>Name:</strong> ${subject.NAME} </h5>
-                        <h5><strong>Date:</strong> ${subject.DATE}</h5>
-                        <br>
-                        <p>${subject.SUBJECT}</p>`;
+                    
+                    // Display subject details
+                    const imageUrl = subject.IMAGE ? `http://localhost/loginregister/uploads/${subject.IMAGE}` : null;
+
+                    if (imageUrl) {
+                        detailsContainer.innerHTML = `
+                            <h5><strong>Tag/Report Number:</strong> ${subject.ID} </h5>
+                            <h5><strong>Name:</strong> ${subject.NAME} </h5>
+                            <h5><strong>Date:</strong> ${subject.DATE}</h5>
+                            <a href="${imageUrl}" target="_blank">
+                                <img class="image" src="${imageUrl}" alt="Image" style="max-width: 100%; cursor: pointer;">
+                            </a>
+                            <p>${subject.SUBJECT}</p>
+                        `;
+                    } else {
+                        detailsContainer.innerHTML = `
+                            <h5><strong>Tag/Report Number:</strong> ${subject.ID} </h5>
+                            <h5><strong>Name:</strong> ${subject.NAME} </h5>
+                            <h5><strong>Date:</strong> ${subject.DATE}</h5>
+                            <p>${subject.SUBJECT}</p>
+                        `;
+                    }
+
+                    // Control button visibility based on STATUS
+                    switch (subject.STATUS) {
+                        case 'UNREAD':
+                            btn.style.display = 'block';
+                            break;
+                        case 'COMPLETED':
+                            btn.style.display = 'none';
+                            break;
+                        default:
+                            btn.style.display = 'none';
+                            break;
+                    }
                 } else {
                     detailsContainer.innerText = 'No details available for this subject.';
                 }
@@ -39,11 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const id = getQueryParameter('id');
     getSubjectDetailsReports(id);
 
-    // Check local storage to see if the button should be hidden
-    if (id && localStorage.getItem(`subject-read3-${id}`) === 'true') {
-        btn.style.display = 'none'; // Only hide if the specific ID is found in localStorage
-    }
-
     btn.addEventListener('click', function() {
         loadingSpinner.style.display = 'block';
         if (!id) {
@@ -52,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        fetch(`https://franciscohomes3.online/loginregister/database/updateReadStatus2.php?id=${encodeURIComponent(id)}`, {
+        fetch(`http://localhost/loginregister/database/updateReadStatus2.php?id=${encodeURIComponent(id)}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -63,9 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                 alert('Marked as read successfully!');
                 loadingSpinner.style.display = 'none';
-                localStorage.setItem(`subject-read3-${id}`, 'true'); // Store the read status
-                btn.style.display = 'none'; // Hide the button after marking as read
-                window.location.href = 'reports.html'; // Redirect after success
+                window.location.href = 'home.html';
             } else {
                 throw new Error('Failed to mark as read');
             }

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Please enter a subject before sending the complaint.");
             return;
         } else{
-            modalMessage.textContent = `Are you sure you want to send the complaint?\n\nSubject: ${subjectText}\nFile: ${fileName}`;
+            modalMessage.textContent = `Are you sure you want to send the complaint?`;
             customModal.style.display = 'block';
         }
 
@@ -33,17 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // Form data for sending to PHP
         const formData = new FormData();
         formData.append('name', name); // You can replace this with actual user data
-        formData.append('date', currentDate); // Current date, or get from your form
+        formData.append('date', currentDate);
         formData.append('subject', subjectText);
         if (file) {
             formData.append('image', file);
         }
 
-        // Show loading spinner
         document.getElementById('loadingSpinner').style.display = 'block';
 
-        // Send the form data using AJAX
-        fetch('http://localhost/loginregister/database/complaints.php', {
+        fetch('https://franciscohomes3.online/loginregister/database/complaints.php', {
             method: 'POST',
             body: formData
         })

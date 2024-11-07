@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Visitors login</title>
+    <title>Visitor Logbook</title>
     <link rel="stylesheet" href="../CSS/visitorRecord.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
           integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
@@ -20,7 +20,7 @@
                 <i class="fa-solid fa-computer"></i> Homepage
             </a>
             <a class="link" id="visitor" href="../HTML/visitorLogin.html">
-                <i class="fa-solid fa-right-to-bracket"></i> Visitor Log In
+                <i class="fa-solid fa-right-to-bracket"></i> Visitor Logbook
             </a>
             <a class="link" id="resident-authentication" href="../HTML/residentAuthentication.html">
                 <i class="fa-solid fa-user"></i> Residents List
@@ -36,12 +36,13 @@
                     <input class="lastname" type="text"/>
                     
                     <span class="purpose-text">Purpose:</span>
-                    <textarea class="prps-txt"></textarea>
+                    <input class="prps-txt" type="text"/>
                     
-                    <button class="save-btn" type="button">Submit</button>
                     <div id="loadingSpinner"></div>
                 </div>
-                
+                <div class="btnclass">
+                    <button class="save-btn" type="button">Submit</button>
+                </div>
             </div>
             <div class="line-middle"></div>
             <input type="text" id="search-box" placeholder="Search..." />

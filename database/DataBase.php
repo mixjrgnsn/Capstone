@@ -131,12 +131,13 @@ class DataBase
     }
 
 
-    function reports($name, $date, $subject)
+    function reports($name, $date, $subject, $image_name = null)
     {
         $name = $this->prepareData($name);
         $date = $this->prepareData($date);
         $subject = $this->prepareData($subject);
-        $this->sql = "INSERT INTO reports (name, date, subject) VALUES ('$name', '$date', '$subject')";
+        $image_name = $this->prepareData($image_name);
+        $this->sql = "INSERT INTO reports (name, date, subject, image_name) VALUES ('$name', '$date', '$subject', '$image_name')";
         if (mysqli_query($this->connect, $this->sql)) {
             return true;
         } else {

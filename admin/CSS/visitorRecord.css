@@ -207,11 +207,13 @@ table tr:hover {
     display: flex;
     flex-wrap: wrap; /* Allows wrapping if needed */
     align-items: center; /* Aligns items vertically */
+    justify-content: center; /* Horizontally centers the button */
     margin-bottom: 20px;
     margin-top: 20px;
 }
 
 .save-btn{
+    height: 30px;
     width: 150px;
     font-family: verdana;
     margin-top: 13px;
@@ -220,19 +222,30 @@ table tr:hover {
     border: 2px solid #000;
     border-radius: 5px;
     margin-bottom: 10px;
+    
 }
 
 .save-btn:hover{
     background-color: rgb(190, 195, 198);
 }
 
+.btnclass{
+    display: flex;
+    align-items: center; /* Aligns items vertically */
+    justify-content: center;
+}
+
 .password-form span, 
 .password-form input, 
 .password-form textarea, 
 .password-form button {
-    margin-right: 10px; /* Space between elements */
+    margin-right: 15px; /* Space between elements */
 }
 
-.password-form textarea {
-    resize: none; /* Optional: Disable resizing */
+.password-form input{
+    height: 25px;
+    width: 210px;
+    font-size: 17px;
+    border: 2px black solid;
+    border-radius: 5px;
 }

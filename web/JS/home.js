@@ -34,15 +34,6 @@ const changeSlide = (n) => {
 }
 
 setInterval(() => changeSlide(1), 5000); // Automatic slide transition every 5 seconds
-const sidebarLinks = document.querySelectorAll('.sidebar .link');
-
-sidebarLinks.forEach(link => {
-    link.addEventListener('click', function() {
-        const checkbox = document.querySelector('.hamburger-menu input');
-        checkbox.checked = false; // Uncheck the checkbox
-        document.body.classList.remove('overlay-active'); // Remove overlay class
-    });
-});
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('logout-btn').addEventListener('click', function() {

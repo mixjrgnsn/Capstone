@@ -8,7 +8,7 @@ body {
 }
 
 .body-container {
-    margin: 50px auto;
+    margin: 20px auto;
     width: 84%;
     height: 600px;
     padding: 20px;
@@ -22,27 +22,15 @@ body {
     font-size: 25px;
 }
 
-.box-text1 {
-    border: 2px solid #ffa943;
-    background-color: #fffbea;
-    color: black;
-    outline: none;
-    font-size: 20px;
-    width: 170px;
-    height: 35px;
-    border-radius: 10px;
-    font-family: Verdana, sans-serif;
-}
-
 .box-text2 {
-    border: 2px solid #ffa943;
-    background-color: #fffbea;
-    color: black;
     padding: 10px;
     outline: none;
+    border: 2px solid #ffa943;
+    background-color: #fffbea;
+    color: black;
     font-size: 20px;
-    width: 98%;
-    height: 400px;
+    width: 98%; 
+    height: 370px;
     border-radius: 10px;
     font-family: Verdana, sans-serif;
 }
@@ -178,4 +166,17 @@ body {
         width: 65%; 
         padding: 5px; 
     }
+}
+
+.upload-container {
+    display: flex;
+    align-items: center; /* Align items vertically centered */
+}
+
+.upload-container p {
+    margin-right: 20px; /* Add space between text and input */
+}
+
+.upload-container input {
+    flex-shrink: 0; /* Prevent the input from shrinking */
 }

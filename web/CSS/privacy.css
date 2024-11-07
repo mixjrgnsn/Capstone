@@ -60,24 +60,19 @@ body {
     margin: 0 auto;
 }
 
-.button {
-    margin-top: 20px;
-    min-width: 150px;
-    height: 25px;
-    border-radius: 20px;
-    border: 0;
-    font-size: 12px;
-    background-color: #164A41;
-    color: rgb(219, 244, 218);
-    cursor: pointer;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.button{
+    height: 35px;
+    border-radius: 15px;
+    margin: 10px 0;
+    padding: 0 15px;
+    background-color: #0e2420;
+    color: rgb(255, 255, 255);
+    border: 2px white solid;
+    outline: none;
 }
 
-.button:hover {
-    background-color: rgb(167, 170, 166);
-    color: rgb(31, 32, 31);
+.button:hover{
+    background-color: #28665a;
 }
 
 /* Modal Styling - Updated to match home.css appearance */
@@ -104,6 +99,10 @@ body {
     border-radius: 10px;
 }
 
+.modal-content p {
+    margin-bottom: 20px;
+}
+
 .close {
     color: #000000;
     float: right;
@@ -127,14 +126,30 @@ button {
     color: #000000;
     font-weight: bold;
     cursor: pointer;
+    font-size: 14px;
 }
 
 button:hover {
     background-color: rgb(190, 195, 198); /* Hover effect similar to home.css */
 }
 
-.modal-content p {
-    margin-bottom: 20px;
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.toggle-password {
+    position: absolute;
+    cursor: pointer;
+    font-size: 19px;
+    color: #fff;
+    top: 64%;
+    transform: translateY(-50%);
+    right: 25%;
+}
+
+.toggle-password:hover {
+    color: #ccc;
 }
 
 @media screen and (min-width: 481px) and (max-width: 1024px) {
@@ -196,3 +211,11 @@ button:hover {
         font-size: 12px;
     }
 }
+
+@media screen and (max-width: 480px) {
+    .toggle-password {
+        font-size: 18px !important;
+        right: 5% !important;
+    }
+}
+

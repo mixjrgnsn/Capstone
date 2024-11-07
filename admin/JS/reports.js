@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const statusOrder = ['UNREAD', 'READ']; // Define the status order
 
     function displayReports() {
-        fetch('https://franciscohomes3.online/loginregister/database/displayReports.php')
+        fetch('http://localhost/loginregister/database/displayReports.php')
             .then(response => response.json())
             .then(data => {
                 const headerRow = document.getElementById('header-row');

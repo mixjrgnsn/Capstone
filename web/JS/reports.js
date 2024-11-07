@@ -1,82 +1,82 @@
-document.querySelector(".btn-click").addEventListener("click", function(event) {
-    if (this.textContent === "Cancel") {
-        event.preventDefault(); // Prevent the default action
-        showModal("Are you sure you want to cancel and go back to the home page?", function() {
-            window.location.href = "home.html";
-        });
-    }
-});
-
-function showModal(message, onConfirm) {
-    const modal = document.getElementById('customModal');
-    const modalMessage = document.getElementById('modal-message');
+document.addEventListener('DOMContentLoaded', () => {
+    const sendReportsBtn = document.getElementById('sendReports');
+    const customModal = document.getElementById('customModal');
     const confirmButton = document.getElementById('confirm-button');
     const cancelButton = document.getElementById('cancel-button');
-
-    modalMessage.textContent = message;
-    modal.style.display = "block";
-
-    confirmButton.onclick = function() {
-        modal.style.display = "none";
-        loadingSpinner.style.display = "block"; // Show loading spinner when confirmed
-        onConfirm();
-    };
-
-    cancelButton.onclick = function() {
-        modal.style.display = "none";
-    };
-
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            event.stopPropagation();
-        }
-    };
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const currentDate = new Date().toISOString().split('T')[0];
-    document.getElementById('date').value = " " + currentDate;
-    let loadingSpinner = document.getElementById('loadingSpinner');
-
+    const modalMessage = document.getElementById('modal-message');
+    const subjectInput = document.getElementById('subject');
+    const currentDate = new Date().toLocaleDateString('en-CA');
+    const fileInput = document.getElementById('file-input');
     const userData = JSON.parse(localStorage.getItem('userData'));
     const name = `${userData.firstname} ${userData.lastname}`;
 
-    window.sendReport = function() {
-        const subject = document.getElementById('subject').value.trim();
+    // When the Send button is clicked, show the confirmation modal
+    sendReportsBtn.addEventListener('click', () => {
+        const subjectText = subjectInput.value;
+        const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : 'No file selected';
 
-        if (!subject) {
+        if (!subjectText) {
             alert("Please enter a subject before sending the report.");
             return;
+        } else{
+            modalMessage.textContent = `Are you sure you want to send the report?`;
+            customModal.style.display = 'block';
         }
 
-        showModal("Are you sure you want to send this report?", function() {
-            fetch('https://franciscohomes3.online/loginregister/database/reports.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams({
-                    name: name,
-                    date: currentDate,
-                    subject: subject
-                })
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert(data);
-                document.getElementById('subject').value = '';
-                window.location.href = "home.html";
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            })
-            .finally(() => {
-                loadingSpinner.style.display = "none"; // Hide spinner after request completes
-            });
-        });
-    };
+    });
 
-    window.cancel = function() {
+    confirmButton.addEventListener('click', () => {
+        const subjectText = subjectInput.value;
+        const file = fileInput.files[0];
+
+        // Form data for sending to PHP
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('date', currentDate);
+        formData.append('subject', subjectText);
+        if (file) {
+            formData.append('image', file);
+        }
+
+        document.getElementById('loadingSpinner').style.display = 'block';
+
+        fetch('http://localhost/loginregister/database/reports.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            // Hide loading spinner after the response is received
+            document.getElementById('loadingSpinner').style.display = 'none';
+            customModal.style.display = 'none'; // Close the modal
+
+            console.log('Server Response:', data); // Log the server response
+
+            // Check if the response indicates success
+            if (data.includes("Report Submitted")) {
+                alert("Report Submitted Successfully!");
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1000);
+                console.log(data);
+            } else {
+                alert("Error: " + data);
+                console.log(data);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error: ' + error);
+            document.getElementById('loadingSpinner').style.display = 'none';
+            customModal.style.display = 'none';
+        });
+    });
+
+    cancelButton.addEventListener('click', () => {
+        customModal.style.display = 'none';
+    });
+
+    document.getElementById('cancel').addEventListener('click', function() {
         document.getElementById('subject').value = '';
-    };
+    });
 });
