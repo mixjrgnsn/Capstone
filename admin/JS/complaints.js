@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const statusOrder = ['UNREAD', 'ON GOING', 'COMPLETED'];
 
     function displayComplaints() {
-        fetch('https://franciscohomes3.online/loginregister/database/displayComplaints.php')
+        fetch('http://localhost/loginregister/database/displayComplaints.php')
             .then(response => response.json())
             .then(data => {
                 const headerRow = document.getElementById('header-row');

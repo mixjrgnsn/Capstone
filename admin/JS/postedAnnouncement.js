@@ -39,15 +39,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Populate table function
+    // Populate table function
     function populateTable(data) {
         tableBody.innerHTML = '';
         data.forEach(announcement => {
             const row = document.createElement('tr');
+            
+            // Check if the announcement has an image
+            const imageHtml = announcement.image_name
+                ? `<img src="https://franciscohomes3.online/loginregister/uploads/${announcement.image_name}" alt="Announcement Image" style="width: 300px; height: 300px;">`
+                : 'No uploaded image'; // Display 'No Image' text if no image is found
+
             row.innerHTML = `
-                <td><img src="https://franciscohomes3.online/loginregister/uploads/${announcement.image_name}" alt="Announcement Image" style="width: 300px; height: 300px;"></td>
+                <td>${imageHtml}</td>
                 <td style="white-space: pre-wrap;">${announcement.content}</td>
                 <td>${new Date(announcement.created_at).toLocaleString()}</td>
             `;
+            
             row.addEventListener('click', () => {
                 announcementToDelete = announcement; // Store the clicked announcement
                 confirmationModal.style.display = 'block'; // Show the modal
@@ -55,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tableBody.appendChild(row);
         });
     }
+
 
     // Search functionality
     searchBox.addEventListener('input', function() {

@@ -31,6 +31,9 @@ class DataBase
 
     function prepareData($data)
     {
+        if ($data === null) {
+            return '';
+        }
         return mysqli_real_escape_string($this->connect, stripslashes(htmlspecialchars($data)));
     }
 
@@ -82,12 +85,13 @@ class DataBase
         }
     }
 
-    function complaints($name, $date, $subject)
+    function complaints($name, $date, $subject, $image_name = null)
     {
         $name = $this->prepareData($name);
         $date = $this->prepareData($date);
         $subject = $this->prepareData($subject);
-        $this->sql = "INSERT INTO complaints (name, date, subject) VALUES ('$name', '$date', '$subject')";
+        $image_name = $this->prepareData($image_name);
+        $this->sql = "INSERT INTO complaints (name, date, subject, image_name) VALUES ('$name', '$date', '$subject', '$image_name')";
         if (mysqli_query($this->connect, $this->sql)) {
             return true;
         } else {
@@ -328,7 +332,7 @@ class DataBase
     }
 
     function getSubjectDetails($table, $id) {
-        $sql = "SELECT id AS ID, name AS NAME, date AS DATE, subject AS SUBJECT FROM " . $table . " WHERE id = ?";
+        $sql = "SELECT id AS ID, name AS NAME, status AS STATUS, date AS DATE, subject AS SUBJECT, image_name AS IMAGE FROM " . $table . " WHERE id = ?";
         $stmt = $this->connect->prepare($sql);
         $stmt->bind_param('i', $id);
         $stmt->execute();
@@ -342,33 +346,32 @@ class DataBase
     }
 
     public function loginWeb($table, $email, $password)
-{
-    $email = $this->prepareData($email);
-    $this->sql = "SELECT * FROM " . $table . " WHERE email = '" . $email . "'";
-    $result = mysqli_query($this->connect, $this->sql);
-    $row = mysqli_fetch_assoc($result);
+    {
+        $email = $this->prepareData($email);
+        $this->sql = "SELECT * FROM " . $table . " WHERE email = '" . $email . "'";
+        $result = mysqli_query($this->connect, $this->sql);
+        $row = mysqli_fetch_assoc($result);
 
-    if (mysqli_num_rows($result) != 0) {
-        $dbemail = $row['email'];
-        $dbpassword = $row['password'];
-        
-        if ($dbemail == $email && password_verify($password, $dbpassword)) {
-            $userData = [
-                'id' => $row['id'],
-                'firstname' => $row['firstname'],
-                'email' => $row['email'],
-                'lastname' => $row['lastname'],
-                'address' => $row['address']
-            ];
-            return json_encode(['status' => 'success', 'data' => $userData]);
+        if (mysqli_num_rows($result) != 0) {
+            $dbemail = $row['email'];
+            $dbpassword = $row['password'];
+            
+            if ($dbemail == $email && password_verify($password, $dbpassword)) {
+                $userData = [
+                    'id' => $row['id'],
+                    'firstname' => $row['firstname'],
+                    'email' => $row['email'],
+                    'lastname' => $row['lastname'],
+                    'address' => $row['address']
+                ];
+                return json_encode(['status' => 'success', 'data' => $userData]);
+            } else {
+                return json_encode(['status' => 'error', 'message' => 'Email or Password wrong']);
+            }
         } else {
-            return json_encode(['status' => 'error', 'message' => 'Email or Password wrong']);
+            return json_encode(['status' => 'error', 'message' => 'No user found with this email']);
         }
-    } else {
-        return json_encode(['status' => 'error', 'message' => 'No user found with this email']);
     }
-}
-
 
 
     function displayLogbook($table)

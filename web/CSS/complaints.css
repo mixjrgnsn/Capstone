@@ -1,37 +1,29 @@
 body {
     margin: 0;
-    background: linear-gradient(to bottom, #164A41, #4D774E);
+    background-image: url('/web/PICTURES/New Pics/Img\ 2.png');
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;     
+    background-attachment: fixed;
     font-family: Verdana, sans-serif;
-}
-
-.heading {
-    text-align: center;
-    font-size: 35px;
-    color: rgb(255, 255, 255);
-    margin: 0;
-    margin-top: 10px;
 }
 
 .body-container {
     margin: 20px auto;
     width: 84%;
-    height: 550px;
+    height: 600px;
     padding: 20px;
     border-radius: 13px;
-    background-color: #7DA87E;
+    background: #fff7d7;
 }
 
 .second {
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     font-size: 25px;
     margin: 0;
 }
 
 .third {
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     font-size: 25px;
 }
 
@@ -40,7 +32,7 @@ body {
     font-size: 20px;
     width: 250px; 
     height: 35px;
-    background-color: #164A41;
+    background-color: #33230e;    
     border-radius: 10px;
     color: rgb(255, 255, 255);
     border: 1px solid rgb(255, 255, 255);
@@ -50,20 +42,18 @@ body {
 .box-text3 {
     padding: 10px;
     outline: none;
-    border: 2px solid rgb(255, 255, 255);
+    border: 2px solid #ffa943;
+    background-color: #fffbea;
+    color: black;
     font-size: 20px;
     width: 98%; 
-    height: 400px;
-    background-color: #164A41;
+    height: 370px;
     border-radius: 10px;
-    color: rgb(255, 255, 255);
     font-family: Verdana, sans-serif;
 }
 
 .btn-container {
-    position: relative;
     text-align: center;
-    margin: 20px auto;
 }
 
 .btn-click {
@@ -73,13 +63,16 @@ body {
     border: 0;
     font-size: 20px;
     font-weight: bold;
-    background-color: #164A41;
-    color: rgb(219, 244, 218);
+    background-color: #ffa943;
+    color: black;
+    text-align: center;
+    margin: 20px 10px; 
+    display: inline-block;
 }
 
 .btn-click:hover {
-    background-color: rgb(167, 170, 166);
-    color: rgb(31, 32, 31);
+    background-color: #191107;
+    color: #aa722e;
 }
 
 @media (max-width: 768px) {
@@ -112,18 +105,6 @@ body {
         font-size: 100%; 
     }
 
-    .btn-container {
-        margin: 20px 0;
-        margin-left: 120px;
-    }
-
-    .btn-click {
-        width: 100%; 
-        max-width: 40%; 
-        height: 30px; 
-        font-size: 100%; 
-    }
-    
 }
 
 .modal {
@@ -191,4 +172,17 @@ body {
         width: 50%;
         padding: 5px; 
     }
+}
+
+.upload-container {
+    display: flex;
+    align-items: center; /* Align items vertically centered */
+}
+
+.upload-container p {
+    margin-right: 20px; /* Add space between text and input */
+}
+
+.upload-container input {
+    flex-shrink: 0; /* Prevent the input from shrinking */
 }

@@ -7,19 +7,18 @@
         <link rel="stylesheet" href="../CSS/complaints.css"/>
     </head>
     <body>
-        <nav class="main-container">
-            <div>
-                <h1 class="heading">Complaints</h1>
+        <div class="body-container">
+            <div class="upload-container">
+                <p>Upload Image (Optional)</p>
+                <input type="file" id="file-input" accept="image/*">
             </div>
-        </nav>
-        <div class="body-container">    
-            <span class="second">Date: </span><input id="date" class="box-text2" type="text" readonly/>
-            <p class="third">Subject: </p>
+            <p class="third">Complaints: </p>
             <textarea id="subject" class="box-text3"></textarea>
-        </div>
-        <div class="btn-container">
-            <button class="btn-click" onclick="cancel()">Cancel</button>
-            <button class="btn-click" onclick="sendReport()">Send</button>
+
+            <div class="btn-container">
+                <button class="btn-click" id="cancel">Cancel</button>
+                <button class="btn-click" id="sendComplaint">Send</button>
+            </div>
         </div>
         <div id="customModal" class="modal">
             <div class="modal-content">

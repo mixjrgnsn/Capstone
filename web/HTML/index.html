@@ -8,28 +8,33 @@
 </head>
 <body>
     <nav class="header">
-        <div>
-            <img class="logo" src="../PICTURES/LOGO HOA.png" alt="Logo"/>
-        </div>
+        <img class="logo" src="../PICTURES/LOGO HOA.png" alt="Logo"/>
+        <a href="https://www.facebook.com/groups/2938218033089672" target="_blank">
+            <img class="icon" src="../PICTURES/Icons/facebook_icon.svg" alt="facebook icon"/>
+        </a>
     </nav>
     <nav class="middle">
-        <div class="main-container">
-            <h1>Good Day!</h1>
-            <p>Sign in to continue</p>
-        </div>
         <div class="login-form">
+            <!-- Green Header for Sign In -->
+            <div class="form-header">
+                <h2>Sign In</h2>
+            </div>
             <form id="loginForm">
                 <label class="first">EMAIL</label><br>
                 <input class="btn" type="email" id="email" name="email" required/><br>
                 <label class="second">PASSWORD</label><br>
-                <input class="btn" type="password" id="password" name="password" required/><br>
+                <div class="password-container">
+                    <input class="btn" type="password" id="password" name="password" required aria-label="Password"/>
+                    <span toggle="#password" class="toggle-password" id="togglePassword">&#128065;</span> <!-- Eye icon -->
+                </div><br>
                 <button class="login-btn" type="submit" id="login-btn">Log in</button><br>
             </form>
-            <a class="link1" href="verify.html">Forgot Password?</a><br>
-            <a class="link2" href="#" id="signupLink">Create new account</a>
+            <a class="link1" href="verify.html">Forgot password?</a><br>
+            <a class="link2" href="#" id="signupLink">Create new account</a><br>
             <div id="loadingSpinner"></div>
         </div>
     </nav>
     <script src="../JS/login.js"></script>
+    <script src="../JS/cantRedo.js"></script>
 </body>
 </html>

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return response.json();
             })
             .then(data => {
-                announcementsContainer.innerHTML = ''; // Clear previous announcements
+                announcementsContainer.innerHTML = '';
 
                 if (data.message) {
                     announcementsContainer.innerHTML = `<p>${data.message}</p>`;
@@ -20,8 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     data.forEach(announcement => {
                         const announcementDiv = document.createElement('div');
                         announcementDiv.classList.add('announcement');
+                        
+                        const imageHtml = announcement.image_name 
+                            ? `<img class="centered-image" src="https://franciscohomes3.online/loginregister/uploads/${announcement.image_name}" alt="Announcement Image"><br>`
+                            : ``;
+
                         announcementDiv.innerHTML = `
                             <p>${announcement.content}</p>
+                            ${imageHtml}
                             <small>Posted on ${new Date(announcement.created_at).toLocaleString()}</small>
                         `;
                         announcementsContainer.appendChild(announcementDiv);
@@ -33,9 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     };
 
-    // Fetch announcements immediately on load
     fetchAnnouncements();
 
-    // Set an interval to fetch announcements every 10 seconds (10000 milliseconds)
     setInterval(fetchAnnouncements, 5000);
 });

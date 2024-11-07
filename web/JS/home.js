@@ -1,6 +1,15 @@
 if (!localStorage.getItem('userData')) {
     // Redirect to login if there's no user data
     window.location.replace('../HTML/index.html');
+} else {
+    // Retrieve the stored user data
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    
+    // Assuming the userData object contains a 'name' field
+    if (userData && userData.firstname && userData.lastname) {
+        // Set the text content of the user link to the user's name
+        document.getElementById('user').innerText = userData.firstname + " " + userData.lastname;
+    }
 }
 
 var loadingSpinner = document.getElementById('loadingSpinner');
@@ -25,13 +34,6 @@ const changeSlide = (n) => {
 }
 
 setInterval(() => changeSlide(1), 5000); // Automatic slide transition every 5 seconds
-
-document.querySelector('.hamburger-menu input').addEventListener('change', function() {
-    document.body.classList.toggle('overlay-active', this.checked);
-    // Add this line to ensure the overlay prevents background interaction
-    document.querySelector('.overlay').style.pointerEvents = this.checked ? 'auto' : 'none';
-});
-
 const sidebarLinks = document.querySelectorAll('.sidebar .link');
 
 sidebarLinks.forEach(link => {
@@ -42,26 +44,27 @@ sidebarLinks.forEach(link => {
     });
 });
 
-document.getElementById('logout-btn').addEventListener('click', function() {
-    // Show the custom alert
-    document.getElementById('custom-alert').style.display = 'flex';
-});
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('logout-btn').addEventListener('click', function() {
+        console.log("haha");
+        document.getElementById('custom-alert').style.display = 'flex';
+    });
 
-// Handle the confirmation button
-document.getElementById('confirm-logout').addEventListener('click', function() {
-    loadingSpinner.style.display = 'block'; // Show the loading spinner
-    // Clear user data from localStorage
-    localStorage.removeItem('userData');
+    document.getElementById('confirm-logout').addEventListener('click', function() {
+        loadingSpinner.style.display = 'block'; // Show the loading spinner
+        // Clear user data from localStorage
+        localStorage.removeItem('userData');
+        
+        // Simulate a delay for loading spinner (optional)
+        setTimeout(() => {
+            window.location.replace('../HTML/index.html');
+            history.replaceState(null, '', '../HTML/index.html');
+        }, 1000);
+    });
     
-    // Simulate a delay for loading spinner (optional)
-    setTimeout(() => {
-        window.location.replace('../HTML/index.html');
-        history.replaceState(null, '', '../HTML/index.html');
-    }, 1000);
-});
-
-// Handle the cancel button
-document.getElementById('cancel-logout').addEventListener('click', function() {
-    // Hide the custom alert
-    document.getElementById('custom-alert').style.display = 'none';
+    // Handle the cancel button
+    document.getElementById('cancel-logout').addEventListener('click', function() {
+        // Hide the custom alert
+        document.getElementById('custom-alert').style.display = 'none';
+    });
 });

@@ -19,8 +19,9 @@ body {
     margin: 20px;
     max-height: 100%; /* Set a maximum height */
     overflow-y: auto;  /* Enable vertical scrolling */
+    height: 580px;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.1); /* Optional: Add a background for visibility */
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
 }
 
@@ -50,5 +51,60 @@ small {
 @media (max-width: 768px) {
     .heading {
         font-size: 100%; 
+    }
+}
+
+.centered-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    height: 400px;
+    border: 3px black solid;
+}
+
+@media (max-width: 667px) {
+    .centered-image {
+        width: 280px;
+        height: 200px;
+    }
+
+    .announcements-container {
+        height: 150px;
+    }
+    
+}
+
+@media (max-width: 344px) {
+    .centered-image {
+        width: 220px;
+        height: 150px;
+    }
+    
+    .announcements-container {
+        height: 150px;
+    }
+}
+
+@media (max-width: 896px) {
+    .announcements-container {
+        height: 150px;
+    }
+}
+
+@media (max-width: 740px) {
+    .centered-image {
+        width: 220px;
+        height: 150px;
+    }
+    
+    .announcements-container {
+        height: 100px;
+    }
+}
+
+@media (max-width: 1368px) {
+    .announcements-container {
+        height: 720px;
     }
 }

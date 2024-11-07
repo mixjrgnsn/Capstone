@@ -9,25 +9,63 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function getSubjectDetailsComplaints(id) {
-        btn2.style.display = 'none';
+        btn1.style.display = 'none';
+        btn2.style.display = 'none'; // Initially hide both buttons
+
         if (!id) {
             document.getElementById('subject-details').innerText = 'No subject selected';
             return;
         }
 
-        fetch(`https://franciscohomes3.online/loginregister/database/getSubjectDetailsComplaints.php?id=${encodeURIComponent(id)}`)
+        fetch(`http://localhost/loginregister/database/getSubjectDetailsComplaints.php?id=${encodeURIComponent(id)}`)
             .then(response => response.json())
             .then(data => {
                 const detailsContainer = document.getElementById('subject-details');
                 
                 if (data && data.length > 0) {
                     const subject = data[0];
-                    detailsContainer.innerHTML = `
-                    <h5><strong>Tag/Complaint Number:</strong> ${subject.ID} </h5>
-                    <h5><strong>Name:</strong> ${subject.NAME} </h5>
-                    <h5><strong>Date:</strong> ${subject.DATE}</h5>
-                    <br>
-                    <p>${subject.SUBJECT}</p>`;
+
+                    // Display subject details
+                    const imageUrl = subject.IMAGE ? `http://localhost/loginregister/uploads/${subject.IMAGE}` : null;
+
+                    if (imageUrl) {
+                        detailsContainer.innerHTML = `
+                            <h5><strong>Tag/Complaint Number:</strong> ${subject.ID} </h5>
+                            <h5><strong>Name:</strong> ${subject.NAME} </h5>
+                            <h5><strong>Date:</strong> ${subject.DATE}</h5>
+                            <a href="${imageUrl}" target="_blank">
+                                <img class="image" src="${imageUrl}" alt="Image" style="max-width: 100%; cursor: pointer;">
+                            </a>
+                            <p>${subject.SUBJECT}</p>
+                        `;
+                    } else {
+                        detailsContainer.innerHTML = `
+                            <h5><strong>Tag/Complaint Number:</strong> ${subject.ID} </h5>
+                            <h5><strong>Name:</strong> ${subject.NAME} </h5>
+                            <h5><strong>Date:</strong> ${subject.DATE}</h5>
+                            <p>${subject.SUBJECT}</p>
+                        `;
+                    }
+
+                    // Control button visibility based on STATUS
+                    switch (subject.STATUS) {
+                        case 'UNREAD':
+                            btn1.style.display = 'block'; // Show btn1
+                            btn2.style.display = 'none';  // Hide btn2
+                            break;
+                        case 'ON GOING':
+                            btn1.style.display = 'none';  // Hide btn1
+                            btn2.style.display = 'block'; // Show btn2
+                            break;
+                        case 'COMPLETED':
+                            btn1.style.display = 'none'; // Hide btn1
+                            btn2.style.display = 'none'; // Hide btn2
+                            break;
+                        default:
+                            btn1.style.display = 'none'; // Hide btn1 by default
+                            btn2.style.display = 'none'; // Hide btn2 by default
+                            break;
+                    }
                 } else {
                     detailsContainer.innerText = 'No details available for this subject.';
                 }
@@ -41,32 +79,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const id = getQueryParameter('id');
     getSubjectDetailsComplaints(id);
 
-    // Check local storage for button states
-    const btn1Clicked = localStorage.getItem(`btn1-clicked-${id}`) === 'true';
-    const btn2Clicked = localStorage.getItem(`btn2-clicked-${id}`) === 'true';
-
-    if (btn1Clicked) {
-        btn1.style.display = 'none';
-        if (btn2Clicked) {
-            btn2.style.display = 'none'; // Hide btn2 if it was also clicked
-        } else {
-            btn2.style.display = 'block'; // Show btn2 if only btn1 was clicked
-        }
-    } else {
-        btn2.style.display = 'none'; // Initially hide btn2
-    }
-
     btn1.addEventListener('click', function() {
         loadingSpinner.style.display = 'block';
-        btn1.style.display = 'none';
-        btn2.style.display = 'block';
         if (!id) {
             alert('No subject selected to mark as read.');
             loadingSpinner.style.display = 'none';
             return;
         }
 
-        fetch(`https://franciscohomes3.online/loginregister/database/updateReadStatus.php?id=${encodeURIComponent(id)}`, {
+        fetch(`http://localhost/loginregister/database/updateReadStatus.php?id=${encodeURIComponent(id)}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -77,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                 alert('Marked as ON GOING successfully!');
                 loadingSpinner.style.display = 'none';
-                localStorage.setItem(`btn1-clicked-${id}`, 'true'); // Save btn1 click state
                 window.location.href = 'complaints.html';
             } else {
                 throw new Error('Failed to mark as ON GOING');
@@ -91,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     btn2.addEventListener('click', function() {
-        btn2.style.display = 'none';
         loadingSpinner.style.display = 'block';
         if (!id) {
             alert('No subject selected to mark as read.');
@@ -99,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        fetch(`https://franciscohomes3.online/loginregister/database/updateStatusToCompleted.php?id=${encodeURIComponent(id)}`, {
+        fetch(`http://localhost/loginregister/database/updateStatusToCompleted.php?id=${encodeURIComponent(id)}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -110,7 +129,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                 alert('Marked as COMPLETED successfully!');
                 loadingSpinner.style.display = 'none';
-                localStorage.setItem(`btn2-clicked-${id}`, 'true'); // Save btn2 click state
                 window.location.href = 'complaints.html';
             } else {
                 throw new Error('Failed to mark as COMPLETED');

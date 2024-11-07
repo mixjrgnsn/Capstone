@@ -2,28 +2,43 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden; /* Prevents scrolling */
 }
 
 body {
     margin: 0;
-    background: linear-gradient(to bottom, #164A41, #4D774E);
+    background-image: url('../PICTURES/3dbackground.png');
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;     
+    background-attachment: fixed;
     font-family: Arial, sans-serif;
 }
 
 .header {
     width: 100%;
-    height: 150px;
-    background: linear-gradient(to right, #7DA87E, #4D774E);
+    height: 110px;
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-between; /* Ensures the logo is on the left and icon on the right */
+    padding: 0 20px; /* Adjusts horizontal padding */
+    box-sizing: border-box; /* Ensures padding doesn’t affect width */
 }
 
 .logo {
     height: 100px;
+}
+
+.icon {
+    height: 50px;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition */
+}
+
+
+
+.icon:hover {
+    transform: scale(1.1); /* Slightly enlarge the icon */
+    opacity: 0.8; /* Make the icon slightly transparent */
 }
 
 .main-container {
@@ -45,70 +60,110 @@ p {
     font-size: 18px;
 }
 
-.first {
-    margin-right: 190px;
-    color: rgb(254, 254, 254);
-    font-family: arial;
+.first, .second {
+    display: block;
+    margin-top: 25px;
+    margin-bottom: -5px;
+    color: black;
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    text-align: left;
+    margin-left: 40px;
 }
 
-.second {
-    margin-right: 150px;
-    color: rgb(255, 255, 255);
-    font-family: arial;
+.middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 70px);
+}
+
+.form-header {
+    background-color: #ffa943; /* Green background */
+    color: white;
+    padding: 30px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    text-align: center;
+}
+
+.form-header h2 {
+    margin: 0;
+    font-size: 40px;
 }
 
 .login-form {
     text-align: center;
+    background-color: #fff7d7;
+    padding: 0;
+    border-radius: 20px;
+    width: 500px;
+    max-width: 90%; /* Limit width to 90% of the screen width */
+    height: 65vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.password-container {
+    position: relative;
+    display: block;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 55px;
+    top: 45%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: black;
+    display: none;
 }
 
 .btn {
-    height: 35px;
-    width: 220px;
+    height: 50px;
+    width: 80%;
     border-radius: 15px;
-    margin: 10px 0;
+    margin-bottom: 5px;
     padding: 0 10px;
-    background-color: #164A41;
-    color: rgb(255, 255, 255);
-    border: 2px white solid;
+    background-color: #fffbea;
+    font-size: 25px;
+    color: black;
+    border: 2px #ffa943 solid;
     outline: none;
 }
 
 .login-btn {
-    margin-top: 25px;
-    margin-bottom: 18px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 50px;
+    width: 180px;
+    border-radius: 15px;
     padding: 7px 40px;
-    border-radius: 5px;
-    border: none;
+    font-size: 25px;
     font-family: sans-serif;
-    font-size: 15px;
-    font-weight: bold;
-    background-color: #164A41;
-    color: rgb(252, 255, 248);
+    background-color:#ffa943;
+    color: rgb(255, 255, 255);
+    border: none;
+    outline: none;
 }
 
 .login-btn:hover {
-    background-color: #7DA87E;
+    background-color: #aa722e;
 }
 
-.link1 {
-    color: rgb(252, 255, 248);
+.link1, .link2 {
+    color: black;
     font-family: sans-serif;
+    font-size: 20px;
 }
 
-.link1:hover {
-    color: rgb(43, 39, 39);
+.link1:hover, .link2:hover {
+    color: #ffa943;
 }
 
 .link2 {
     position: relative;
     top: 10px;
-    color: rgb(252, 255, 248);
-    font-family: sans-serif;
     padding-bottom: 10px;
-}
-
-.link2:hover {
-    color: rgb(43, 39, 39);
 }
 
 #loadingSpinner {
@@ -128,4 +183,178 @@ p {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Media Queries */
+@media (max-width: 1280px) {
+    h1 {
+        font-size: 5vw;
+    }
+
+    p {
+        font-size: 2vw;
+    }
+    .first, .second{
+        font-size: 1.5vw;
+    }
+    .btn {
+        font-size: 1.5vw;
+        width: 80%;
+    }
+    .login-btn {
+        font-size: 2vw;
+        width: 30%;
+    }
+
+    .form-header h2 {
+        font-size: 2vw;
+        height: 1vw;
+    }
+
+    .login-form {
+        width: 50vw;
+        height: 80vh;
+    }
+
+    .link1, .link2{
+        font-size: 1.5vw;
+    }
+}
+
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 5vw;
+    }
+
+    p {
+        font-size: 2vw;
+    }
+    .first, .second{
+        font-size: 1.5vw;
+    }
+    .btn {
+        font-size: 1.5vw;
+        width: 80%;
+    }
+    .login-btn {
+        font-size: 2vw;
+        width: 35%;
+    }
+    .form-header h2 {
+        font-size: 2vw;
+        height: 1vw;
+    }
+
+    .login-form {
+        width: 50vw;
+        height: 80vh;
+    }
+
+    .link1, .link2{
+        font-size: 1.5vw;
+    }
+}
+
+@media (max-width: 1023px) {
+    h1 {
+        font-size: 5vw;
+    }
+
+    p {
+        font-size: 2vw;
+    }
+    .first, .second{
+        font-size: 2.5vw;
+    }
+    .btn {
+        font-size: 2.5vw;
+        width: 80%;
+    }
+    .login-btn {
+        font-size: 2.5vw;
+        width: 35%;
+    }
+    .form-header h2 {
+        font-size: 2.5vw;
+        height: 2vw;
+    }
+
+    .login-form {
+        width: 50vw;
+        height: 50vh;
+    }
+
+    .link1, .link2{
+        font-size: 2.5vw;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 5vw;
+    }
+
+    p {
+        font-size: 2vw;
+    }
+    .first, .second{
+        font-size: 2.5vw;
+    }
+    .btn {
+        font-size: 3vw;
+        width: 80%;
+        height: 6vw;
+    }
+    .login-btn {
+        font-size: 3vw;
+        width: 40%;
+    }
+
+    .form-header h2 {
+        font-size: 5vw;
+    }
+
+    .login-form {
+        width: 70vw;
+        height: 70vh;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 6vw;
+    }
+
+    p {
+        font-size: 3vw;
+    }
+
+    .first, .second{
+        font-size: 4vw;
+    }
+
+    .btn{
+        font-size: 4vw;
+        width: 65vw;
+        height: 10vw;
+    }
+
+    .login-btn{
+        font-size: 4vw;
+        width: 35vw;
+        height: 10vw;
+    }
+
+    .form-header h2 {
+        font-size: 6vw;
+    }
+
+    .login-form {
+        width: 95vw;
+        height: 65vh;
+    }
+
+    .link1, .link2{
+        font-size: 3.5vw;
+    }
 }
