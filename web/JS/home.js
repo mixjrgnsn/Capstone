@@ -30,7 +30,6 @@ const changeSlide = (n) => {
         slides[i].style.display = "none";
     }
 
-    slides[slideIndex].style.display = "block";
 }
 
 setInterval(() => changeSlide(1), 5000); // Automatic slide transition every 5 seconds

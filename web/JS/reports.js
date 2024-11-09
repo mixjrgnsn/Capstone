@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmButton = document.getElementById('confirm-button');
     const cancelButton = document.getElementById('cancel-button');
     const modalMessage = document.getElementById('modal-message');
+    const customModal1 = document.getElementById('customModal1');
+    const confirmButton1 = document.getElementById('confirm-button1');
+    const cancelButton1 = document.getElementById('cancel-button1');
+    const modalMessage1 = document.getElementById('modal-message1');
     const subjectInput = document.getElementById('subject');
     const currentDate = new Date().toLocaleDateString('en-CA');
     const fileInput = document.getElementById('file-input');
@@ -22,10 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
             modalMessage.textContent = `Are you sure you want to send the report?`;
             customModal.style.display = 'block';
         }
-
     });
 
     confirmButton.addEventListener('click', () => {
+        customModal.style.display = 'none';
         const subjectText = subjectInput.value;
         const file = fileInput.files[0];
 
@@ -40,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('loadingSpinner').style.display = 'block';
 
-        fetch('http://localhost/loginregister/database/reports.php', {
+        fetch('https://franciscohomes3.online/loginregister/database/reports.php', {
             method: 'POST',
             body: formData
         })
@@ -77,6 +81,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('cancel').addEventListener('click', function() {
-        document.getElementById('subject').value = '';
+        modalMessage1.textContent = `Are you sure you want to cancel?`;
+        customModal1.style.display = 'block';
+    });
+
+    confirmButton1.addEventListener('click', () => {
+        customModal1.style.display = 'none';
+        document.getElementById('loadingSpinner').style.display = 'block';
+        setTimeout(() => {
+            window.location.href = 'home.html'; // Redirect after a slight delay
+        }, 500);
+    });
+
+    cancelButton1.addEventListener('click', () => {
+        customModal1.style.display = 'none';
     });
 });

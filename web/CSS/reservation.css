@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-image: url('/web/PICTURES/New Pics/Court Reservation.png');
+    background-image: url('../PICTURES/New Pics/Court Reservation.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -10,10 +10,14 @@ body {
 .body-container {
     margin: 50px auto;
     width: 84%;
-    height: 580px;
+    height: 550px;
     padding: 20px;
     border-radius: 13px;
     background: #fff7d7;
+}
+
+.form{
+    margin-top: 20px;
 }
 
 .first {
@@ -45,7 +49,7 @@ body {
     outline: none;
     font-size: 20px;
     width: 98%;
-    height: 360px;
+    height: 90px;
     border-radius: 10px;
     font-family: Verdana, sans-serif;
     border: 2px solid #ffa943;
@@ -92,6 +96,31 @@ body {
 .btn-click:hover {
     background-color: #191107;
     color: #aa722e;
+}
+
+.table-container {
+    overflow-y: auto;
+    max-height: 40%;
+    border: 1px solid #ffa943;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 2px solid #ffa943;
+}
+th, td {
+    padding: 8px;
+    text-align: center;
+}
+th {
+    background-color: #ffa943;
+}
+table tr {
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {

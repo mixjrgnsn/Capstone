@@ -3,19 +3,31 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Privacy & Security</title>
+        <title>Account Settings</title>
         <link rel="stylesheet" href="../CSS/privacy.css"/>
     </head>
     <body>
         <nav>
-            <div class="head-container">
-                <p class="first">Privacy & Security</p>
-            </div>
             <div class="body-container">
+                <p>Account Details</p>
                 <div class="form-group">
-                    <label class="title" for="email">Email</label>
-                    <input class="btn" type="email" id="email" name="email" required />
+                    <label class="title" for="id">ID</label>
+                    <input class="btn1" type="text" id="id" name="id" required />
                 </div>
+                <div class="form-group">
+                    <label class="title" for="name">Name</label>
+                    <input class="btn1" type="text" id="name" name="name" required />
+                </div>
+                <div class="form-group">
+                    <label class="title" for="address">Address</label>
+                    <input class="btn1" type="text" id="address" name="address" required />
+                </div>
+                <div class="form-group">
+                    <label class="title" for="email">Email Address</label>
+                    <input class="btn1" type="email" id="email" name="email" required />
+                </div>
+                <div class="line-middle"></div>
+                <p>Change Password</p>
                 <div class="form-group">
                     <label class="title" for="oldPass">Old password</label>
                     <input class="btn" type="password" id="oldPass" name="oldPass" required />
@@ -27,14 +39,6 @@
                 <input class="button" type="submit" value="Change Password" />
             </div>            
         </nav>
-
-        <!-- Modals -->
-        <div id="alertModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p id="alertMessage"></p>
-            </div>
-        </div>
 
         <div id="confirmModal" class="modal">
             <div class="modal-content">

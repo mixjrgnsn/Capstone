@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                 alert('Marked as read successfully!');
                 loadingSpinner.style.display = 'none';
-                window.location.href = 'home.html';
+                window.location.href = 'reports.html';
             } else {
                 throw new Error('Failed to mark as read');
             }

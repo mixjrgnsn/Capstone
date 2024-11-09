@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-image: url('/web/PICTURES/New Pics/Img\ 3.png');
+    background-image: url('../PICTURES/New Pics/Img\ 3.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;

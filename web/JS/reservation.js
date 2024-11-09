@@ -91,3 +91,50 @@ document.getElementById("submit-btn").addEventListener("click", function() {
         document.getElementById("customModal").style.display = "none"; // Close modal
     };
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    function displayReserved() {
+        fetch('https://franciscohomes3.online/loginregister/database/displayReserved.php')
+            .then(response => response.json())
+            .then(data => {
+                const headerRow = document.getElementById('header-row');
+                const bodyRow = document.getElementById('body-row');
+                const searchBox = document.getElementById('search-box');
+
+                // Clear existing rows
+                headerRow.innerHTML = '';
+                bodyRow.innerHTML = '';
+
+                if (data.length > 0) {
+                    const headers = Object.keys(data[0]);
+                    headers.forEach(header => {
+                        const th = document.createElement('th');
+                        th.textContent = header;
+                        headerRow.appendChild(th);
+                    });
+
+                    data.forEach(row => {
+                        const tr = document.createElement('tr');
+                        tr.addEventListener('click', () => handleRowClick(row, tr));
+
+                        headers.forEach(header => {
+                            const td = document.createElement('td');
+                            td.textContent = header === 'PASSWORD' ? '*****' : row[header];
+                            tr.appendChild(td);
+                        });
+
+                        bodyRow.appendChild(tr);
+                    });
+                } else {
+                    bodyRow.innerHTML = '<tr><td colspan="100%">No data available</td></tr>';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }
+
+    // Fetch data when the page loads
+    displayReserved();
+    setInterval(displayReserved, 5000);
+});

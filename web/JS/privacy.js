@@ -1,6 +1,22 @@
 window.onload = function() {
     // Retrieve the email from localStorage
     const userEmail = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).email : '';
+    const userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : {};
+    const userID = userData.id;
+    const userName = userData.firstname && userData.lastname ? `${userData.firstname} ${userData.lastname}` : '';
+    const userAddress = userData.address;
+
+    const idInput = document.getElementById('id');
+    idInput.value = userID;
+    idInput.disabled = true;
+
+    const nameInput = document.getElementById('name');
+    nameInput.value = userName;
+    nameInput.disabled = true;
+
+    const addressInput = document.getElementById('address');
+    addressInput.value = userAddress;
+    addressInput.disabled = true;
 
     const emailInput = document.getElementById('email');
     emailInput.value = userEmail;
@@ -16,12 +32,12 @@ window.onload = function() {
         const newPass = newPassInput.value;
 
         if (!oldPass || !newPass) {
-            showAlert("Please fill all fields.");
+            alert("Please fill all fields.");
             return;
         }
 
         if (newPass.length < 6) {
-            showAlert("New password must be at least 6 characters long.");
+            alert("New password must be at least 6 characters long.");
             return;
         }
 
@@ -40,38 +56,19 @@ window.onload = function() {
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    showAlert(data.message);  // Show alert with success message
+                    alert(data.message);  // Show alert with success message
                     oldPassInput.value = '';  // Clear inputs
                     newPassInput.value = '';
                 } else {
-                    showAlert(data.message);
+                    alert(data.message);
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                showAlert('An error occurred while processing your request.');
+                alert('An error occurred while processing your request.');
             });
         });
     });
-
-    // Alert Modal Functions
-    const alertModal = document.getElementById("alertModal");
-    const alertMessage = document.getElementById("alertMessage");
-    const closeAlert = document.querySelector("#alertModal .close");
-
-    function showAlert(message) {
-        alertMessage.innerText = message;
-        alertModal.style.display = "block";
-    }
-
-    closeAlert.onclick = function() {
-        alertModal.style.display = "none";
-
-        // Check if the alert message is "Password updated successfully"
-        if (alertMessage.innerText === "Password updated successfully") {
-            window.location.href = 'home.html';  // Redirect to home.html
-        }
-    };
 
     // Confirm Modal Functions
     const confirmModal = document.getElementById("confirmModal");
@@ -92,13 +89,4 @@ window.onload = function() {
             confirmModal.style.display = "none";
         };
     }
-
-    // Close modals when clicking outside
-    window.onclick = function(event) {
-        if (event.target == alertModal) {
-            alertModal.style.display = "none";
-        } else if (event.target == confirmModal) {
-            confirmModal.style.display = "none";
-        }
-    };
 };

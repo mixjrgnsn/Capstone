@@ -1,6 +1,6 @@
 body{
     margin: 0;
-    background: linear-gradient(to bottom, #164A41, #4D774E);
+    background-image: url('../PICTURES/New Pics/Img\ 3.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;       
@@ -20,9 +20,9 @@ body{
 p{
     margin: 50px;
     text-align: center;
-    font-size: 25px;
+    font-size: 45px;
     font-family: verdana;
-    color: rgb(255, 255, 255);
+    color: black;
 }
 
 @media (max-width: 768px) {
@@ -36,7 +36,7 @@ p{
     max-height: 100%; /* Set a maximum height */
     overflow-y: auto;  /* Enable vertical scrolling */
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.1); /* Optional: Add a background for visibility */
+    background-color: rgba(214, 206, 196, 0.667);
     border-radius: 5px;
 }
 
@@ -44,9 +44,9 @@ p{
     border: 2px solid #272626;
     padding: 10px;
     margin-bottom: 10px;
-    color: white;
+    color: black;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #2d3d2e;
+    background-color: #fff7d7;
     border-radius: 5px;
 }
 
@@ -65,10 +65,19 @@ p{
 
 .notification small {
     font-size: 15px;
-    color: rgb(255, 255, 255);
+    color: black;
     font-family: verdana;
 }
 
 #reports-container {
     margin-top: 20px; /* Add space between the two containers */
+}
+
+.notification-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    height: 400px;
+    border: 3px black solid;
 }

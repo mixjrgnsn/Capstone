@@ -1,17 +1,22 @@
 body{
+    background-color: #848f84;
+    display: flex;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;      /* Center vertically */
+    height: 100vh;            /* Make body take full viewport height */
     margin: 0;
-    overflow: hidden;
 }
 
-
-.header{
-    padding: 15px 0 10px 0;
-    background-color: #7DA87E;
-    display: flex;
+.middle{
+    background-color: #a7cba7;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
     justify-content: center;
-    align-items: center;
-    height: 90px;
-    width: 100%; 
+    width: 30%;
+    height: 350px;
 }
 
 .logo-header{
@@ -19,12 +24,8 @@ body{
     height: 90px;
 }
 
-.middle{
-    height: calc(100vh - 90px);
-    background: linear-gradient(to bottom, #164A41, #4D774E);
-}
-
 .button-box{
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     width: 400px;
     margin: 0 auto;
     top: 40px;
@@ -39,8 +40,6 @@ body{
     cursor: pointer;
     background: transparent;
     border: 0;
-    /*border-radius: 30px;
-    border: 1;*/
     color: #ffffff;
     outline: none;
     position: relative;
@@ -51,6 +50,7 @@ body{
 }
 
 .btn{
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     left: 0;
     top: 0;
     position: absolute;
@@ -69,6 +69,7 @@ body{
 }
 
 .input-form{
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     width: 210px;
     display: flex;
     padding: 10px;
@@ -76,7 +77,7 @@ body{
     font-family: sans-serif;
     font-size: 14px;
     margin-bottom: 8px;
-    border-radius: 10px;
+    border-radius: 15px;
     color: #ffffff;
     border-color: rgb(255, 255, 255);
     background-color: #164A41;
@@ -89,6 +90,7 @@ body{
 }
 
 .button-form{
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     display: flex;
     margin: 0 auto;
     margin-top: 15px;

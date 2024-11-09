@@ -9,14 +9,23 @@
 <body>
 
     <div class="body-container">
-        <span class="first">Date: </span><input class="box-text1" type="date" id="reservation-date"/>
-        <span class="text1">From: </span>
-        <input class="time-one" type="time" id="time-from"/>
-        <span class="text2">To: </span>
-        <input class="time-one" type="time" id="time-to"/>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr id="header-row"></tr>
+                </thead>
+                <tbody id="body-row"></tbody>
+            </table>
+        </div>
+        <div class="form">
+            <span class="first">Date: </span><input class="box-text1" type="date" id="reservation-date"/>
+            <span class="text1">From: </span>
+            <input class="time-one" type="time" id="time-from"/>
+            <span class="text2">To: </span>
+            <input class="time-one" type="time" id="time-to"/>
+        </div>
         <p class="second">Purpose: </p>
         <textarea class="box-text2" id="purpose"></textarea>
-
         <div class="btn-container">
             <button class="btn-click" id="submit-btn">Submit</button>
         </div>

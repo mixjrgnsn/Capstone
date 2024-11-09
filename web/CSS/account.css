@@ -1,14 +1,14 @@
 body{
     margin: 0;
-    background: linear-gradient(to bottom, #164A41, #4D774E);
+    background-image: url('../PICTURES/new\ announcement\ image.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed; 
 }
 
 .body-container{
-    background-color: #2d3d2e;
-    border: 2px solid #ffffff;
+    background-color: #fff7d7;
+    border: 2px black solid;
     padding: 40px 0;
     height: 400px;
     width: 40%;
@@ -18,7 +18,7 @@ body{
 }
 
 .display-name{
-    color: rgb(255, 255, 255);
+    color: black;
     font-weight: bold;
     font-family: Verdana, sans-serif;
     margin-left: 5%;

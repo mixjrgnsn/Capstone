@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background: linear-gradient(to bottom, #164A41, #4D774E);
+    background-image: url('../PICTURES/new\ announcement\ image.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -33,7 +33,7 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 98%;
+    width: 50%;
     margin-top: 50px;
     margin-bottom: 20px;
 }
@@ -42,10 +42,10 @@ p {
     font-family: verdana;
     padding: 30px;
     font-size: 28px;
-    color: rgb(255, 255, 255);
-    border: 2px solid #B8B6B6;
-    background-color: #2d3d2e;
-    border-radius: 5px;
+    color: black;
+    border: 2px solid rgb(35, 35, 35);
+    background-color: #fff7d7;
+    border-radius: 20px;
     margin: 10px;
     width: 100%;
     box-sizing: border-box;
@@ -53,7 +53,7 @@ p {
 }
 
 .btn:hover {
-    background-color: rgb(104, 104, 104);
+    background-color: #a39e8a;
 }
 
 @media (max-width: 768px) {

@@ -642,5 +642,24 @@ class DataBase
         return $stmt->execute();
     }
 
+    function displayReserved($table)
+    {
+        $columns = ' CONCAT(DATE_FORMAT(date, "%m/%d/%Y"), " ", timeFrom, " - ", timeTo) AS `RESERVED LIST`';
+
+
+        $this->sql = "SELECT $columns FROM " . $table . " WHERE status = 'ACCEPTED' ORDER BY updated_at DESC";
+        $result = mysqli_query($this->connect, $this->sql);
+
+        if ($result) {
+            $data = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
 }
 ?>
