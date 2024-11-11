@@ -73,7 +73,7 @@ class DataBase
         $result = mysqli_query($this->connect, $checkEmailQuery);
         
         if (mysqli_num_rows($result) > 0) {
-            return "Email already exists. Please use a different email.";
+            return "Email already exists and waiting for approval.";
         } else {
             $this->sql =
                 "INSERT INTO " . $table . " (firstname, lastname, email, password, address) VALUES ('$firstname','$lastname','$email','$hashedPassword','$address')";
