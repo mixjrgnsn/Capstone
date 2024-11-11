@@ -116,7 +116,7 @@ class DataBase
         $checkResult = mysqli_query($this->connect, $checkSql);
         
         if (mysqli_num_rows($checkResult) > 0) {
-            return "The time is already in use"; // Reservation conflict
+            return "The time is already in pending request"; // Reservation conflict
         }
     
         // Insert new reservation
