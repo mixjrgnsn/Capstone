@@ -5,23 +5,39 @@ html, body {
 
 body {
     margin: 0;
-    background: linear-gradient(to bottom, #164A41, #4D774E);
+    background-image: url('../PICTURES/3dbackground.png');
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;     
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  
     font-family: Arial, sans-serif;
 }
 
+.main-container{
+    margin: 20px 20px 20px 20px;
+    max-width: fit-content;
+    border-radius: 20px;
+    background-color: #fff7d7;
+}
+
 .create-form{
+    background-color: #ffa943;
+    color: white;
+    padding: 1px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     text-align: center;
 }
 
 .create{
-    margin-top: 20px;
-    margin-bottom: 30px;
-    font-family: sans-serif;
     font-size: 40px;
+    font-weight: bold;
     color: rgb(255, 255, 255);
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 p{
@@ -29,43 +45,43 @@ p{
     margin-bottom: 3px;
     font-family: verdana;
     font-size: 13px;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 
 .link{
     font-family: verdana;
     font-size: 13px;
-    color: rgb(252, 255, 248);
+    color: rgb(0, 0, 0);
     margin-bottom: 20px;
 }
 
 .link:hover{
-    color: rgb(43, 39, 39);
+    color: #aa722e;
 }
 
 .input-form{
     text-align: center;
     font-family: sans-serif;
     margin-top: 30px;
-    color: rgb(252, 255, 248);
+    color: rgb(0, 0, 0);
     padding-bottom: 20px; /*updated*/
 }
 
 .input-text{
     outline: none;
-    border-radius: 8px;
+    border-radius: 15px;
     height: 25px;
     padding: 5px 10px;
     width: 250px;
-    background-color: #164A41;
-    border: 2px white solid;    
+    background-color: #fffbea;
+    color: rgb(0, 0, 0);
+    border: 2px #ffa943 solid;  
     margin: 10px 0;
-    color: rgb(252, 255, 248);
 }
 
 .input-text2{
     outline: none;
-    border-radius: 8px;
+    border-radius: 15px;
     height: 25px;
     padding: 5px 10px;
     width: 70px;
@@ -77,7 +93,7 @@ p{
 
 .input-text2{
     outline: none;
-    border-radius: 8px;
+    border-radius: 15px;
     height: 25px;
     padding: 5px 10px;
     width: 70px;
@@ -89,26 +105,26 @@ p{
 
 .input-text1{
     outline: none;
-    border-radius: 8px;
+    border-radius: 15px;
     height: 25px;
     padding: 5px 10px;
     width: 70px;
-    background-color: #164A41;
-    border: 2px white solid;    
+    background-color: #fffbea;
+    color: rgb(0, 0, 0);
+    border: 2px #ffa943 solid;    
     margin: 10px -232px;
-    color: rgb(252, 255, 248);
 }
 
 .input-text2{
     outline: none;
-    border-radius: 8px;
     height: 25px;
     padding: 5px 10px;
+    border-radius: 15px;
     width: 70px;
-    background-color: #164A41;
-    border: 2px white solid;    
+    background-color: #fffbea;
+    color: rgb(0, 0, 0);
+    border: 2px #ffa943 solid;   
     margin: 10px -168px;
-    color: rgb(252, 255, 248);
 }
 
 .fname{
@@ -158,14 +174,14 @@ p{
 
 .street1{
     outline: none;
-    border-radius: 8px;
+    border-radius: 15px;
     height: 38px;
     padding: 5px 10px;
     width: 271px;
-    background-color: #164A41;
-    border: 2px white solid;    
+    background-color: #fffbea;
+    color: rgb(0, 0, 0);
+    border: 2px #ffa943 solid;  
     margin: 10px 0;
-    color: rgb(252, 255, 248);
 }
 
 .street1:focus {
@@ -176,17 +192,16 @@ p{
 .btn-submit{
     margin-top: 15px;
     position: flex;
-    background-color: #164A41;
-    color: rgb(252, 255, 248);
+    background-color: #ffa943;
+    border: 2px rgba(0, 0, 0, 0.416) solid;
+    color: rgb(255, 255, 255);
     width: 120px;
     height: 30px;
     font-family: sans-serif;
     font-weight: bold;
-    border-radius: 5px;
-    border: none;
+    border-radius: 15px;
 }
 
 .btn-submit:hover{
-    background-color: #7DA87E;
+    background-color: #aa722e;
 }
-

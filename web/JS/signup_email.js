@@ -5,7 +5,7 @@ document.getElementById('check').addEventListener('click', function() {
 
     setTimeout(() => {
         if (email) {
-            fetch('http://localhost/loginregister/database/check_email.php', {
+            fetch('https://franciscohomes3.online/loginregister/database/check_email.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

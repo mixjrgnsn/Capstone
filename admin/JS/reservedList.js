@@ -81,11 +81,15 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error fetching data:', error));
     }
     
-
+    
     function openModal(row) {
         selectedRowId = row.TAG;
-        modalMessage.textContent = `Change status of ${row.NAME} to COMPLETED?`;
-        modal.style.display = 'block';
+        if(row.STATUS == "ACCEPTED"){
+            modalMessage.textContent = `Change status of ${row.NAME} to COMPLETED?`;
+            modal.style.display = 'block';
+        } else{
+            console.log("already completed")
+        }
     }
 
     function updateStatus(id) {

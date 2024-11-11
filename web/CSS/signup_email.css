@@ -1,9 +1,33 @@
 body{
     margin: 0;
-    background: linear-gradient(to bottom, #164A41, #4D774E);
+    background-image: url('../PICTURES/3dbackground.png');
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed; 
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.main-container{
+    margin: 20px 20px 20px 20px;
+    max-width: fit-content;
+    border-radius: 20px;
+    background-color: #fff7d7;
+}
+
+.title-container{
+    background-color: #ffa943;
+    color: white;
+    padding: 1px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    text-align: center;
+}
+
+.email-container{
+    margin-top: 20px;
 }
 
 .emailCheck{
@@ -12,15 +36,17 @@ body{
 
 #result{
     text-align: center;
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: 30px;
-    margin-top: 20px;
+    margin: 20px;
 }
 
-.emailCheck h1{
+.title-container h1{
     font-size: 50px;
     font-weight: bold;
     color: rgb(255, 255, 255);
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 #email{
@@ -29,26 +55,26 @@ body{
     border-radius: 15px;
     margin: 10px 0;
     padding: 0 10px;
-    background-color: #164A41;
-    color: rgb(255, 255, 255);
-    border: 2px white solid;
+    background-color: #fffbea;
+    color: rgb(0, 0, 0);
+    border: 2px #ffa943 solid;
     outline: none;
 }
 
 #code{
     height: 35px;
-    width: 140px;
+    width: 220px;
     border-radius: 15px;
     margin: 10px 0;
     padding: 0 10px;
-    background-color: #164A41;
-    color: rgb(255, 255, 255);
-    border: 2px white solid;
+    background-color: #fffbea;
+    color: rgb(0, 0, 0);
+    border: 2px #ffa943 solid;
     outline: none;
 }
 
 #email::placeholder, #code::placeholder, #new::placeholder, #cnfrm::placeholder{
-    color: #c7c7c7;
+    color: #7a7a7a;
 }
 
 #sendcode{
@@ -56,21 +82,21 @@ body{
     border-radius: 15px;
     margin: 10px 0;
     font-size: 11px;
-    background-color: #0e2420;
+    background-color: #ffa943;
+    border: 2px rgba(0, 0, 0, 0.416) solid;
     color: rgb(255, 255, 255);
-    border: 2px white solid;
     outline: none;
 }
 
-#verifycode{
+#verifycode, #submit{
     height: 35px;
-    width: 170px;
+    width: 200px;
     border-radius: 15px;
     margin: 10px 0;
     font-size: 15px;
-    background-color: #0e2420;
+    background-color: #ffa943;
+    border: 2px rgba(0, 0, 0, 0.416) solid;
     color: rgb(255, 255, 255);
-    border: 2px white solid;
     outline: none;
 }
 
@@ -79,14 +105,14 @@ body{
     border-radius: 15px;
     margin: 10px 0;
     padding: 0 10px;
-    background-color: #0e2420;
+    background-color: #ffa943;
+    border: 2px rgba(0, 0, 0, 0.416) solid;
     color: rgb(255, 255, 255);
-    border: 2px white solid;
     outline: none;
 }
 
-#sendcode:hover, #verifycode:hover{
-    background-color: #28665a;
+#sendcode:hover, #verifycode:hover, #check:hover{
+    background-color: #aa722e;
 }
 
 .emailCode{
@@ -99,6 +125,7 @@ body{
     margin-top: 20px;
     text-align: center;
     display: none;
+    margin-bottom: 20px;
 }
 
 #loadingSpinner {

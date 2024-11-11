@@ -5,7 +5,7 @@ document.getElementById('check').addEventListener('click', function() {
 
     setTimeout(() => {
         if (email) {
-            fetch('http://localhost/loginregister/database/check_email.php', {
+            fetch('https://franciscohomes3.online/loginregister/database/check_email.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ document.getElementById('verifycode').addEventListener('click', function() {
     const resultMessage = document.getElementById('result');
 
     if (inputCode === storedCode) {
-        resultMessage.innerText = 'Verification successful! You can now change your password.';
+        resultMessage.innerText = 'You can now change your password.';
         document.getElementById('new').style.display = 'block';
         document.getElementById('cnfrm').style.display = 'block';
         document.getElementById('submit').style.display = 'block';
@@ -100,7 +100,7 @@ document.getElementById('submit').addEventListener('click', function() {
         loadingSpinner.style.display = 'block';
 
         // Make a POST request to the PHP script to update the password
-        fetch('http://localhost/loginregister/database/update_password.php', {
+        fetch('https://franciscohomes3.online/loginregister/database/update_password.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

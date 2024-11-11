@@ -17,25 +17,30 @@
     </script>
 </head>
 <body>
-    <div class="emailCheck" >
-        <h1>Email Verification</h1>
-        <input type="email" id="email" placeholder="Enter your email" required>
-        <button class="btn" id="check">Confirm</button>
+    <div class="main-container">
+        <div class="emailCheck" >
+            <div class="title-container">
+                <h1>Email Verification</h1>
+            </div>
+            <div class="email-container">
+                <input type="email" id="email" placeholder="Enter your email" required>
+                <button class="btn" id="check">Confirm</button>
+            </div>
+        </div>
+        <div class="emailCode" id="emailCode">
+            <input type="number" id="code" placeholder="Enter the code" required>
+            <button class="btn" id="sendcode">Send Code</button>
+        </div>
+        <div class="container" id="container">
+            <button class="btn" id="verifycode">Verify Code</button>
+        </div>
+        <div class="newPass">
+            <input type="password" id="new" placeholder="Enter new password" required>
+            <input type="password" id="cnfrm" placeholder="Confirm new password" required>
+            <button class="btn" id="submit">Submit</button>
+        </div>
+        <div id="result"></div>
     </div>
-    
-    <div class="emailCode" id="emailCode">
-        <input type="number" id="code" placeholder="Enter the code" required>
-        <button class="btn" id="sendcode">Send Code</button>
-    </div>
-    <div class="container" id="container">
-        <button class="btn" id="verifycode">Verify Code</button>
-    </div>
-    <div class="newPass">
-        <input type="password" id="new" placeholder="Enter new password" required>
-        <input type="password" id="cnfrm" placeholder="Confirm new password" required>
-        <button class="btn" id="submit">Submit</button>
-    </div>
-    <div id="result"></div>
     <div id="loadingSpinner"></div>
     <script src="../JS/verify.js"></script>
 </body>

@@ -369,3 +369,29 @@ p {
     }
 
 }
+
+@media (max-width: 896px) {
+
+    .login-form {
+        width: 100%;
+        height: 80vh;
+    }
+
+    .btn {
+        width: 72%;
+        font-size: 100%;
+    }
+
+    .first, .second {
+        font-size: 100%;
+    }
+    
+    .link1, .link2 {
+        font-size: 100%;
+    }
+
+    .toggle-password {
+        right: 50px;
+    }
+
+}

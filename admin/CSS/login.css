@@ -1,5 +1,8 @@
 body{
-    background-color: #848f84;
+    background-image: url("../Pictures/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
     display: flex;
     justify-content: center;  /* Center horizontally */
     align-items: center;      /* Center vertically */
@@ -8,9 +11,9 @@ body{
 }
 
 .middle{
-    background-color: #a7cba7;
+    background-color: #e7e7e750;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
     padding: 30px;
     width: 100%;
     max-width: 400px;
@@ -19,13 +22,27 @@ body{
     height: 350px;
 }
 
-.logo-header{
+.line {
+    width: 2px;        /* Width of the line */
+    height: 400px;     /* Height of the line */
+    background-color: rgba(0, 0, 0, 0.486); /* Color of the line */
+    margin-left: 100px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    margin-right: 150px;
+  }
+
+.logo-container{
     display: flex;
-    height: 90px;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo{
+    height: 400px;  
 }
 
 .button-box{
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
     width: 400px;
     margin: 0 auto;
     top: 40px;
@@ -50,7 +67,7 @@ body{
 }
 
 .btn{
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
     left: 0;
     top: 0;
     position: absolute;
@@ -69,7 +86,7 @@ body{
 }
 
 .input-form{
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
     width: 210px;
     display: flex;
     padding: 10px;
@@ -79,9 +96,22 @@ body{
     margin-bottom: 8px;
     border-radius: 15px;
     color: #ffffff;
-    border-color: rgb(255, 255, 255);
+    border: 2px white solid;
     background-color: #164A41;
     outline: none;
+}
+
+.password-container {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 24%;
+    top: 45%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
 }
 
 ::placeholder {
@@ -90,7 +120,7 @@ body{
 }
 
 .button-form{
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
     display: flex;
     margin: 0 auto;
     margin-top: 15px;
@@ -107,15 +137,6 @@ body{
 .button-form:hover{
     background-color: #28665a;
     cursor: pointer;
-}
-
-.logo-footer{
-    height: 70px;
-    margin-top: 10px;
-    padding: 0;
-    margin-left: 48%;
-    position: relative;
-    place-items: center;
 }
 
 .foot-text{
@@ -144,12 +165,4 @@ body{
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-#togglePassword{
-    margin-left: 855px;
-    margin-top: -40px;
-    margin-bottom: 25.5px;
-    width: 10px;
-    cursor: pointer;
 }

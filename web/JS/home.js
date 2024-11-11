@@ -36,7 +36,6 @@ setInterval(() => changeSlide(1), 5000); // Automatic slide transition every 5 s
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('logout-btn').addEventListener('click', function() {
-        console.log("haha");
         document.getElementById('custom-alert').style.display = 'flex';
     });
 
